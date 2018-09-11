@@ -6,7 +6,11 @@
   "description": "An anonymous social platform for posting text, pictures, and 'vine-style' videos, exclusively for college students.",
   "devDependencies": {
     "eslint": "^5.5.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "husky": "^0.14.3",
     "jest-expo": "~27.0.0",
+    "prettier": "^1.14.2",
+    "pretty-quick": "^1.6.0",
     "react-native-scripts": "^1.14.1",
     "react-test-renderer": "16.3.1"
   },
@@ -16,7 +20,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "pretty-quick --staged"
   },
   "jest": {
     "preset": "jest-expo"
