@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Button, Text, Header, colors } from 'react-native-elements';
 import { withTheme } from 'react-native-elements';
+import { styles } from './styles';
 
 class ThemePreview extends React.Component {
   constructor(props) {
@@ -16,7 +17,6 @@ class ThemePreview extends React.Component {
           centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
           rightComponent={{ icon: 'home', color: '#fff' }}
         />
-        <Text h2>Palette</Text>
 
         <View style={styles.container}>
           <View style={[styles.block, { backgroundColor: colors.primary }]} />
@@ -33,18 +33,5 @@ class ThemePreview extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignContent: 'center',
-  },
-  block: {
-    width: 100,
-    height: 100,
-  },
-});
 
 export default withTheme(ThemePreview);
