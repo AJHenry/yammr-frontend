@@ -4,6 +4,7 @@ export const theme = {
   colors: {
     primary: '#279af1',
     secondary: '#fcfc62',
+    red: '#9f2042',
     error: '#ff0033',
     divider: '#CCCCCC',
     black: '#131112',
@@ -16,14 +17,32 @@ export const theme = {
       marginTop: 20,
     },
     buttonStyle: {
-      backgroundColor: colors.transparent,
-      borderColor: colors.primary,
-      borderWidth: 2,
-      borderRadius: 50,
+      borderRadius: 100,
       elevation: 0,
+      paddingLeft: 40,
+      paddingRight: 40,
     },
     titleStyle: {
-      color: colors.primary,
+      fontWeight: '100',
     },
+  },
+  Input: {
+    errorStyle: {
+      fontSize: 12,
+      fontWeight: '100',
+      color: colors.error,
+    },
+    labelStyle: {
+      fontSize: 12,
+    },
+    containerStyle: {
+      //Need to fix the styles in RNE
+      marginLeft: 20,
+      //END FIX
+
+      paddingTop: 5,
+      paddingBottom: 5,
+    },
+    inputContainerStyle: {},
   },
 };
