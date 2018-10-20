@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { withTheme } from 'react-native-elements';
 import { styles, style } from './Login.styles';
@@ -12,7 +17,7 @@ class Login extends React.Component {
   render() {
     const { colors } = this.props.theme;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.header}>Log In</Text>
         <View style={styles.inputContainer}>
           <Input
@@ -29,7 +34,7 @@ class Login extends React.Component {
         </View>
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
         <Button buttonStyle={style.loginButton} title="LOG IN" />
-      </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }

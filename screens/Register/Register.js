@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { withTheme } from 'react-native-elements';
 import { styles, style } from './Register.styles';
@@ -34,7 +39,7 @@ class Register extends React.Component {
   render() {
     const { colors } = this.props.theme;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.header}>Register</Text>
         <View style={styles.inputContainer}>
           <Input
@@ -50,7 +55,7 @@ class Register extends React.Component {
             rightIcon={
               <Icon
                 type="font-awesome"
-                name="eye"
+                name={this.state.visible ? 'eye' : 'eye-slash'}
                 color={colors.red}
                 onPress={this.viewPassword}
               />
@@ -61,7 +66,7 @@ class Register extends React.Component {
           buttonStyle={{ backgroundColor: colors.red }}
           title="REGISTER"
         />
-      </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
