@@ -1,9 +1,9 @@
 import React from 'react';
-import Registration from './Registration';
+import Register from './Register';
 
 import renderer from 'react-test-renderer';
 
 it('renders without crashing', () => {
-  const rendered = renderer.create(<Registration />).toJSON();
+  const rendered = renderer.create(<Register />).toJSON();
   expect(rendered).toBeTruthy();
 });
