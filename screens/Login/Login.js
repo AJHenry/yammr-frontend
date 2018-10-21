@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { View, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { withTheme } from 'react-native-elements';
 import { styles, style } from './Login.styles';
+import { colors } from '../../config/theme';
 
 class Login extends React.Component {
   constructor(props) {
@@ -15,7 +11,6 @@ class Login extends React.Component {
   }
 
   render() {
-    const { colors } = this.props.theme;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.header}>Log In</Text>
@@ -39,4 +34,4 @@ class Login extends React.Component {
   }
 }
 
-export default withTheme(Login);
+export default Login;

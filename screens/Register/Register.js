@@ -8,6 +8,7 @@ import {
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { withTheme } from 'react-native-elements';
 import { styles, style } from './Register.styles';
+import { colors } from '../../config/theme';
 
 class Register extends React.Component {
   constructor(props) {
@@ -37,7 +38,6 @@ class Register extends React.Component {
   }
 
   render() {
-    const { colors } = this.props.theme;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.header}>Register</Text>
@@ -71,4 +71,4 @@ class Register extends React.Component {
   }
 }
 
-export default withTheme(Register);
+export default Register;

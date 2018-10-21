@@ -1,16 +1,16 @@
-import { colors } from 'react-native-elements';
+export const colors = {
+  primary: '#279af1',
+  secondary: '#fcfc62',
+  red: '#9f2042',
+  error: '#ff0033',
+  divider: '#CCCCCC',
+  black: '#131112',
+  white: '#f1f7ee',
+  transparent: 'rgba(0,0,0,0)',
+};
 
 export const theme = {
-  colors: {
-    primary: '#279af1',
-    secondary: '#fcfc62',
-    red: '#9f2042',
-    error: '#ff0033',
-    divider: '#CCCCCC',
-    black: '#131112',
-    white: '#f1f7ee',
-    transparent: 'rgba(0,0,0,0)',
-  },
+  colors,
   Button: {
     raised: false,
     containerStyle: {
