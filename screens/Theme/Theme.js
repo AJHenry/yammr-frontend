@@ -42,49 +42,83 @@ class Theme extends React.Component {
     });
   }
 
-  viewPassword() {
-    this.setState({
-      visible: !this.state.visible,
-    });
-  }
-
   render() {
     return (
       <ScrollView>
         <View style={styles.container}>
-          <Avatar
-            rounded
-            size="large"
-            title="LW"
-            onPress={() => console.log('Works!')}
-            activeOpacity={0.7}
+          <Text h1>Palette</Text>
+          <Button
+            title="Primary"
+            buttonStyle={{ backgroundColor: colors.primary }}
           />
-          <Badge containerStyle={{ backgroundColor: 'violet' }}>
-            <Text>User 1</Text>
+          <Button
+            title="Secondary"
+            buttonStyle={{ backgroundColor: colors.secondary }}
+          />
+          <Button
+            title="Success"
+            buttonStyle={{ backgroundColor: colors.success }}
+          />
+          <Button
+            title="Danger"
+            buttonStyle={{ backgroundColor: colors.danger }}
+          />
+          <Button
+            title="Warning"
+            buttonStyle={{ backgroundColor: colors.warning }}
+          />
+          <Button title="Info" buttonStyle={{ backgroundColor: colors.info }} />
+          <Button
+            title="Light"
+            buttonStyle={{ backgroundColor: colors.light }}
+            titleStyle={{ color: colors.dark }}
+          />
+          <Button
+            title="Muted"
+            buttonStyle={{ backgroundColor: colors.muted }}
+          />
+          <Button title="Dark" buttonStyle={{ backgroundColor: colors.dark }} />
+          <Button
+            title="Error"
+            buttonStyle={{ backgroundColor: colors.error }}
+          />
+          <Button
+            title="Black"
+            buttonStyle={{ backgroundColor: colors.black }}
+          />
+          <Button
+            title="White"
+            buttonStyle={{ backgroundColor: colors.white }}
+            titleStyle={{ color: colors.dark }}
+          />
+          <Button
+            title="Transparent"
+            buttonStyle={{ backgroundColor: colors.transparent }}
+            titleStyle={{ color: colors.dark }}
+          />
+        </View>
+        <View style={styles.container}>
+          <Text h1>Avatars</Text>
+          <Avatar rounded size="large" title="AH" />
+        </View>
+        <View style={styles.container}>
+          <Text h1>Badges</Text>
+          <Badge>
+            <Text>Badge</Text>
           </Badge>
-          <Button title="BUTTON WITH ICON COMPONENT" />
-          <Card title="HELLO WORLD" key={0}>
-            <Text>
-              The idea with React Native Elements is more about component
-              structure than actual design.
-            </Text>
-            <Button
-              icon={<Icon name="code" color="#ffffff" />}
-              title="VIEW NOW"
-            />
-          </Card>
-
-          <CheckBox center title="Click Here" />
-          <Header
-            leftComponent={{ icon: 'menu', color: '#fff' }}
-            centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-            rightComponent={{ icon: 'home', color: '#fff' }}
-          />
+          <Badge
+            containerStyle={{ backgroundColor: colors.secondary }}
+            textStyle={{ color: colors.light }}
+          >
+            <Text>34</Text>
+          </Badge>
+        </View>
+        <View style={styles.container}>
+          <Text h1>Input</Text>
           <Input
             label="Optional Label"
             errorMessage="Error message"
             placeholder="Input"
-            leftIcon={<Icon name="user" size={24} color="black" />}
           />
         </View>
       </ScrollView>
