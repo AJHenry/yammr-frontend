@@ -15,6 +15,8 @@ export const style = {
   },
   inputContainer: {
     width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   forgotPassword: {
     padding: 5,

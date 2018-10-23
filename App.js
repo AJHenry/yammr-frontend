@@ -30,7 +30,7 @@ const RootStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Theme',
+    initialRouteName: 'Authentication',
   }
 );
 export default class App extends React.Component {
@@ -39,6 +39,7 @@ export default class App extends React.Component {
     this.state = { loading: true };
   }
 
+  // STUPID EXPO FONT HACK
   async componentWillMount() {
     await Font.loadAsync({
       OpenSans: require('./assets/fonts/OpenSans.ttf'),
@@ -46,12 +47,15 @@ export default class App extends React.Component {
     });
     this.setState({ loading: false });
   }
+  // END STUPID EXPO FONT HACK
 
   render() {
     // STUPID STUPID EXPO FONT HACK
     if (this.state.loading) {
       return <AppLoading />;
     }
+    // END OF STUPID HACK
+
     return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>

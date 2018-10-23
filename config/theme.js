@@ -60,7 +60,7 @@ export const Input = {
 };
 
 export const Text = {
-  fontFamily: 'ProximaNova',
+  //fontFamily: 'ProximaNova',
 };
 
 export const theme = {
