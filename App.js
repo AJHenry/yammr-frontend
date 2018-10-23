@@ -8,6 +8,7 @@ import store from './store/index';
 import Register from './screens/Register/Register';
 import Login from './screens/Login/Login';
 import Authentication from './screens/Authentication/Authentication';
+import Theme from './screens/Theme/Theme';
 import { createStackNavigator } from 'react-navigation';
 
 const RootStack = createStackNavigator(
@@ -21,9 +22,12 @@ const RootStack = createStackNavigator(
     Register: {
       screen: Register,
     },
+    Theme: {
+      screen: Theme,
+    },
   },
   {
-    initialRouteName: 'Authentication',
+    initialRouteName: 'Theme',
   }
 );
 export default class App extends React.Component {
