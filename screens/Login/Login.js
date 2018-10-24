@@ -17,12 +17,12 @@ class Login extends React.Component {
         <View style={styles.inputContainer}>
           <Input
             label="EMAIL"
-            labelStyle={{ color: colors.primary }}
+            labelStyle={style.labelStyle}
             placeholder="Email"
           />
           <Input
             placeholder="Password"
-            labelStyle={{ color: colors.primary }}
+            labelStyle={style.labelStyle}
             label="PASSWORD"
             secureTextEntry
           />

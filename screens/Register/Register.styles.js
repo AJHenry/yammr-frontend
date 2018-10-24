@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from 'react-native-elements';
+import { colors } from '../../config/theme';
 
 export const style = {
   container: {
@@ -7,9 +7,16 @@ export const style = {
     alignItems: 'center',
     justifyContent: 'center',
   },
-  loginButton: {},
+  labelStyle: {
+    color: colors.secondary,
+  },
+  registerButton: {
+    backgroundColor: colors.secondary,
+  },
   inputContainer: {
     width: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   forgotPassword: {
     padding: 5,

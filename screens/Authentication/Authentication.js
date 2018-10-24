@@ -26,12 +26,12 @@ class Authentication extends React.Component {
         </Text>
 
         <Button
-          buttonStyle={style.registerButton}
+          buttonStyle={style.loginButton}
           title="LOG IN"
           onPress={() => navigation.navigate('Login')}
         />
         <Button
-          buttonStyle={{ backgroundColor: colors.red }}
+          buttonStyle={style.registerButton}
           title="REGISTER"
           onPress={() => navigation.navigate('Register')}
         />

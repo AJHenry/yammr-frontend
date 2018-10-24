@@ -1,16 +1,18 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../config/theme';
 
 export const style = {
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: -50,
   },
   loginButton: {
-    paddingRight: 0,
+    backgroundColor: colors.primary,
   },
   registerButton: {
-    padding: 0,
+    backgroundColor: colors.secondary,
   },
   inputContainer: {
     width: '80%',

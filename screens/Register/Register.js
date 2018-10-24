@@ -6,7 +6,6 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
-import { withTheme } from 'react-native-elements';
 import { styles, style } from './Register.styles';
 import { colors } from '../../config/theme';
 
@@ -44,28 +43,25 @@ class Register extends React.Component {
         <View style={styles.inputContainer}>
           <Input
             label="EMAIL"
-            labelStyle={{ color: colors.red }}
+            labelStyle={style.labelStyle}
             placeholder="Email"
           />
           <Input
             placeholder="Password"
-            labelStyle={{ color: colors.red }}
+            labelStyle={style.labelStyle}
             label="PASSWORD"
             secureTextEntry={this.state.visible}
             rightIcon={
               <Icon
                 type="font-awesome"
                 name={this.state.visible ? 'eye' : 'eye-slash'}
-                color={colors.red}
+                color={colors.secondary}
                 onPress={this.viewPassword}
               />
             }
           />
         </View>
-        <Button
-          buttonStyle={{ backgroundColor: colors.red }}
-          title="REGISTER"
-        />
+        <Button buttonStyle={style.registerButton} title="REGISTER" />
       </KeyboardAvoidingView>
     );
   }
