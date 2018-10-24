@@ -1,9 +1,9 @@
 import React from 'react';
-import ThemePreview from './ThemePreview';
+import Theme from './Theme';
 
 import renderer from 'react-test-renderer';
 
 it('renders without crashing', () => {
-  const rendered = renderer.create(<ThemePreview />).toJSON();
+  const rendered = renderer.create(<Theme />).toJSON();
   expect(rendered).toBeTruthy();
 });

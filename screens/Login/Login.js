@@ -42,13 +42,13 @@ class Login extends React.Component {
         <View style={styles.inputContainer}>
           <Input
             label="EMAIL"
-            labelStyle={{ color: colors.primary }}
             onChangeText={text => this.setState({ ...this.state, email: text })}
+            labelStyle={style.labelStyle}
             placeholder="Email"
           />
           <Input
             placeholder="Password"
-            labelStyle={{ color: colors.primary }}
+            labelStyle={style.labelStyle}
             label="PASSWORD"
             onChangeText={text =>
               this.setState({ ...this.state, password: text })
