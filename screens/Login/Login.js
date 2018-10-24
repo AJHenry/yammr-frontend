@@ -1,13 +1,38 @@
 import React from 'react';
 import { View, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
-import { withTheme } from 'react-native-elements';
 import { styles, style } from './Login.styles';
 import { colors } from '../../config/theme';
+
+import { userActions } from '../../actions/user.actions';
+import { userService } from '../../services';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.getUser = this.getUser.bind(this);
+  }
+
+  async login(e) {
+    const { dispatch } = this.props.navigation;
+    dispatch(userActions.login(this.state.email, this.state.password));
+  }
+
+  async logout(e) {
+    const { dispatch } = this.props.navigation;
+    dispatch(userActions.logout());
+  }
+
+  async getUser(e) {
+    console.log(await userService.getUser());
   }
 
   render() {
@@ -18,17 +43,37 @@ class Login extends React.Component {
           <Input
             label="EMAIL"
             labelStyle={{ color: colors.primary }}
+            onChangeText={text => this.setState({ ...this.state, email: text })}
             placeholder="Email"
           />
           <Input
             placeholder="Password"
             labelStyle={{ color: colors.primary }}
             label="PASSWORD"
+            onChangeText={text =>
+              this.setState({ ...this.state, password: text })
+            }
             secureTextEntry
           />
         </View>
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
-        <Button buttonStyle={style.loginButton} title="LOG IN" />
+        <Button
+          buttonStyle={style.loginButton}
+          onPress={this.login}
+          title="LOG IN"
+        />
+
+        <Button
+          buttonStyle={style.loginButton}
+          onPress={this.logout}
+          title="LOG OUT"
+        />
+
+        <Button
+          buttonStyle={style.loginButton}
+          onPress={this.getUser}
+          title="CHECK TOKEN"
+        />
       </KeyboardAvoidingView>
     );
   }
