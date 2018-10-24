@@ -25,11 +25,11 @@ const RootStack = createStackNavigator(
       screen: Register,
     },
     Theme: {
-      screen: Theme,
+      screen: Authentication,
     },
   },
   {
-    initialRouteName: 'Authentication',
+    initialRouteName: 'Theme',
   }
 );
 export default class App extends React.Component {

@@ -6,6 +6,8 @@ export const style = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
   },
 };
 

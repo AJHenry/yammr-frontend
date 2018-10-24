@@ -23,12 +23,17 @@ import {
   CheckBox,
   Input,
   ListItem,
+  Overlay,
 } from 'react-native-elements';
 
 class Theme extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isVisible: true,
+    };
 
+    this.setVisible = this.setVisible.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -42,9 +47,23 @@ class Theme extends React.Component {
     });
   }
 
+  setVisible() {
+    this.setState({
+      isVisible: !this.state.isVisible,
+    });
+  }
+
   render() {
     return (
       <ScrollView>
+        <View style={styles.container}>
+          <Card title="Card Style">
+            <Text>
+              The idea with React Native Elements is more about component
+              structure than actual design.
+            </Text>
+          </Card>
+        </View>
         <View style={styles.container}>
           <Text h1>Palette</Text>
           <Button
@@ -120,6 +139,9 @@ class Theme extends React.Component {
             errorMessage="Error message"
             placeholder="Input"
           />
+        </View>
+        <View style={styles.container}>
+          <Text h1>Overlay</Text>
         </View>
       </ScrollView>
     );

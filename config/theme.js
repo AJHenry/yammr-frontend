@@ -43,6 +43,17 @@ export const Badge = {
   },
 };
 
+export const Card = {
+  containerStyle: {
+    elevation: 0,
+    borderRadius: 6,
+    margin: 10,
+  },
+  titleStyle: {
+    fontWeight: '100',
+  },
+};
+
 export const Input = {
   errorStyle: {
     fontSize: 12,
@@ -60,14 +71,17 @@ export const Input = {
 };
 
 export const Text = {
-  //fontFamily: 'ProximaNova',
+  style: {
+    fontWeight: '100',
+  },
 };
 
 export const theme = {
   colors,
-  Button,
-  Input,
   Avatar,
   Badge,
+  Button,
+  Card,
+  Input,
   Text,
 };
