@@ -2,16 +2,16 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text, Icon, Header } from 'react-native-elements';
 import { colors } from '../../config/theme';
-import { style, styles } from './Feed.styles';
+import { style, styles } from './Account.styles';
 
-class Feed extends React.Component {
+class Account extends React.Component {
   static navigationOptions = {
-    title: 'Feed Layout',
+    title: 'Account Layout',
   };
 
   render() {
-    return <Text>Feed</Text>;
+    return <Text>Account</Text>;
   }
 }
 
-export default Feed;
+export default Account;

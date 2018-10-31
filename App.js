@@ -8,7 +8,7 @@ import Login from './screens/Login/Login';
 import Authentication from './screens/Authentication/Authentication';
 import Theme from './screens/Theme/Theme';
 import { createStackNavigator } from 'react-navigation';
-import Feed from './screens/Feed/Feed';
+import Main from './screens/Main/Main';
 //Stupid expo font hack
 import { Font, AppLoading } from 'expo';
 
@@ -26,15 +26,16 @@ const RootStack = createStackNavigator(
     Theme: {
       screen: Authentication,
     },
-    Feed: {
-      screen: Feed,
+    Main: {
+      screen: Main,
     },
   },
   {
-    initialRouteName: 'Authentication',
+    initialRouteName: 'Main',
     navigationOptions: {},
   }
 );
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);

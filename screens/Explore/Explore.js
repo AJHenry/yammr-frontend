@@ -2,16 +2,16 @@ import React from 'react';
 import { View } from 'react-native';
 import { Text, Icon, Header } from 'react-native-elements';
 import { colors } from '../../config/theme';
-import { style, styles } from './Feed.styles';
+import { style, styles } from './Explore.styles';
 
-class Feed extends React.Component {
+class Explore extends React.Component {
   static navigationOptions = {
-    title: 'Feed Layout',
+    title: 'Explore Layout',
   };
 
   render() {
-    return <Text>Feed</Text>;
+    return <Text>Explore</Text>;
   }
 }
 
-export default Feed;
+export default Explore;
