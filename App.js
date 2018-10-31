@@ -1,7 +1,6 @@
 import React from 'react';
-import { ThemeProvider, Button, colors } from 'react-native-elements';
-import { View } from 'react-native';
-import { theme } from './config/theme';
+import { ThemeProvider } from 'react-native-elements';
+import { theme, colors } from './config/theme';
 import { Provider } from 'react-redux';
 import store from './store/index';
 import Register from './screens/Register/Register';
@@ -9,7 +8,7 @@ import Login from './screens/Login/Login';
 import Authentication from './screens/Authentication/Authentication';
 import Theme from './screens/Theme/Theme';
 import { createStackNavigator } from 'react-navigation';
-
+import Feed from './screens/Feed/Feed';
 //Stupid expo font hack
 import { Font, AppLoading } from 'expo';
 
@@ -27,9 +26,13 @@ const RootStack = createStackNavigator(
     Theme: {
       screen: Authentication,
     },
+    Feed: {
+      screen: Feed,
+    },
   },
   {
-    initialRouteName: 'Theme',
+    initialRouteName: 'Authentication',
+    navigationOptions: {},
   }
 );
 export default class App extends React.Component {

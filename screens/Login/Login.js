@@ -4,11 +4,17 @@ import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { withTheme } from 'react-native-elements';
 import { styles, style } from './Login.styles';
 import { colors } from '../../config/theme';
+import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationHeaders/AuthenticationHeader';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  static navigationOptions = {
+    title: 'Log in',
+    header: AuthenticationHeader,
+  };
 
   render() {
     return (
