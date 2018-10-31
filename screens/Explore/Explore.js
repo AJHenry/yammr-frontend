@@ -6,7 +6,7 @@ import { style, styles } from './Explore.styles';
 
 class Explore extends React.Component {
   static navigationOptions = {
-    title: 'Explore Layout',
+    title: 'Explore',
   };
 
   render() {

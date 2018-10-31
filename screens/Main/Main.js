@@ -4,22 +4,41 @@ import { Text, Icon, Header } from 'react-native-elements';
 import {
   createBottomTabNavigator,
   createMaterialTopTabNavigator,
+  createStackNavigator,
 } from 'react-navigation';
 import { colors } from '../../config/theme';
 import Feed from '../Feed/Feed';
 import Explore from '../Explore/Explore';
 import Account from '../Account/Account';
 
+const FeedStack = createStackNavigator({
+  Feed: {
+    screen: Feed,
+  },
+});
+
+const ExploreStack = createStackNavigator({
+  Explore: {
+    screen: Explore,
+  },
+});
+
+const AccountStack = createStackNavigator({
+  Account: {
+    screen: Account,
+  },
+});
+
 const NavBar = createBottomTabNavigator(
   {
     Feed: {
-      screen: Feed,
+      screen: FeedStack,
     },
     Explore: {
-      screen: Explore,
+      screen: ExploreStack,
     },
     Account: {
-      screen: Account,
+      screen: AccountStack,
     },
   },
   {
@@ -28,10 +47,10 @@ const NavBar = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Feed') {
-          iconName = `plus`;
+          iconName = `fire`;
         }
         if (routeName === 'Explore') {
-          iconName = `heart`;
+          iconName = `map`;
         }
         if (routeName === 'Account') {
           iconName = `user`;
@@ -40,10 +59,13 @@ const NavBar = createBottomTabNavigator(
         // You can return any component that you like here
         return (
           <Icon
-            type="font-awesome"
+            type="simple-line-icon"
             name={iconName}
-            size={horizontal ? 20 : 25}
+            size={focused ? 30 : 25}
             color={tintColor}
+            iconStyle={{
+              color: tintColor,
+            }}
           />
         );
       },
@@ -57,6 +79,9 @@ const NavBar = createBottomTabNavigator(
 );
 
 export default class Main extends React.Component {
+  static navigationOptions = {
+    header: null,
+  };
   render() {
     return <NavBar />;
   }

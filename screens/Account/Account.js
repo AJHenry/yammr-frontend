@@ -6,7 +6,7 @@ import { style, styles } from './Account.styles';
 
 class Account extends React.Component {
   static navigationOptions = {
-    title: 'Account Layout',
+    title: 'Account',
   };
 
   render() {
