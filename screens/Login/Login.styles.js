@@ -14,7 +14,7 @@ export const style = {
     backgroundColor: colors.primary,
   },
   inputContainer: {
-    width: '80%',
+    width: 340,
     alignItems: 'center',
     justifyContent: 'center',
   },

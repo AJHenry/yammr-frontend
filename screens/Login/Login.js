@@ -4,11 +4,24 @@ import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { withTheme } from 'react-native-elements';
 import { styles, style } from './Login.styles';
 import { colors } from '../../config/theme';
+import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationHeaders/AuthenticationHeader';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
   }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: colors.transparent,
+      },
+      headerBackImage: (
+        <Icon type="ionicons" name="arrow-back" title="Info" size={28} />
+      ),
+      headerTransparent: true,
+    };
+  };
 
   render() {
     return (
