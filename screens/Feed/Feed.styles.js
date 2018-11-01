@@ -20,6 +20,10 @@ export const style = {
     backgroundColor: colors.transparent,
   },
   tabStyle: {},
+  feedSelector: {
+    height: 50,
+    width: '100%',
+  },
 };
 
 export const styles = StyleSheet.create(style);
