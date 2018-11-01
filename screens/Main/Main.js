@@ -61,7 +61,7 @@ const NavBar = createBottomTabNavigator(
             type="simple-line-icon"
             name={iconName}
             size={25}
-            color={focused ? colors.primary : colors.grey}
+            color={tintColor}
           />
         );
       },
@@ -70,6 +70,7 @@ const NavBar = createBottomTabNavigator(
     backBehavior: 'initialRoute',
     tabBarOptions: {
       showIcon: true,
+      activeTintColor: colors.primary,
     },
   }
 );
