@@ -1,5 +1,4 @@
 import { userService } from '../services';
-import { store } from 'react-redux';
 import { userConstants } from '../constants/user.constants';
 
 export const userActions = {
@@ -8,19 +7,24 @@ export const userActions = {
 };
 
 function login(username, password) {
-  userService.login(username, password).then(
+  return userService.login(username, password).then(
     user => {
-      store.dispatch({ type: userConstants.LOGIN_SUCCESS, user });
+      return success(user);
     },
     error => {
-      store.dispatch({ type: userConstants.LOGIN_FAILURE, error });
+      return failure(error);
     }
   );
+
+  function success(user) {
+    return { type: userConstants.LOGIN_SUCCESS, user };
+  }
+  function failure(error) {
+    return { type: userConstants.LOGIN_FAILURE, error };
+  }
 }
 
 function logout() {
-  console.log('logging out');
-  userService.logout().then(res => {
-    store.dispatch({ type: userConstants.LOGOUT });
-  });
+  userService.logout();
+  return { type: userConstants.LOGOUT };
 }

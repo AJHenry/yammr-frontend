@@ -22,9 +22,9 @@ class Login extends React.Component {
 
   _signInAsync = async () => {
     const { dispatch } = this.props.navigation;
-    const result = await dispatch(
-      userActions.login(this.state.email, this.state.password)
-    );
+    console.log('before dispatch');
+    await dispatch(userActions.login(this.state.email, this.state.password));
+    console.log('after dispatch');
     const userToken = await userService.getUser(); //login(this.state.email, this.state.password);
     if (userToken) this.props.navigation.navigate('App');
   };
