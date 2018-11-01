@@ -3,6 +3,7 @@ import { View, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { styles, style } from './Login.styles';
 import { colors } from '../../config/theme';
+import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationHeaders/AuthenticationHeader';
 
 import { userActions } from '../../actions/user.actions';
 import { userService } from '../../services';
@@ -34,6 +35,18 @@ class Login extends React.Component {
   async getUser(e) {
     console.log(await userService.getUser());
   }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: colors.transparent,
+      },
+      headerBackImage: (
+        <Icon type="ionicons" name="arrow-back" title="Info" size={28} />
+      ),
+      headerTransparent: true,
+    };
+  };
 
   render() {
     return (

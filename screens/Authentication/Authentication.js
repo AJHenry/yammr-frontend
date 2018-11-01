@@ -16,6 +16,10 @@ class Authentication extends React.Component {
     super(props);
   }
 
+  static navigationOptions = {
+    header: null,
+  };
+
   render() {
     const { navigation } = this.props;
 

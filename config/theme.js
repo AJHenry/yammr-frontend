@@ -10,8 +10,21 @@ export const colors = {
   muted: 'rgba(121, 128, 134, 0.3)',
   error: '#ff0033',
   black: '#131112',
-  white: '#f1f7ee',
+  white: '#fff',
+  grey: '#A9A9A9',
   transparent: 'rgba(0,0,0,0)',
+};
+
+export const Avatar = {
+  containerStyle: {
+    margin: 10,
+  },
+};
+
+export const Badge = {
+  containerStyle: {
+    margin: 5,
+  },
 };
 
 export const Button = {
@@ -31,17 +44,7 @@ export const Button = {
   },
 };
 
-export const Avatar = {
-  containerStyle: {
-    margin: 10,
-  },
-};
-
-export const Badge = {
-  containerStyle: {
-    margin: 5,
-  },
-};
+export const ButtonGroup = {};
 
 export const Card = {
   containerStyle: {
@@ -81,6 +84,7 @@ export const theme = {
   Avatar,
   Badge,
   Button,
+  ButtonGroup,
   Card,
   Input,
   Text,
