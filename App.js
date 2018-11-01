@@ -65,7 +65,6 @@ export default class App extends React.Component {
       ProximaNova: require('./assets/fonts/ProximaNova.ttf'),
     });
     this.setState({ loading: false });
-    await AsyncStorage.clear();
   }
   // END STUPID EXPO FONT HACK
 

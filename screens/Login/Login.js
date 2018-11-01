@@ -16,8 +16,6 @@ class Login extends React.Component {
       email: '',
       password: '',
     };
-
-    this.logout = this.logout.bind(this);
   }
 
   _signInAsync = async () => {
@@ -28,11 +26,6 @@ class Login extends React.Component {
     const userToken = await userService.getUser(); //login(this.state.email, this.state.password);
     if (userToken) this.props.navigation.navigate('App');
   };
-
-  async logout(e) {
-    const { dispatch } = this.props.navigation;
-    dispatch(userActions.logout());
-  }
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -72,18 +65,6 @@ class Login extends React.Component {
           buttonStyle={style.loginButton}
           onPress={this._signInAsync}
           title="LOG IN"
-        />
-
-        <Button
-          buttonStyle={style.loginButton}
-          onPress={this.logout}
-          title="LOG OUT"
-        />
-
-        <Button
-          buttonStyle={style.loginButton}
-          onPress={this.getUser}
-          title="CHECK TOKEN"
         />
       </KeyboardAvoidingView>
     );
