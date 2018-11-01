@@ -20,9 +20,7 @@ class Account extends React.Component {
     const { dispatch } = this.props.navigation;
     dispatch(userActions.logout());
     const userToken = await userService.getUser();
-    console.log(!userToken);
-    console.log(this.props.mainNav);
-    this.props.mainNav.navigate('Auth');
+    if (!userToken) this.props.screenProps.rootNavigation.navigate('Auth');
   };
 
   render() {

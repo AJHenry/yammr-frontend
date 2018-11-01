@@ -85,6 +85,6 @@ export default class Main extends React.Component {
   }
 
   render() {
-    return <NavBar mainNav={this.props.navigation} />;
+    return <NavBar screenProps={{ rootNavigation: this.props.navigation }} />;
   }
 }
