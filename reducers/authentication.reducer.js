@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import { userConstants } from '../constants/user.constants';
 
-let user = async () => await AsyncStorage.getItem('user');
+let user = async () => await AsyncStorage.getItem('userToken');
 
 const initialState = user ? { loggedIn: true, user } : {};
 

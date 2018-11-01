@@ -1,38 +1,54 @@
 import React from 'react';
-import { ThemeProvider } from 'react-native-elements';
-import { theme, colors } from './config/theme';
+import { ThemeProvider, Button, colors } from 'react-native-elements';
+import { View } from 'react-native';
+import { theme } from './config/theme';
 import { Provider } from 'react-redux';
 import store from './store/index';
 import Register from './screens/Register/Register';
 import Login from './screens/Login/Login';
 import Authentication from './screens/Authentication/Authentication';
-import Theme from './screens/Theme/Theme';
-import { createStackNavigator } from 'react-navigation';
-import Main from './screens/Main/Main';
+import AuthLoadingScreen from './screens/AuthLoadingScreen/AuthLoadingScreen';
+
 //Stupid expo font hack
 import { Font, AppLoading } from 'expo';
+import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import Main from './screens/Main/Main';
 
-const RootStack = createStackNavigator(
+// Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
+// goes here.
+
+const AuthStack = createStackNavigator({
+  Authentication: {
+    screen: Authentication,
+  },
+  Login: {
+    screen: Login,
+  },
+  Register: {
+    screen: Register,
+  },
+});
+
+const AppStack = createStackNavigator({
+  Main: {
+    screen: Main,
+  },
+});
+
+const RootNav = createSwitchNavigator(
   {
-    Authentication: {
-      screen: Authentication,
+    AuthLoading: {
+      screen: AuthLoadingScreen,
     },
-    Login: {
-      screen: Login,
+    App: {
+      screen: AppStack,
     },
-    Register: {
-      screen: Register,
-    },
-    Theme: {
-      screen: Authentication,
-    },
-    Main: {
-      screen: Main,
+    Auth: {
+      screen: AuthStack,
     },
   },
   {
-    initialRouteName: 'Main',
-    navigationOptions: {},
+    initialRouteName: 'AuthLoading',
   }
 );
 
@@ -49,6 +65,7 @@ export default class App extends React.Component {
       ProximaNova: require('./assets/fonts/ProximaNova.ttf'),
     });
     this.setState({ loading: false });
+    await AsyncStorage.clear();
   }
   // END STUPID EXPO FONT HACK
 
@@ -62,7 +79,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <ThemeProvider theme={theme}>
-          <RootStack />
+          <RootNav />
         </ThemeProvider>
       </Provider>
     );

@@ -16,22 +16,22 @@ async function login(username, password) {
     body: JSON.stringify({ username, password }),
   };
 
-  let user = {
-    token: 'inaibfiubau8y0e8h',
-  };
+  const userToken = 'inaibfiubau8y0e8h';
 
   // For when successfully implemented
   //user = await fetch(AUTHENTICATION, requestOptions);
 
-  if (user.token) await AsyncStorage.setItem('user', JSON.stringify(user));
-  return user;
+  if (userToken)
+    await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
+  console.log('returning ' + userToken);
+  return userToken;
 }
 
 async function logout() {
   console.log('removing token');
-  return await AsyncStorage.removeItem('user');
+  return await AsyncStorage.removeItem('userToken');
 }
 
 async function getUser() {
-  return await AsyncStorage.getItem('user');
+  return await AsyncStorage.getItem('userToken');
 }

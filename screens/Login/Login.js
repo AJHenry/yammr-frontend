@@ -17,23 +17,21 @@ class Login extends React.Component {
       password: '',
     };
 
-    this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    this.getUser = this.getUser.bind(this);
   }
 
-  async login(e) {
+  _signInAsync = async () => {
     const { dispatch } = this.props.navigation;
-    dispatch(userActions.login(this.state.email, this.state.password));
-  }
+    const result = await dispatch(
+      userActions.login(this.state.email, this.state.password)
+    );
+    const userToken = await userService.getUser(); //login(this.state.email, this.state.password);
+    if (userToken) this.props.navigation.navigate('App');
+  };
 
   async logout(e) {
     const { dispatch } = this.props.navigation;
     dispatch(userActions.logout());
-  }
-
-  async getUser(e) {
-    console.log(await userService.getUser());
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -72,7 +70,7 @@ class Login extends React.Component {
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
         <Button
           buttonStyle={style.loginButton}
-          onPress={this.login}
+          onPress={this._signInAsync}
           title="LOG IN"
         />
 
