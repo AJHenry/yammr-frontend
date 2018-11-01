@@ -1,5 +1,6 @@
 import { userService } from '../services';
 import { store } from 'react-redux';
+import { userConstants } from '../constants/user.constants';
 
 export const userActions = {
   login,
