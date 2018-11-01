@@ -60,11 +60,8 @@ const NavBar = createBottomTabNavigator(
           <Icon
             type="simple-line-icon"
             name={iconName}
-            size={focused ? 30 : 25}
-            color={tintColor}
-            iconStyle={{
-              color: tintColor,
-            }}
+            size={25}
+            color={focused ? colors.primary : colors.grey}
           />
         );
       },

@@ -31,7 +31,7 @@ const RootStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Authentication',
+    initialRouteName: 'Main',
     navigationOptions: {},
   }
 );
