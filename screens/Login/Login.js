@@ -11,9 +11,16 @@ class Login extends React.Component {
     super(props);
   }
 
-  static navigationOptions = {
-    title: 'Log in',
-    header: AuthenticationHeader,
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: colors.transparent,
+      },
+      headerBackImage: (
+        <Icon type="ionicons" name="arrow-back" title="Info" size={28} />
+      ),
+      headerTransparent: true,
+    };
   };
 
   render() {

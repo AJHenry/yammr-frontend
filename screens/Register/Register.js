@@ -20,6 +20,18 @@ class Register extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: colors.transparent,
+      },
+      headerBackImage: (
+        <Icon type="ionicons" name="arrow-back" title="Info" size={28} />
+      ),
+      headerTransparent: true,
+    };
+  };
+
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;

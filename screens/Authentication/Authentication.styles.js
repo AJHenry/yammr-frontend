@@ -6,7 +6,6 @@ export const style = {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -50,
   },
   loginButton: {
     backgroundColor: colors.primary,
