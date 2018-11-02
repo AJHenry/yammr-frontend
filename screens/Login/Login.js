@@ -1,15 +1,37 @@
 import React from 'react';
 import { View, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
-import { withTheme } from 'react-native-elements';
 import { styles, style } from './Login.styles';
 import { colors } from '../../config/theme';
 import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationHeaders/AuthenticationHeader';
 
+import { userActions } from '../../actions/user.actions';
+import { userConstants } from '../../constants/user.constants';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
   }
+
+  _signInAsync = async () => {
+    const { dispatch } = this.props.navigation;
+    dispatch(
+      userActions.login(this.state.email, this.state.password).then(res => {
+        if (res.type === userConstants.LOGIN_SUCCESS) {
+          this.props.navigation.navigate('App');
+        } else {
+          // Bad login set state accordingly
+          console.log('bad login');
+        }
+        return res;
+      })
+    );
+  };
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -30,6 +52,7 @@ class Login extends React.Component {
         <View style={styles.inputContainer}>
           <Input
             label="EMAIL"
+            onChangeText={text => this.setState({ ...this.state, email: text })}
             labelStyle={style.labelStyle}
             placeholder="Email"
           />
@@ -37,11 +60,18 @@ class Login extends React.Component {
             placeholder="Password"
             labelStyle={style.labelStyle}
             label="PASSWORD"
+            onChangeText={text =>
+              this.setState({ ...this.state, password: text })
+            }
             secureTextEntry
           />
         </View>
         <Text style={styles.forgotPassword}>Forgot your password?</Text>
-        <Button buttonStyle={style.loginButton} title="LOG IN" />
+        <Button
+          buttonStyle={style.loginButton}
+          onPress={this._signInAsync}
+          title="LOG IN"
+        />
       </KeyboardAvoidingView>
     );
   }

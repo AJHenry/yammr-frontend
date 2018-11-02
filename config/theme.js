@@ -1,3 +1,6 @@
+import { Platform } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
 export const colors = {
   primary: '#279af1',
   secondary: '#9f2042',
@@ -57,6 +60,13 @@ export const Card = {
   },
 };
 
+export const Header = {
+  containerStyle: {
+    paddingTop: getStatusBarHeight(),
+    height: (Platform.OS === 'ios' ? 44 : 56) + getStatusBarHeight(),
+  },
+};
+
 export const Input = {
   errorStyle: {
     fontSize: 12,
@@ -86,6 +96,7 @@ export const theme = {
   Button,
   ButtonGroup,
   Card,
+  Header,
   Input,
   Text,
 };

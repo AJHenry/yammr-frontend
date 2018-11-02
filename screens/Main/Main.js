@@ -79,7 +79,12 @@ export default class Main extends React.Component {
   static navigationOptions = {
     header: null,
   };
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <NavBar />;
+    return <NavBar screenProps={{ rootNavigation: this.props.navigation }} />;
   }
 }

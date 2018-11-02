@@ -9,11 +9,15 @@ import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { styles, style } from './Register.styles';
 import { colors } from '../../config/theme';
 
+import { userActions } from '../../actions/user.actions';
+
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       visible: true,
+      email: '',
+      password: '',
     };
 
     this.viewPassword = this.viewPassword.bind(this);
@@ -38,15 +42,23 @@ class Register extends React.Component {
     const name = target.name;
 
     this.setState({
+      ...this.state,
       [name]: value,
     });
   }
 
   viewPassword() {
     this.setState({
+      ...this.state,
       visible: !this.state.visible,
     });
   }
+
+  _registerAsync = async () => {
+    const { dispatch } = this.props.navigation;
+    dispatch(userActions.register(this.state.email, this.state.password));
+    this.props.navigation.navigate('Login');
+  };
 
   render() {
     return (
@@ -56,11 +68,15 @@ class Register extends React.Component {
           <Input
             label="EMAIL"
             labelStyle={style.labelStyle}
+            onChangeText={text => this.setState({ ...this.state, email: text })}
             placeholder="Email"
           />
           <Input
             placeholder="Password"
             labelStyle={style.labelStyle}
+            onChangeText={text =>
+              this.setState({ ...this.state, password: text })
+            }
             label="PASSWORD"
             secureTextEntry={this.state.visible}
             rightIcon={
@@ -73,7 +89,11 @@ class Register extends React.Component {
             }
           />
         </View>
-        <Button buttonStyle={style.registerButton} title="REGISTER" />
+        <Button
+          buttonStyle={style.registerButton}
+          onPress={this._registerAsync}
+          title="REGISTER"
+        />
       </KeyboardAvoidingView>
     );
   }
