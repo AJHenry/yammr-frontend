@@ -7,6 +7,7 @@ import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationH
 
 import { userActions } from '../../actions/user.actions';
 import { userService } from '../../services';
+import { userConstants } from '../../constants/user.constants';
 
 class Login extends React.Component {
   constructor(props) {
@@ -20,11 +21,13 @@ class Login extends React.Component {
 
   _signInAsync = async () => {
     const { dispatch } = this.props.navigation;
-    console.log('before dispatch');
-    await dispatch(userActions.login(this.state.email, this.state.password));
-    console.log('after dispatch');
-    const userToken = await userService.getUser(); //login(this.state.email, this.state.password);
-    if (userToken) this.props.navigation.navigate('App');
+    dispatch(
+      userActions.login(this.state.email, this.state.password).then(res => {
+        if (res.type === userConstants.LOGIN_SUCCESS)
+          this.props.navigation.navigate('App');
+        return res;
+      })
+    );
   };
 
   static navigationOptions = ({ navigation }) => {

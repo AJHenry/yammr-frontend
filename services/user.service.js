@@ -1,30 +1,40 @@
 import { AsyncStorage } from 'react-native';
+import { LOGIN, REGISTER } from '../constants/api.constants';
 
 export const userService = {
   login,
   logout,
   getUser,
+  register,
 };
 
-const AUTHENTICATION = '/users/authenticate';
-
-async function login(username, password) {
-  console.log('logging in');
+async function login(email, password) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email: email, password: password }),
   };
 
-  const userToken = 'inaibfiubau8y0e8h';
-
   // For when successfully implemented
-  //user = await fetch(AUTHENTICATION, requestOptions);
+  const response = await fetch(LOGIN, requestOptions);
+  console.log(response);
 
-  if (userToken)
-    await AsyncStorage.setItem('userToken', JSON.stringify(userToken));
-  console.log('returning ' + userToken);
-  return userToken;
+  if (response)
+    await AsyncStorage.setItem('userToken', JSON.stringify(response));
+  return response;
+}
+
+async function register(email, password) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email, password: password }),
+  };
+
+  console.log('about to fetch');
+  const response = await fetch(REGISTER, requestOptions);
+  console.log(response);
+  return response;
 }
 
 async function logout() {

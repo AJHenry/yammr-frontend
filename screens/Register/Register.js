@@ -12,6 +12,7 @@ import { colors } from '../../config/theme';
 class Register extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       visible: true,
     };
@@ -48,6 +49,14 @@ class Register extends React.Component {
     });
   }
 
+  _registerAsync = async () => {
+    const { dispatch } = this.props.navigation;
+    console.log('before dispatch');
+    await dispatch(userActions.login(this.state.email, this.state.password));
+    console.log('after dispatch');
+    this.props.navigation.navigate('Login');
+  };
+
   render() {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
@@ -73,7 +82,11 @@ class Register extends React.Component {
             }
           />
         </View>
-        <Button buttonStyle={style.registerButton} title="REGISTER" />
+        <Button
+          buttonStyle={style.registerButton}
+          onPress={this._registerAsync}
+          title="REGISTER"
+        />
       </KeyboardAvoidingView>
     );
   }
