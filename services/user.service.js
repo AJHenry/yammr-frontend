@@ -17,11 +17,13 @@ async function login(email, password) {
 
   // For when successfully implemented
   const response = await fetch(LOGIN, requestOptions);
-  console.log(response);
 
   if (response.status == 403) throw response;
 
-  await AsyncStorage.setItem('userToken', JSON.stringify(response));
+  await AsyncStorage.setItem(
+    'userToken',
+    response.headers.map.authorization[0]
+  );
   return response;
 }
 
