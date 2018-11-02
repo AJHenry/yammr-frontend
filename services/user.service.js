@@ -19,8 +19,9 @@ async function login(email, password) {
   const response = await fetch(LOGIN, requestOptions);
   console.log(response);
 
-  if (response)
-    await AsyncStorage.setItem('userToken', JSON.stringify(response));
+  if (response.status == 403) throw response;
+
+  await AsyncStorage.setItem('userToken', JSON.stringify(response));
   return response;
 }
 
@@ -30,15 +31,13 @@ async function register(email, password) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: email, password: password }),
   };
-
-  console.log('about to fetch');
+  console.log(requestOptions);
   const response = await fetch(REGISTER, requestOptions);
   console.log(response);
   return response;
 }
 
 async function logout() {
-  console.log('removing token');
   return await AsyncStorage.removeItem('userToken');
 }
 

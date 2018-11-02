@@ -6,7 +6,6 @@ import { colors } from '../../config/theme';
 import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationHeaders/AuthenticationHeader';
 
 import { userActions } from '../../actions/user.actions';
-import { userService } from '../../services';
 import { userConstants } from '../../constants/user.constants';
 
 class Login extends React.Component {
@@ -23,8 +22,12 @@ class Login extends React.Component {
     const { dispatch } = this.props.navigation;
     dispatch(
       userActions.login(this.state.email, this.state.password).then(res => {
-        if (res.type === userConstants.LOGIN_SUCCESS)
+        if (res.type === userConstants.LOGIN_SUCCESS) {
           this.props.navigation.navigate('App');
+        } else {
+          // Bad login set state accordingly
+          console.log('bad login');
+        }
         return res;
       })
     );
