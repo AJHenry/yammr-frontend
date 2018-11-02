@@ -61,7 +61,7 @@ export const Card = {
 
 export const Header = {
   containerStyle: {
-    marginTop: Platform.OS === 'ios' ? 70 : 0,
+    paddingTop: Platform.OS === 'ios' ? 70 : 0,
   },
 };
 
