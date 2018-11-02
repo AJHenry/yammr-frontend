@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 export const colors = {
   primary: '#279af1',
@@ -61,7 +62,8 @@ export const Card = {
 
 export const Header = {
   containerStyle: {
-    paddingTop: Platform.OS === 'ios' ? 70 : 0,
+    paddingTop: getStatusBarHeight(),
+    height: (Platform.OS === 'ios' ? 44 : 56) + getStatusBarHeight(),
   },
 };
 
