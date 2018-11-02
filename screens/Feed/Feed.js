@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { Text, Icon, Header, ButtonGroup } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './Feed.styles';

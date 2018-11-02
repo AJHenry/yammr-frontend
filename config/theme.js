@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 export const colors = {
   primary: '#279af1',
   secondary: '#9f2042',
@@ -57,6 +59,12 @@ export const Card = {
   },
 };
 
+export const Header = {
+  containerStyle: {
+    marginTop: Platform.OS === 'ios' ? 70 : 0,
+  },
+};
+
 export const Input = {
   errorStyle: {
     fontSize: 12,
@@ -86,6 +94,7 @@ export const theme = {
   Button,
   ButtonGroup,
   Card,
+  Header,
   Input,
   Text,
 };
