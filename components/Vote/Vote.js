@@ -15,7 +15,7 @@ export class Vote extends React.Component {
     super(props);
 
     this.state = {
-      score: this.props.score || -5,
+      score: this.props.score || 0,
       voteType: this.props.voteType, // null = no vote, up = upvote, down = downvote
     };
 

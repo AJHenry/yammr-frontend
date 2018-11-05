@@ -20,7 +20,7 @@ class Feed extends React.Component {
     const feedItems = [
       {
         text: 'Watermelon is a meat?',
-        score: 100,
+        score: 99,
         postId: 'asdfljkhasfl',
       },
       {
@@ -31,6 +31,11 @@ class Feed extends React.Component {
       {
         text: 'Negative Post',
         score: -8,
+        postId: 'asdfljkhasfl',
+      },
+      {
+        text: 'Overflow Post',
+        score: 0,
         postId: 'asdfljkhasfl',
       },
     ];

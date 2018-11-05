@@ -2,12 +2,11 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/theme';
 
 export const style = {
-  container: {
+  mainContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: '100%',
     padding: 10,
-    paddingLeft: 15,
     backgroundColor: colors.white,
     marginTop: 2,
     marginBottom: 2,
@@ -16,15 +15,41 @@ export const style = {
     borderBottomWidth: 1,
     borderTopWidth: 1,
   },
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   textContainer: {
-    width: '80%',
+    left: 0,
     paddingTop: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    maxWidth: '80%',
   },
   textStyle: {
     fontSize: 18,
   },
   voteContainer: {
-    width: '20%',
+    marginLeft: 10,
+    marginRight: 10,
+    padding: 5,
+  },
+  bottomContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 10,
+    paddingLeft: 10,
+  },
+  timeContainer: {},
+  replyContainer: {},
+  extraContainer: {
+    width: 50,
+  },
+  bottomTextStyle: {
+    color: colors.grey,
   },
 };
 

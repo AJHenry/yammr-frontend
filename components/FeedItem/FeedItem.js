@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View, TouchableNativeFeedback } from 'react-native';
 import {
   Text,
   Icon,
@@ -11,16 +11,38 @@ import { colors } from '../../config/theme';
 import { style, styles } from './FeedItem.styles';
 import { Vote } from '../Vote/Vote';
 
-const CustomTextItem = ({ score, text }) => {
+const CustomTextItem = ({ score, text, timestamp }) => {
+  onPress = () => {
+    console.log('Post Clicked');
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Text style={styles.textStyle}>{text}</Text>
+    <TouchableNativeFeedback
+      onPress={this._onPressButton}
+      onPress={() => this.onPress()}
+    >
+      <View style={styles.mainContainer}>
+        <View style={styles.container}>
+          <View style={styles.textContainer}>
+            <Text style={styles.textStyle}>{text}</Text>
+          </View>
+          <View style={styles.voteContainer}>
+            <Vote score={score} />
+          </View>
+        </View>
+        <View style={styles.bottomContainer}>
+          <View>
+            <Text style={style.bottomTextStyle}>15 mins</Text>
+          </View>
+          <View>
+            <Text style={style.bottomTextStyle}>2 replies</Text>
+          </View>
+          <View style={styles.extraContainer}>
+            <Text style={style.bottomTextStyle} />
+          </View>
+        </View>
       </View>
-      <View style={styles.voteContainer}>
-        <Vote score={score} />
-      </View>
-    </View>
+    </TouchableNativeFeedback>
   );
 };
 
