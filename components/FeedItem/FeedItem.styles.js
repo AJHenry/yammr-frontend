@@ -46,7 +46,7 @@ export const style = {
   timeContainer: {},
   replyContainer: {},
   extraContainer: {
-    width: 50,
+    width: 10,
   },
   bottomTextStyle: {
     color: colors.grey,
