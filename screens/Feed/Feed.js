@@ -9,7 +9,6 @@ import {
 } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './Feed.styles';
-import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationHeaders/AuthenticationHeader';
 import FeedHeader from '../../components/FeedHeader/FeedHeader';
 import { FeedItem } from '../../components/FeedItem/FeedItem';
 
