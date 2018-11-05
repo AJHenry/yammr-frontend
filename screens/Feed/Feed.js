@@ -22,21 +22,27 @@ class Feed extends React.Component {
         text: 'Watermelon is a meat?',
         score: 99,
         postId: 'asdfljkhasfl',
+        postTime: new Date(),
+        replyCount: 1,
       },
       {
         text: `Those who survived the San Francisco earthquake said, "Thank God, I'm still alive." But, of course, those who died, their lives will never be the same again.`,
         score: 50,
         postId: 'asdfljkhasfl',
+        postTime: new Date(Date.now() - 24 * 60 * 60 * 1000),
       },
       {
         text: 'Negative Post',
         score: -8,
         postId: 'asdfljkhasfl',
+        postTime: new Date(Date.now() - 546456),
+        replyCount: 2,
       },
       {
         text: 'Overflow Post',
         score: 0,
         postId: 'asdfljkhasfl',
+        postTime: new Date(Date.now() - 346457457),
       },
     ];
 
@@ -88,9 +94,11 @@ class Feed extends React.Component {
     <FeedItem
       postId={item.postId}
       postType={item.postType}
+      postTime={item.postTime}
       text={item.text}
       image={item.image}
       score={item.score}
+      replyCount={item.replyCount}
     />
   );
 

@@ -10,8 +10,9 @@ import {
 import { colors } from '../../config/theme';
 import { style, styles } from './FeedItem.styles';
 import { Vote } from '../Vote/Vote';
+import { getTimeAgo } from '../../config/helpers';
 
-const CustomTextItem = ({ score, text, timestamp }) => {
+const CustomTextItem = ({ score, text, timestamp, replyCount }) => {
   onPress = () => {
     console.log('Post Clicked');
   };
@@ -32,10 +33,16 @@ const CustomTextItem = ({ score, text, timestamp }) => {
         </View>
         <View style={styles.bottomContainer}>
           <View>
-            <Text style={style.bottomTextStyle}>15 mins</Text>
+            <Text style={style.bottomTextStyle}>{getTimeAgo(timestamp)}</Text>
           </View>
           <View>
-            <Text style={style.bottomTextStyle}>2 replies</Text>
+            <Text style={style.bottomTextStyle}>
+              {replyCount
+                ? replyCount > 1
+                  ? replyCount + ' replies'
+                  : replyCount + ' reply'
+                : null}
+            </Text>
           </View>
           <View style={styles.extraContainer}>
             <Text style={style.bottomTextStyle} />
@@ -47,7 +54,7 @@ const CustomTextItem = ({ score, text, timestamp }) => {
 };
 
 export const FeedItem = props => {
-  const { postId, postType, text, image, score } = props;
+  const { postId, postType, postTime, text, image, score, replyCount } = props;
 
   switch (postType) {
     case 'image':
@@ -55,6 +62,13 @@ export const FeedItem = props => {
     case 'text':
       return <ListItem title={text} />;
     default:
-      return <CustomTextItem score={score} text={text} />;
+      return (
+        <CustomTextItem
+          score={score}
+          text={text}
+          timestamp={postTime}
+          replyCount={replyCount}
+        />
+      );
   }
 };
