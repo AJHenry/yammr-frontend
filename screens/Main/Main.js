@@ -10,10 +10,14 @@ import { colors } from '../../config/theme';
 import Feed from '../Feed/Feed';
 import Explore from '../Explore/Explore';
 import Account from '../Account/Account';
+import PostView from '../PostView/PostView';
 
 const FeedStack = createStackNavigator({
   Feed: {
     screen: Feed,
+  },
+  PostView: {
+    screen: PostView,
   },
 });
 

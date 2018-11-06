@@ -12,9 +12,17 @@ import { style, styles } from './FeedItem.styles';
 import { Vote } from '../Vote/Vote';
 import { getTimeAgo } from '../../config/helpers';
 
-const CustomTextItem = ({ score, text, timestamp, replyCount }) => {
+const CustomTextItem = ({
+  postId,
+  score,
+  text,
+  timestamp,
+  replyCount,
+  clickHandler,
+}) => {
   onPress = () => {
     console.log('Post Clicked');
+    clickHandler(postId);
   };
 
   return (
@@ -54,20 +62,31 @@ const CustomTextItem = ({ score, text, timestamp, replyCount }) => {
 };
 
 export const FeedItem = props => {
-  const { postId, postType, postTime, text, image, score, replyCount } = props;
+  const {
+    postId,
+    postType,
+    postTime,
+    text,
+    image,
+    score,
+    replyCount,
+    clickHandler,
+  } = props;
 
   switch (postType) {
     case 'image':
       return <ListItem rightElement={<Vote score={score} />} />;
     case 'text':
-      return <ListItem title={text} />;
+    case 'video':
     default:
       return (
         <CustomTextItem
+          postId={postId}
           score={score}
           text={text}
           timestamp={postTime}
           replyCount={replyCount}
+          clickHandler={clickHandler}
         />
       );
   }

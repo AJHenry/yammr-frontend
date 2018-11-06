@@ -52,14 +52,27 @@ class Feed extends React.Component {
 
     this.composeHandle = this.composeHandle.bind(this);
     this.feedHandler = this.feedHandler.bind(this);
+    this.clickHandle = this.clickHandle.bind(this);
   }
 
   static navigationOptions = {
     header: null,
   };
 
+  /**
+   * Called when the compose button in the header is clicked
+   */
   composeHandle = () => {
     console.log('Compose Handler');
+  };
+
+  /**
+   * Called when a post is clicked on
+   */
+  clickHandle = postId => {
+    this.props.navigation.push('PostView', {
+      postId: postId,
+    });
   };
 
   feedHandler = index => {
@@ -91,6 +104,7 @@ class Feed extends React.Component {
 
   renderItem = ({ item }) => (
     <FeedItem
+      clickHandler={this.clickHandle}
       postId={item.postId}
       postType={item.postType}
       postTime={item.postTime}
