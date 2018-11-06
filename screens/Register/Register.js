@@ -59,8 +59,9 @@ class Register extends React.Component {
   }
 
   _registerAsync = async () => {
+    let emailRegex = /\S+@\S+\.edu/;
     let shouldReturn = false;
-    if (this.state.email.length < 1) {
+    if (!this.state.email.match(emailRegex)) {
       this.setState({ emailError: true });
       shouldReturn = true;
     } else {
@@ -96,7 +97,9 @@ class Register extends React.Component {
           <Input
             label="EMAIL"
             labelStyle={style.labelStyle}
-            errorMessage={this.state.emailError ? 'Email required' : ' '}
+            errorMessage={
+              this.state.emailError ? 'Valid .edu email required' : ' '
+            }
             onChangeText={text => this.setState({ email: text })}
             placeholder="Email"
           />
