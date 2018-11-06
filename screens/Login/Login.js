@@ -15,6 +15,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      error: ' ',
     };
   }
 
@@ -23,10 +24,13 @@ class Login extends React.Component {
     dispatch(
       userActions.login(this.state.email, this.state.password).then(res => {
         if (res.type === userConstants.LOGIN_SUCCESS) {
+          this.setState({ ...this.state, error: ' ' });
           this.props.navigation.navigate('App');
         } else {
-          // Bad login set state accordingly
-          console.log('bad login');
+          this.setState({
+            ...this.state,
+            error: 'Invalid email/password. Please try again.',
+          });
         }
         return res;
       })
@@ -60,6 +64,7 @@ class Login extends React.Component {
             placeholder="Password"
             labelStyle={style.labelStyle}
             label="PASSWORD"
+            errorMessage={this.state.error}
             onChangeText={text =>
               this.setState({ ...this.state, password: text })
             }
