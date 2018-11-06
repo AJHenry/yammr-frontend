@@ -5,7 +5,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from 'react-native';
-import { Button, Text, Header, Input, Icon } from 'react-native-elements';
+import { Button, Text, CheckBox, Input, Icon } from 'react-native-elements';
 import { styles, style } from './Register.styles';
 import { colors } from '../../config/theme';
 
@@ -18,6 +18,10 @@ class Register extends React.Component {
       visible: true,
       email: '',
       password: '',
+      checked: false,
+      error: false,
+      passwordError: false,
+      emailError: false,
     };
 
     this.viewPassword = this.viewPassword.bind(this);
@@ -55,6 +59,31 @@ class Register extends React.Component {
   }
 
   _registerAsync = async () => {
+    let emailRegex = /\S+@\S+\.edu/;
+    let shouldReturn = false;
+    if (!this.state.email.match(emailRegex)) {
+      this.setState({ emailError: true });
+      shouldReturn = true;
+    } else {
+      this.setState({ emailError: false });
+    }
+
+    if (this.state.password.length < 1) {
+      this.setState({ passwordError: true });
+      shouldReturn = true;
+    } else {
+      this.setState({ passwordError: false });
+    }
+
+    if (!this.state.checked) {
+      this.setState({ error: true });
+      shouldReturn = true;
+    } else {
+      this.setState({ error: false });
+    }
+
+    if (shouldReturn) return;
+
     const { dispatch } = this.props.navigation;
     dispatch(userActions.register(this.state.email, this.state.password));
     this.props.navigation.navigate('Login');
@@ -68,15 +97,17 @@ class Register extends React.Component {
           <Input
             label="EMAIL"
             labelStyle={style.labelStyle}
-            onChangeText={text => this.setState({ ...this.state, email: text })}
+            errorMessage={
+              this.state.emailError ? 'Valid .edu email required' : ' '
+            }
+            onChangeText={text => this.setState({ email: text })}
             placeholder="Email"
           />
           <Input
             placeholder="Password"
             labelStyle={style.labelStyle}
-            onChangeText={text =>
-              this.setState({ ...this.state, password: text })
-            }
+            errorMessage={this.state.passwordError ? 'Password required' : ' '}
+            onChangeText={text => this.setState({ password: text })}
             label="PASSWORD"
             secureTextEntry={this.state.visible}
             rightIcon={
@@ -88,7 +119,18 @@ class Register extends React.Component {
               />
             }
           />
+          <CheckBox
+            center
+            checked={this.state.checked}
+            checkedColor={style.labelStyle.color}
+            containerStyle={
+              this.state.error ? style.checkboxOutline : style.checkbox
+            }
+            onPress={() => this.setState({ checked: !this.state.checked })}
+            title="I agree to Yammer Terms of Service"
+          />
         </View>
+
         <Button
           buttonStyle={style.registerButton}
           onPress={this._registerAsync}

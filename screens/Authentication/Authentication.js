@@ -26,7 +26,7 @@ class Authentication extends React.Component {
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding">
         <Text style={styles.header} h1>
-          Gib Gab
+          Yammr
         </Text>
 
         <Button

@@ -25,6 +25,14 @@ export const style = {
     fontSize: 30,
     marginBottom: 20,
   },
+  checkbox: {
+    backgroundColor: colors.transparent,
+    borderColor: colors.transparent,
+  },
+  checkboxOutline: {
+    backgroundColor: colors.transparent,
+    borderColor: colors.secondary,
+  },
 };
 
 export const styles = StyleSheet.create(style);
