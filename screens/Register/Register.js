@@ -20,6 +20,8 @@ class Register extends React.Component {
       password: '',
       checked: false,
       error: false,
+      passwordError: false,
+      emailError: false,
     };
 
     this.viewPassword = this.viewPassword.bind(this);
@@ -57,12 +59,29 @@ class Register extends React.Component {
   }
 
   _registerAsync = async () => {
-    if (!this.state.checked) {
-      this.setState({ ...this.state, error: true });
-      return;
+    let shouldReturn = false;
+    if (this.state.email.length < 1) {
+      this.setState({ emailError: true });
+      shouldReturn = true;
+    } else {
+      this.setState({ emailError: false });
     }
 
-    if (this.state.error) this.setState({ ...this.state, error: false });
+    if (this.state.password.length < 1) {
+      this.setState({ passwordError: true });
+      shouldReturn = true;
+    } else {
+      this.setState({ passwordError: false });
+    }
+
+    if (!this.state.checked) {
+      this.setState({ error: true });
+      shouldReturn = true;
+    } else {
+      this.setState({ error: false });
+    }
+
+    if (shouldReturn) return;
 
     const { dispatch } = this.props.navigation;
     dispatch(userActions.register(this.state.email, this.state.password));
@@ -77,15 +96,15 @@ class Register extends React.Component {
           <Input
             label="EMAIL"
             labelStyle={style.labelStyle}
-            onChangeText={text => this.setState({ ...this.state, email: text })}
+            errorMessage={this.state.emailError ? 'Email required' : ' '}
+            onChangeText={text => this.setState({ email: text })}
             placeholder="Email"
           />
           <Input
             placeholder="Password"
             labelStyle={style.labelStyle}
-            onChangeText={text =>
-              this.setState({ ...this.state, password: text })
-            }
+            errorMessage={this.state.passwordError ? 'Password required' : ' '}
+            onChangeText={text => this.setState({ password: text })}
             label="PASSWORD"
             secureTextEntry={this.state.visible}
             rightIcon={
@@ -104,9 +123,7 @@ class Register extends React.Component {
             containerStyle={
               this.state.error ? style.checkboxOutline : style.checkbox
             }
-            onPress={() =>
-              this.setState({ ...this.state, checked: !this.state.checked })
-            }
+            onPress={() => this.setState({ checked: !this.state.checked })}
             title="I agree to Yammer Terms of Service"
           />
         </View>

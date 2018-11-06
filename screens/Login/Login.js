@@ -15,21 +15,38 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      error: ' ',
+      passwordError: ' ',
+      emailError: ' ',
     };
   }
 
   _signInAsync = async () => {
+    let emailRegex = /\S+@\S+\.edu/;
+    let shouldReturn = false;
+    if (!this.state.email.match(emailRegex)) {
+      this.setState({ emailError: 'Valid .edu email required' });
+      shouldReturn = true;
+    } else {
+      this.setState({ emailError: ' ' });
+    }
+
+    if (this.state.password.length < 1) {
+      this.setState({ passwordError: 'Password required' });
+      shouldReturn = true;
+    } else {
+      this.setState({ passwordError: ' ' });
+    }
+
+    if (shouldReturn) return;
+
     const { dispatch } = this.props.navigation;
     dispatch(
       userActions.login(this.state.email, this.state.password).then(res => {
         if (res.type === userConstants.LOGIN_SUCCESS) {
-          this.setState({ ...this.state, error: ' ' });
           this.props.navigation.navigate('App');
         } else {
           this.setState({
-            ...this.state,
-            error: 'Invalid email/password. Please try again.',
+            passwordError: 'Invalid email/password. Please try again.',
           });
         }
         return res;
@@ -56,7 +73,8 @@ class Login extends React.Component {
         <View style={styles.inputContainer}>
           <Input
             label="EMAIL"
-            onChangeText={text => this.setState({ ...this.state, email: text })}
+            onChangeText={text => this.setState({ email: text })}
+            errorMessage={this.state.emailError}
             labelStyle={style.labelStyle}
             placeholder="Email"
           />
@@ -64,10 +82,8 @@ class Login extends React.Component {
             placeholder="Password"
             labelStyle={style.labelStyle}
             label="PASSWORD"
-            errorMessage={this.state.error}
-            onChangeText={text =>
-              this.setState({ ...this.state, password: text })
-            }
+            errorMessage={this.state.passwordError}
+            onChangeText={text => this.setState({ password: text })}
             secureTextEntry
           />
         </View>
