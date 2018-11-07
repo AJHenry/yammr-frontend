@@ -1,4 +1,6 @@
-const root = 'http://gibgab.us-east-1.elasticbeanstalk.com/';
+import { API_ENDPOINT } from 'react-native-dotenv';
+
+const root = API_ENDPOINT;
 
 export const LOGIN = root + 'login';
 export const REGISTER = root + 'register';
