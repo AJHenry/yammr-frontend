@@ -22,6 +22,9 @@ bin/
 gen/
 out/
 
+#expo
+.expo/
+
 # Gradle files
 .gradle/
 build/
