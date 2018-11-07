@@ -1,4 +1,4 @@
-package com.gibgab;
+package com.yammr;
 
 import android.app.Application;
 

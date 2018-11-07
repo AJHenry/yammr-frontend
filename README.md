@@ -1,4 +1,4 @@
-# Gib Gab - Frontend
+# Yammr - Frontend
 
 An anonymous social platform for posting text, pictures, and "vine-style" videos, exclusively for college students. Students sign up for the app using their `.edu` email address and are completely anonymous to each other.
 

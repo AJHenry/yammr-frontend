@@ -1,8 +1,8 @@
 {
-  "name": "gibgab",
+  "name": "yammr",
   "version": "0.1.0",
   "private": true,
-  "repository": "https://github.com/the-better-gibgab/gibgab-frontend",
+  "repository": "https://github.com/yammr/yammr-frontend",
   "description": "An anonymous social platform for posting text, pictures, and 'vine-style' videos, exclusively for college students.",
   "devDependencies": {
     "eslint": "^5.5.0",
