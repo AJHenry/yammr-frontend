@@ -3,6 +3,11 @@ pipeline {
         docker { image 'node:10' }
     }
     stages {
+        stage('Pre-Build') {
+            steps {
+                sh 'mv .env.ci .env'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
