@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, TouchableNativeFeedback } from 'react-native';
+import { Image, View, TouchableNativeFeedback } from 'react-native';
 import {
   Text,
   Icon,
@@ -9,57 +9,8 @@ import {
 } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './FeedItem.styles';
-import { Vote } from '../Vote/Vote';
-import { getTimeAgo } from '../../config/helpers';
-
-const CustomTextItem = ({
-  postId,
-  score,
-  text,
-  timestamp,
-  replyCount,
-  clickHandler,
-}) => {
-  onPress = () => {
-    console.log('Post Clicked');
-    clickHandler(postId);
-  };
-
-  return (
-    <TouchableNativeFeedback
-      onPress={this._onPressButton}
-      onPress={() => this.onPress()}
-    >
-      <View style={styles.mainContainer}>
-        <View style={styles.container}>
-          <View style={styles.textContainer}>
-            <Text style={styles.textStyle}>{text}</Text>
-          </View>
-          <View style={styles.voteContainer}>
-            <Vote score={score} />
-          </View>
-        </View>
-        <View style={styles.bottomContainer}>
-          <View>
-            <Text style={style.bottomTextStyle}>{getTimeAgo(timestamp)}</Text>
-          </View>
-          <View>
-            <Text style={style.bottomTextStyle}>
-              {replyCount
-                ? replyCount > 1
-                  ? replyCount + ' replies'
-                  : replyCount + ' reply'
-                : null}
-            </Text>
-          </View>
-          <View style={styles.extraContainer}>
-            <Text style={style.bottomTextStyle} />
-          </View>
-        </View>
-      </View>
-    </TouchableNativeFeedback>
-  );
-};
+import { ImageItem } from './ImageItem/ImageItem';
+import { TextItem } from './TextItem/TextItem';
 
 export const FeedItem = props => {
   const {
@@ -67,7 +18,7 @@ export const FeedItem = props => {
     postType,
     postTime,
     text,
-    image,
+    imageSrc,
     score,
     replyCount,
     clickHandler,
@@ -75,12 +26,22 @@ export const FeedItem = props => {
 
   switch (postType) {
     case 'image':
-      return <ListItem rightElement={<Vote score={score} />} />;
+      return (
+        <ImageItem
+          postId={postId}
+          score={score}
+          text={text}
+          imageSrc={imageSrc}
+          timestamp={postTime}
+          replyCount={replyCount}
+          clickHandler={clickHandler}
+        />
+      );
     case 'text':
     case 'video':
     default:
       return (
-        <CustomTextItem
+        <TextItem
           postId={postId}
           score={score}
           text={text}
