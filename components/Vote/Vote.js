@@ -70,6 +70,9 @@ export class Vote extends React.Component {
         });
         break;
     }
+
+    // Callback to parent to handle the vote action
+    this.props.voteHandler(this.props.postId, type);
   };
 
   render() {

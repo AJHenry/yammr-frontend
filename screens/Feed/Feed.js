@@ -1,14 +1,5 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import {
-  Text,
-  Icon,
-  Header,
-  ButtonGroup,
-  ListItem,
-} from 'react-native-elements';
-import { colors } from '../../config/theme';
-import { style, styles } from './Feed.styles';
 import FeedHeader from '../../components/FeedHeader/FeedHeader';
 import { FeedItem } from '../../components/FeedItem/FeedItem';
 
@@ -20,27 +11,30 @@ class Feed extends React.Component {
       {
         text: 'Watermelon is a meat?',
         score: 99,
-        postId: 'asdfljkhasfl',
+        postId: 'asdf1',
         postTime: new Date(),
         replyCount: 1,
+        postType: 'text',
+        voteType: 'up',
       },
       {
         text: `Those who survived the San Francisco earthquake said, "Thank God, I'm still alive." But, of course, those who died, their lives will never be the same again.`,
         score: 50,
-        postId: 'asdfljkhasfl',
+        postId: 'lkj4',
         postTime: new Date(Date.now() - 24 * 60 * 60 * 1000),
+        voteType: 'down',
       },
       {
         text: 'Negative Post',
         score: -8,
-        postId: 'asdfljkhasfl',
+        postId: 'gfbfg8',
         postTime: new Date(Date.now() - 546456),
         replyCount: 2,
       },
       {
         text: 'Overflow Post',
         score: 0,
-        postId: 'asdfljkhasfl',
+        postId: 'weroiw9',
         postTime: new Date(Date.now() - 346457457),
       },
     ];
@@ -53,6 +47,7 @@ class Feed extends React.Component {
     this.composeHandle = this.composeHandle.bind(this);
     this.feedHandler = this.feedHandler.bind(this);
     this.clickHandle = this.clickHandle.bind(this);
+    this.voteHandle = this.voteHandle.bind(this);
   }
 
   static navigationOptions = {
@@ -73,6 +68,13 @@ class Feed extends React.Component {
     this.props.navigation.push('PostView', {
       postId: postId,
     });
+  };
+
+  /**
+   * Called when a vote is cast on a post
+   */
+  voteHandle = (postId, voteType) => {
+    console.log(`VoteType: ${voteType} vote on postID: ${postId}`);
   };
 
   feedHandler = index => {
@@ -105,13 +107,16 @@ class Feed extends React.Component {
   renderItem = ({ item }) => (
     <FeedItem
       clickHandler={this.clickHandle}
+      imageSrc={item.imageSrc}
+      postData={item}
       postId={item.postId}
       postType={item.postType}
       postTime={item.postTime}
-      text={item.text}
-      image={item.image}
-      score={item.score}
       replyCount={item.replyCount}
+      score={item.score}
+      text={item.text}
+      voteHandler={this.voteHandle}
+      voteType={item.voteType}
     />
   );
 

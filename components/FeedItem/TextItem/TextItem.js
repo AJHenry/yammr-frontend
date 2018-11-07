@@ -1,15 +1,14 @@
 import React from 'react';
-import { Image, View, TouchableNativeFeedback } from 'react-native';
-import {
-  Text,
-  Icon,
-  Header,
-  ButtonGroup,
-  ListItem,
-} from 'react-native-elements';
+import { View, TouchableNativeFeedback } from 'react-native';
+import { Text } from 'react-native-elements';
 import { style, styles } from './TextItem.styles';
 import { Vote } from '../../Vote/Vote';
 import { getTimeAgo } from '../../../config/helpers';
+
+onPress = postId => {
+  console.log('Post Clicked on id ' + postId);
+  clickHandler(postId);
+};
 
 export const TextItem = ({
   postId,
@@ -18,24 +17,23 @@ export const TextItem = ({
   timestamp,
   replyCount,
   clickHandler,
+  voteHandler,
+  voteType,
 }) => {
-  onPress = () => {
-    console.log('Post Clicked');
-    clickHandler(postId);
-  };
-
   return (
-    <TouchableNativeFeedback
-      onPress={this._onPressButton}
-      onPress={() => this.onPress()}
-    >
+    <TouchableNativeFeedback onPress={() => this.onPress(postId)}>
       <View style={styles.mainContainer}>
         <View style={styles.container}>
           <View style={styles.textContainer}>
             <Text style={styles.textStyle}>{text}</Text>
           </View>
           <View style={styles.voteContainer}>
-            <Vote score={score} />
+            <Vote
+              score={score}
+              voteHandler={voteHandler}
+              postId={postId}
+              voteType={voteType}
+            />
           </View>
         </View>
         <View style={styles.bottomContainer}>

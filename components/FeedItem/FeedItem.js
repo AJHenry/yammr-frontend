@@ -1,14 +1,4 @@
 import React from 'react';
-import { Image, View, TouchableNativeFeedback } from 'react-native';
-import {
-  Text,
-  Icon,
-  Header,
-  ButtonGroup,
-  ListItem,
-} from 'react-native-elements';
-import { colors } from '../../config/theme';
-import { style, styles } from './FeedItem.styles';
 import { ImageItem } from './ImageItem/ImageItem';
 import { TextItem } from './TextItem/TextItem';
 
@@ -22,21 +12,12 @@ export const FeedItem = props => {
     score,
     replyCount,
     clickHandler,
+    voteHandler,
+    voteType,
   } = props;
 
   switch (postType) {
     case 'image':
-      return (
-        <ImageItem
-          postId={postId}
-          score={score}
-          text={text}
-          imageSrc={imageSrc}
-          timestamp={postTime}
-          replyCount={replyCount}
-          clickHandler={clickHandler}
-        />
-      );
     case 'text':
     case 'video':
     default:
@@ -48,6 +29,8 @@ export const FeedItem = props => {
           timestamp={postTime}
           replyCount={replyCount}
           clickHandler={clickHandler}
+          voteHandler={voteHandler}
+          voteType={voteType}
         />
       );
   }
