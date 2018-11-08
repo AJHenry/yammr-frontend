@@ -1,17 +1,18 @@
 {
-  "name": "gibgab",
+  "name": "yammr",
   "version": "0.1.0",
   "private": true,
-  "repository": "https://github.com/the-better-gibgab/gibgab-frontend",
+  "repository": "https://github.com/yammr/yammr-frontend",
   "description": "An anonymous social platform for posting text, pictures, and 'vine-style' videos, exclusively for college students.",
   "devDependencies": {
     "eslint": "^5.5.0",
     "eslint-plugin-prettier": "^2.6.2",
     "husky": "^0.14.3",
+    "jest-expo": "~27.0.0",
     "prettier": "^1.14.2",
     "pretty-quick": "^1.6.0",
+    "react-native-dotenv": "^0.2.0",
     "react-native-scripts": "1.14.0",
-    "jest-expo": "~27.0.0",
     "react-test-renderer": "16.3.1"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
