@@ -25,7 +25,7 @@ A step by step series of examples that tell you how to get a development env run
 `.env` file
 
 ```
-TODO
+API_ENDPOINT
 ```
 
 Follow the steps on the React Native document to get started, [those can be found here](https://facebook.github.io/react-native/docs/getting-started.html)
@@ -34,7 +34,7 @@ Install and run using npm
 
 ```
 npm install
-npm run
+npm start
 ```
 
 Now install using expo
@@ -42,20 +42,20 @@ Now install using expo
 You should be good to go if you see the following output
 
 ```
-TODO
+ › Press a to open Android device or emulator.
+ › Press s to send the app URL to your phone number or email address
+ › Press q to display QR code.
+ › Press r to restart packager, or R to restart packager and clear cache.
+ › Press d to toggle development mode. (current mode: development)
 ```
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+We use Jest for our unit tests
 
-### Break down into end to end tests
+There is also CI that needs to be passing before a branch can be merged
 
-Explain what these tests test and why
-
-```
-Give an example
-```
+Run the tests using `npm test`
 
 ### Coding Style
 
@@ -67,7 +67,7 @@ There is a pre-hook that will format your documents after they are staged for co
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+We will be using Fastlane when the current feature set is ready
 
 ## Built With
 
