@@ -5,9 +5,18 @@ import { style, styles } from './TextItem.styles';
 import { Vote } from '../../Vote/Vote';
 import { getTimeAgo } from '../../../config/helpers';
 
-onPress = postId => {
+/**
+ * Performs actions when
+ * @param {The id of the current post} postId
+ * @param {The post-click handler given by Feed.js} clickHandler
+ */
+const onPress = (postId, clickHandler) => {
   console.log('Post Clicked on id ' + postId);
-  clickHandler(postId);
+  if (clickHandler) {
+    clickHandler(postId);
+  } else {
+    console.log('Post item clicked on, but no clickHandler supplied');
+  }
 };
 
 export const TextItem = ({
@@ -20,8 +29,12 @@ export const TextItem = ({
   voteHandler,
   voteType,
 }) => {
+  if (!text || text.length == 0) {
+    console.log(`Warning, post with ID: ${postId}, has an empty text body`);
+  }
+
   return (
-    <TouchableNativeFeedback onPress={() => this.onPress(postId)}>
+    <TouchableNativeFeedback onPress={() => onPress(postId, clickHandler)}>
       <View style={styles.mainContainer}>
         <View style={styles.container}>
           <View style={styles.textContainer}>

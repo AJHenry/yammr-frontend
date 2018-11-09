@@ -43,11 +43,6 @@ class Feed extends React.Component {
       text: 'Top Feed',
       feedItems: feedItems,
     };
-
-    this.composeHandle = this.composeHandle.bind(this);
-    this.feedHandler = this.feedHandler.bind(this);
-    this.clickHandle = this.clickHandle.bind(this);
-    this.voteHandle = this.voteHandle.bind(this);
   }
 
   static navigationOptions = {
