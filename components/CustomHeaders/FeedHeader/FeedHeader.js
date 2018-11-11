@@ -1,8 +1,8 @@
 import React from 'react';
 import { Icon, Header, ButtonGroup } from 'react-native-elements';
-import { colors } from '../../config/theme';
+import { colors } from '../../../config/theme';
 
-class FeedHeader extends React.Component {
+export class FeedHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,5 +67,3 @@ class FeedHeader extends React.Component {
     );
   }
 }
-
-export default FeedHeader;

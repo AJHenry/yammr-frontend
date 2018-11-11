@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableNativeFeedback } from 'react-native';
 import {
   Text,
   Icon,
@@ -25,6 +25,7 @@ export class Vote extends React.Component {
   handleScore = type => {
     let score = 0;
     let voteType = null;
+    let { voteHandler, postId } = this.props;
 
     switch (type) {
       case 'up':
@@ -72,7 +73,13 @@ export class Vote extends React.Component {
     }
 
     // Callback to parent to handle the vote action
-    this.props.voteHandler(this.props.postId, type);
+    if (voteHandler) {
+      voteHandler(postId, type);
+    } else {
+      console.log(
+        `Warning: voteHandler called on Vote without being passed a voteHandler prop`
+      );
+    }
   };
 
   render() {
@@ -80,6 +87,7 @@ export class Vote extends React.Component {
     return (
       <View style={styles.container}>
         <Icon
+          component={TouchableNativeFeedback}
           iconStyle={
             voteType === 'up' ? [style.vote, style.upvote] : style.vote
           }
@@ -89,6 +97,7 @@ export class Vote extends React.Component {
         />
         <Text style={style.scoreStyle}>{score}</Text>
         <Icon
+          component={TouchableNativeFeedback}
           iconStyle={
             voteType === 'down' ? [style.vote, style.downvote] : style.vote
           }

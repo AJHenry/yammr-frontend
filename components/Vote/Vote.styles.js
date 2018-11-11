@@ -3,11 +3,9 @@ import { colors } from '../../config/theme';
 
 export const style = {
   container: {
-    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
   },
   scoreStyle: {
     fontSize: 24,

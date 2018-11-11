@@ -1,7 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import FeedHeader from '../../components/FeedHeader/FeedHeader';
-import { FeedItem } from '../../components/FeedItem/FeedItem';
+import { FeedHeader, FeedItem } from '../../components';
 
 class Feed extends React.Component {
   constructor(props) {
@@ -15,7 +14,7 @@ class Feed extends React.Component {
         postTime: new Date(),
         replyCount: 1,
         postType: 'text',
-        voteType: 'up',
+        voteType: 'down',
       },
       {
         text: `Those who survived the San Francisco earthquake said, "Thank God, I'm still alive." But, of course, those who died, their lives will never be the same again.`,
@@ -50,6 +49,24 @@ class Feed extends React.Component {
   };
 
   /**
+   * Helper function for getting post data from the feed data list
+   * TODO: this method is pretty inefficient at O(n),
+   * we can make it O(1) if we make the data an Object with postId as the key
+   */
+  getPostData = postId => {
+    let selectedPost = null;
+
+    for (let post of this.state.feedItems) {
+      if (post.postId === postId) {
+        selectedPost = post;
+        break;
+      }
+    }
+
+    return selectedPost;
+  };
+
+  /**
    * Called when the compose button in the header is clicked
    */
   composeHandle = () => {
@@ -60,8 +77,10 @@ class Feed extends React.Component {
    * Called when a post is clicked on
    */
   clickHandle = postId => {
+    let postData = this.getPostData(postId);
+
     this.props.navigation.push('PostView', {
-      postId: postId,
+      postData: postData,
     });
   };
 
