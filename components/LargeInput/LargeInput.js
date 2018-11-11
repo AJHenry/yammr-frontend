@@ -1,6 +1,11 @@
 import React from 'react';
 import { TextInput } from 'react-native';
+
 export const LargeInput = props => {
-  const { inputStyle } = props;
-  return <TextInput style={inputStyle} />;
+  const { inputStyle, containerStyle } = props;
+  return (
+    <View style={containerStyle}>
+      <TextInput style={inputStyle} />
+    </View>
+  );
 };
