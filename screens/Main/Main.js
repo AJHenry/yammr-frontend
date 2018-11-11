@@ -22,6 +22,18 @@ const FeedStack = createStackNavigator({
   },
 });
 
+// Needed to make bottomTabBar go away on subsequent screens
+FeedStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
 const ExploreStack = createStackNavigator({
   Explore: {
     screen: Explore,
