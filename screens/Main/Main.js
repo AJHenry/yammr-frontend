@@ -10,6 +10,7 @@ import { colors } from '../../config/theme';
 import Feed from '../Feed/Feed';
 import Explore from '../Explore/Explore';
 import Account from '../Account/Account';
+import More from '../More/More';
 import PostView from '../PostView/PostView';
 
 const FeedStack = createStackNavigator({
@@ -33,6 +34,12 @@ const AccountStack = createStackNavigator({
   },
 });
 
+const MoreStack = createStackNavigator({
+  More: {
+    screen: More,
+  },
+});
+
 const NavBar = createBottomTabNavigator(
   {
     Feed: {
@@ -43,6 +50,9 @@ const NavBar = createBottomTabNavigator(
     },
     Account: {
       screen: AccountStack,
+    },
+    More: {
+      screen: MoreStack,
     },
   },
   {
@@ -59,12 +69,15 @@ const NavBar = createBottomTabNavigator(
         if (routeName === 'Account') {
           iconName = `user`;
         }
+        if (routeName === 'More') {
+          iconName = `menu`;
+        }
 
         return (
           <Icon
             type="simple-line-icon"
             name={iconName}
-            size={25}
+            size={22}
             color={tintColor}
           />
         );
