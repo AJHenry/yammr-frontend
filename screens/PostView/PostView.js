@@ -1,27 +1,86 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Text, Icon, Header } from 'react-native-elements';
+import { View, KeyboardAvoidingView } from 'react-native';
+import { Text, Icon, Divider, Button } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './PostView.styles';
+import { PostViewHeader, Vote } from '../../components';
+import { getTimeAgo } from '../../config/helpers';
+import { LargeInput } from '../../components';
 
 class PostView extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'PostView',
-      headerStyle: {
-        backgroundColor: colors.transparent,
-      },
-      headerBackImage: (
-        <Icon type="ionicons" name="arrow-back" title="Info" size={28} />
-      ),
+      header: null,
+      tabBarVisible: false,
     };
+  };
+
+  /**
+   * Used for handling the back arrow on the header
+   */
+  goBack = () => {
+    this.props.navigation.goBack();
+  };
+
+  menuHandler = () => {
+    console.log(`Clicked menu handler`);
   };
 
   render() {
     const { navigation } = this.props;
-    const postId = navigation.getParam('postId', '0');
+    const postData = navigation.getParam('postData', undefined);
+    const {
+      text,
+      score,
+      postId,
+      postTime,
+      replyCount,
+      postType,
+      voteType,
+    } = postData;
 
-    return <Text>PostID: {postId}</Text>;
+    voteHander = (postId, type) => {
+      console.log(
+        `Vote (type: ${type}) handler called on PostView with postId: ${postId}`
+      );
+    };
+
+    return (
+      <React.Fragment>
+        <PostViewHeader goBack={this.goBack} menuHandler={this.menuHandler} />
+        <KeyboardAvoidingView
+          style={styles.mainContainer}
+          behavior="padding"
+          enabled
+        >
+          <View style={styles.aboveContainer} />
+          <View style={styles.contentContainer}>
+            <View style={styles.postContainer}>
+              <Text style={styles.contentStyle}>{text}</Text>
+            </View>
+            <View style={styles.sideContainer}>
+              <Vote score={score} voteType={voteType} />
+              <Text>{getTimeAgo(postTime)}</Text>
+            </View>
+          </View>
+          <View style={styles.belowContainer} />
+          <View style={styles.commentContainer}>
+            <Text style={styles.commentHeader}>COMMENTS</Text>
+            <Divider />
+
+            <View style={styles.comment}>
+              <LargeInput inputStyle={styles.commentInput} />
+              <Button
+                buttonStyle={style.commentButton}
+                title={null}
+                icon={<Icon type="simple-line-icons" name="send" />}
+              />
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </React.Fragment>
+    );
   }
 }
 
