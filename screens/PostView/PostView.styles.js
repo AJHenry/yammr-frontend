@@ -39,23 +39,8 @@ export const style = {
     fontSize: 12,
     color: colors.grey,
   },
-  comment: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderTopColor: colors.muted,
-    borderTopWidth: 1,
-    backgroundColor: colors.white,
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-  },
-  commentInput: {
-    flex: 1,
-  },
-  commentButton: {
-    flex: 1,
-    minWidth: 0,
-    width: 100,
+  commentFeed: {
+    marginBottom: 50,
   },
 };
 

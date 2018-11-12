@@ -44,24 +44,22 @@ export class PostViewHeader extends React.Component {
         }}
         leftComponent={
           <TouchableNativeFeedback onPress={() => this.goBack()}>
-            <View style={styles.backContainer}>
+            <View>
               <Icon
-                type="ionicon"
-                name="ios-arrow-back"
+                type="simple-line-icon"
+                name="arrow-left"
                 color={colors.white}
-                size={30}
               />
             </View>
           </TouchableNativeFeedback>
         }
         rightComponent={
           <TouchableNativeFeedback onPress={() => this.menuHandler()}>
-            <View style={styles.menuContainer}>
+            <View>
               <Icon
                 type="simple-line-icon"
                 name="options-vertical"
                 color={colors.white}
-                size={24}
               />
             </View>
           </TouchableNativeFeedback>

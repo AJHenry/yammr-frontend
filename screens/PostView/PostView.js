@@ -1,19 +1,65 @@
 import React from 'react';
-import { View, KeyboardAvoidingView } from 'react-native';
+import {
+  View,
+  KeyboardAvoidingView,
+  FlatList,
+  TouchableHighlight,
+} from 'react-native';
 import { Text, Icon, Divider, Button } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './PostView.styles';
 import { PostViewHeader, Vote } from '../../components';
 import { getTimeAgo } from '../../config/helpers';
-import { LargeInput } from '../../components';
+import { LargeInput, FeedItem, BottomComment } from '../../components';
 
 class PostView extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: null,
+    };
+
+    const feedItems = [
+      {
+        text: 'Comment One',
+        score: 3,
+        postId: 'asdf1',
+        postTime: new Date(Date.now() - 24 * 60 * 60 * 4587),
+        user: 'HairyOrange67',
+        postType: 'comment',
+        voteType: 'down',
+      },
+      {
+        text: 'Comment Two',
+        score: 0,
+        postId: 'sdfef',
+        postTime: new Date(Date.now() - 24 * 60 * 60),
+        user: 'WireyTumbleWeed45',
+        postType: 'comment',
+      },
+    ];
+
+    this.state = {
+      feedItems: feedItems,
+    };
+  }
+
   static navigationOptions = ({ navigation }) => {
     return {
       title: 'PostView',
       header: null,
       tabBarVisible: false,
     };
+  };
+
+  handleInputChange = event => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value,
+    });
   };
 
   /**
@@ -23,9 +69,42 @@ class PostView extends React.Component {
     this.props.navigation.goBack();
   };
 
+  /**
+   * Used for handling comment button
+   */
+  commentHandler = () => {
+    console.log(`Comment Handler`);
+  };
+
+  /**
+   * Used for handling camera button
+   */
+  cameraHandler = () => {
+    console.log(`Camera Handler`);
+  };
+
   menuHandler = () => {
     console.log(`Clicked menu handler`);
   };
+
+  keyExtractor = (item, index) => index.toString();
+
+  renderItem = ({ item }) => (
+    <FeedItem
+      clickHandler={this.clickHandle}
+      imageSrc={item.imageSrc}
+      postData={item}
+      postId={item.postId}
+      postType={item.postType}
+      postTime={item.postTime}
+      replyCount={item.replyCount}
+      score={item.score}
+      text={item.text}
+      voteHandler={this.voteHandle}
+      voteType={item.voteType}
+      user={item.user}
+    />
+  );
 
   render() {
     const { navigation } = this.props;
@@ -68,15 +147,20 @@ class PostView extends React.Component {
           <View style={styles.commentContainer}>
             <Text style={styles.commentHeader}>COMMENTS</Text>
             <Divider />
-
-            <View style={styles.comment}>
-              <LargeInput inputStyle={styles.commentInput} />
-              <Button
-                buttonStyle={style.commentButton}
-                title={null}
-                icon={<Icon type="simple-line-icons" name="send" />}
+            <View style={styles.commentFeed}>
+              <FlatList
+                keyExtractor={this.keyExtractor}
+                data={this.state.feedItems}
+                renderItem={this.renderItem}
               />
             </View>
+
+            <BottomComment
+              onChange={this.onChange}
+              value={this.state.value}
+              cameraHandler={this.cameraHandler}
+              commentHandler={this.commentHandler}
+            />
           </View>
         </KeyboardAvoidingView>
       </React.Fragment>
