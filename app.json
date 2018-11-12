@@ -1,4 +1,7 @@
 {
   "name": "yammr",
-  "displayName": "yammr"
+  "displayName": "yammr",
+  "expo": {
+    "sdkVersion": "27.0.0"
+  }
 }
