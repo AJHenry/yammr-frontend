@@ -108,7 +108,7 @@ class PostView extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const postData = navigation.getParam('postData', undefined);
+    const postData = navigation.getParam('postData', {});
     const {
       text,
       score,

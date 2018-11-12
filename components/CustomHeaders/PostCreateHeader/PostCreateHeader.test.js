@@ -1,5 +1,5 @@
 import React from 'react';
-import PostCreateHeader from './PostCreateHeader';
+import { PostCreateHeader } from './PostCreateHeader';
 
 import renderer from 'react-test-renderer';
 
