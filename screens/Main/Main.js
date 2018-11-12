@@ -12,6 +12,7 @@ import Explore from '../Explore/Explore';
 import Account from '../Account/Account';
 import More from '../More/More';
 import PostView from '../PostView/PostView';
+import PostCreate from '../PostCreate/PostCreate';
 
 const FeedStack = createStackNavigator({
   Feed: {
@@ -19,6 +20,9 @@ const FeedStack = createStackNavigator({
   },
   PostView: {
     screen: PostView,
+  },
+  PostCreate: {
+    screen: PostCreate,
   },
 });
 

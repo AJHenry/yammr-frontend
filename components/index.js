@@ -1,6 +1,7 @@
 // Headers
 import { FeedHeader } from './CustomHeaders/FeedHeader/FeedHeader';
 import { PostViewHeader } from './CustomHeaders/PostViewHeader/PostViewHeader';
+import { PostCreateHeader } from './CustomHeaders/PostCreateHeader/PostCreateHeader';
 
 //Bottom Comment
 import { BottomComment } from './BottomComment/BottomComment';
@@ -18,6 +19,7 @@ export {
   FeedHeader,
   FeedItem,
   LargeInput,
+  PostCreateHeader,
   PostViewHeader,
   Vote,
   BottomComment,

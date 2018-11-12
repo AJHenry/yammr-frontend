@@ -71,6 +71,7 @@ class Feed extends React.Component {
    */
   composeHandle = () => {
     console.log('Compose Handler');
+    this.props.navigation.push('PostCreate');
   };
 
   /**

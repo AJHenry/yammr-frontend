@@ -1,9 +1,9 @@
 import React from 'react';
-import Feed from './Feed';
+import PostCreate from './PostCreate';
 
 import renderer from 'react-test-renderer';
 
 it('renders without crashing', () => {
-  const rendered = renderer.create(<Feed />).toJSON();
+  const rendered = renderer.create(<PostCreate />).toJSON();
   expect(rendered).toBeTruthy();
 });
