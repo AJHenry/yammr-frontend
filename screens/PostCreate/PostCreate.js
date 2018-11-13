@@ -60,6 +60,8 @@ class PostCreate extends React.Component {
             <LargeInput
               onChangeText={text => this.setState({ postcontent: text })}
               placeholder="Create a great post"
+              style={styles.inputContainer}
+              multiline={true}
             />
           </View>
         </View>
