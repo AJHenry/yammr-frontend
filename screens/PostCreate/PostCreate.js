@@ -3,7 +3,7 @@ import { View, PermissionsAndroid } from 'react-native';
 import { Button, Text, CheckBox, Input, Icon } from 'react-native-elements';
 import { styles, style } from './PostCreate.styles';
 import { colors } from '../../config/theme';
-import { PostCreateHeader } from '../../components';
+import { PostCreateHeader, LargeInput } from '../../components';
 
 class PostCreate extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class PostCreate extends React.Component {
       latitude: null,
       longitude: null,
       error: null,
+      postconent: '',
     };
   }
 
@@ -52,10 +53,15 @@ class PostCreate extends React.Component {
     const { navigation } = this.props;
     return (
       <View>
-        <PostCreateHeader goBack={() => navigation.goBack()} />
+        <PostCreateHeader goBack={navigation.goBack} />
         <View style={styles.mainContainer}>
           <View style={styles.postContainer} />
-          <View style={styles.bottomContainer} />
+          <View style={styles.bottomContainer}>
+            <LargeInput
+              onChangeText={text => this.setState({ postcontent: text })}
+              placeholder="Create a great post"
+            />
+          </View>
         </View>
       </View>
     );

@@ -15,9 +15,6 @@ import { LargeInput, FeedItem, BottomComment } from '../../components';
 class PostView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      comment: null,
-    };
 
     const feedItems = [
       {
@@ -52,35 +49,11 @@ class PostView extends React.Component {
     };
   };
 
-  handleInputChange = event => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    this.setState({
-      [name]: value,
-    });
-  };
-
   /**
    * Used for handling the back arrow on the header
    */
   goBack = () => {
     this.props.navigation.goBack();
-  };
-
-  /**
-   * Used for handling comment button
-   */
-  commentHandler = () => {
-    console.log(`Comment Handler`);
-  };
-
-  /**
-   * Used for handling camera button
-   */
-  cameraHandler = () => {
-    console.log(`Camera Handler`);
   };
 
   menuHandler = () => {
@@ -155,12 +128,7 @@ class PostView extends React.Component {
               />
             </View>
 
-            <BottomComment
-              onChange={this.onChange}
-              value={this.state.value}
-              cameraHandler={this.cameraHandler}
-              commentHandler={this.commentHandler}
-            />
+            <BottomComment />
           </View>
         </KeyboardAvoidingView>
       </React.Fragment>
