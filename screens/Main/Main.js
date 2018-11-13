@@ -77,21 +77,21 @@ const NavBar = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Feed') {
-          iconName = `fire`;
+          iconName = focused ? `comment` : `comment-o`;
         }
         if (routeName === 'Explore') {
-          iconName = `map`;
+          iconName = focused ? `map` : `map-o`;
         }
         if (routeName === 'Account') {
-          iconName = `user`;
+          iconName = focused ? `user` : `user-o`;
         }
         if (routeName === 'More') {
-          iconName = `menu`;
+          iconName = focused ? `bars` : `navicon`;
         }
 
         return (
           <Icon
-            type="simple-line-icon"
+            type="font-awesome"
             name={iconName}
             size={22}
             color={tintColor}
