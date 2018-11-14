@@ -10,7 +10,7 @@ import { colors } from '../../config/theme';
 import { style, styles } from './PostView.styles';
 import { PostViewHeader, Vote } from '../../components';
 import { getTimeAgo } from '../../config/helpers';
-import { LargeInput, FeedItem, BottomComment } from '../../components';
+import { FeedItem, BottomComment, FeedList } from '../../components';
 
 class PostView extends React.Component {
   constructor(props) {
@@ -60,25 +60,6 @@ class PostView extends React.Component {
     console.log(`Clicked menu handler`);
   };
 
-  keyExtractor = (item, index) => index.toString();
-
-  renderItem = ({ item }) => (
-    <FeedItem
-      clickHandler={this.clickHandle}
-      imageSrc={item.imageSrc}
-      postData={item}
-      postId={item.postId}
-      postType={item.postType}
-      postTime={item.postTime}
-      replyCount={item.replyCount}
-      score={item.score}
-      text={item.text}
-      voteHandler={this.voteHandle}
-      voteType={item.voteType}
-      user={item.user}
-    />
-  );
-
   render() {
     const { navigation } = this.props;
     const postData = navigation.getParam('postData', {});
@@ -121,11 +102,7 @@ class PostView extends React.Component {
             <Text style={styles.commentHeader}>COMMENTS</Text>
             <Divider />
             <View style={styles.commentFeed}>
-              <FlatList
-                keyExtractor={this.keyExtractor}
-                data={this.state.feedItems}
-                renderItem={this.renderItem}
-              />
+              <FeedList data={this.state.feedItems} />
             </View>
 
             <BottomComment />

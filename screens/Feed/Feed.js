@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { FeedHeader, FeedItem } from '../../components';
+import { FeedHeader, FeedList, FeedItem } from '../../components';
 
 class Feed extends React.Component {
   constructor(props) {
@@ -77,7 +77,7 @@ class Feed extends React.Component {
   /**
    * Called when a post is clicked on
    */
-  clickHandle = postId => {
+  clickHandler = postId => {
     let postData = this.getPostData(postId);
 
     this.props.navigation.push('PostView', {
@@ -88,7 +88,7 @@ class Feed extends React.Component {
   /**
    * Called when a vote is cast on a post
    */
-  voteHandle = (postId, voteType) => {
+  voteHandler = (postId, voteType) => {
     console.log(`VoteType: ${voteType} vote on postID: ${postId}`);
   };
 
@@ -117,24 +117,6 @@ class Feed extends React.Component {
     }
   };
 
-  keyExtractor = (item, index) => index.toString();
-
-  renderItem = ({ item }) => (
-    <FeedItem
-      clickHandler={this.clickHandle}
-      imageSrc={item.imageSrc}
-      postData={item}
-      postId={item.postId}
-      postType={item.postType}
-      postTime={item.postTime}
-      replyCount={item.replyCount}
-      score={item.score}
-      text={item.text}
-      voteHandler={this.voteHandle}
-      voteType={item.voteType}
-    />
-  );
-
   render() {
     return (
       <React.Fragment>
@@ -142,10 +124,10 @@ class Feed extends React.Component {
           composeHandler={this.composeHandle}
           feedHandler={this.feedHandler}
         />
-        <FlatList
-          keyExtractor={this.keyExtractor}
+        <FeedList
           data={this.state.feedItems}
-          renderItem={this.renderItem}
+          clickHandler={this.clickHandler}
+          voteHandler={this.voteHandler}
         />
       </React.Fragment>
     );

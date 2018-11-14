@@ -15,7 +15,11 @@ import { LargeInput } from './LargeInput/LargeInput';
 // Feed Item
 import { FeedItem } from './FeedItem/FeedItem';
 
+// Feed
+import { FeedList } from './FeedList/FeedList';
+
 export {
+  FeedList,
   FeedHeader,
   FeedItem,
   LargeInput,
