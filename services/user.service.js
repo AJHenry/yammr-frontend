@@ -11,12 +11,6 @@ export const userService = {
 };
 
 async function login(email, password) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, password: password }),
-  };
-
   const response = await axios.post(
     LOGIN,
     {
@@ -34,7 +28,7 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-  const response = await axios.post(
+  return await axios.post(
     REGISTER,
     {
       email: email,
@@ -45,13 +39,11 @@ async function register(email, password) {
       validateStatus: status => status == 200,
     }
   );
-
-  return response;
 }
 
 async function postItem(text) {
   const token = await AsyncStorage.getItem('userToken');
-  return axios.post(
+  return await axios.post(
     POST_ITEM,
     { text: text },
     {
