@@ -1,6 +1,13 @@
 import React from 'react';
 import { View, PermissionsAndroid } from 'react-native';
-import { Button, Text, CheckBox, Input, Icon } from 'react-native-elements';
+import {
+  Button,
+  Text,
+  CheckBox,
+  Input,
+  Icon,
+  Divider,
+} from 'react-native-elements';
 import { styles, style } from './PostCreate.styles';
 import { colors } from '../../config/theme';
 import { PostCreateHeader, LargeInput } from '../../components';
@@ -38,6 +45,7 @@ class PostCreate extends React.Component {
 
     geolocation.getCurrentPosition(
       position => {
+        console.log(position);
         this.setState({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
@@ -49,6 +57,10 @@ class PostCreate extends React.Component {
     );
   }
 
+  postHandler = () => {
+    console.log(`Clicked post`);
+  };
+
   render() {
     const { navigation } = this.props;
     return (
@@ -57,12 +69,29 @@ class PostCreate extends React.Component {
         <View style={styles.mainContainer}>
           <View style={styles.postContainer} />
           <View style={styles.bottomContainer}>
+            <Text style={style.inputLabel}>CONTENT</Text>
             <LargeInput
               onChangeText={text => this.setState({ postcontent: text })}
-              placeholder="Create a great post"
-              style={styles.inputContainer}
+              placeholder="Create something great"
+              inputStyle={styles.inputContainer}
               multiline={true}
+              error={this.state.error || ''}
             />
+            <View style={styles.iconContainer}>
+              <Icon
+                iconStyle={style.icon}
+                type="simple-line-icon"
+                name="camera"
+              />
+              <Icon
+                iconStyle={style.icon}
+                type="simple-line-icon"
+                name="picture"
+              />
+            </View>
+            <View style={{ alignItems: 'center' }}>
+              <Button title="POST" onPress={this.postHandler} />
+            </View>
           </View>
         </View>
       </View>
