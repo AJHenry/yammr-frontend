@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/theme';
 
 export const style = {
+  container: {
+    margin: 5,
+  },
   inputContainer: {
     borderRadius: 5,
     paddingLeft: 10,
@@ -10,7 +13,16 @@ export const style = {
     paddingBottom: 2,
     borderWidth: 1,
     borderColor: colors.muted,
-    margin: 5,
+  },
+  label: {
+    color: colors.black,
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  error: {
+    color: colors.error,
+    marginLeft: 3,
+    fontSize: 12,
   },
 };
 

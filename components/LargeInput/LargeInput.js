@@ -1,5 +1,11 @@
 import React from 'react';
-import ReactNative, { TextInput, Platform, NativeModules } from 'react-native';
+import ReactNative, {
+  TextInput,
+  Platform,
+  NativeModules,
+  Text,
+  View,
+} from 'react-native';
 import { styles } from './LargeInput.styles';
 
 const ANDROID_PLATFORM = Platform.OS === 'android';
@@ -48,16 +54,32 @@ export class LargeInput extends React.Component {
 
   render() {
     return (
-      <TextInput
-        multiline
-        {...this.props}
-        {...this.style}
-        underlineColorAndroid="transparent"
-        style={[this.props.style, { height: 'auto' }, styles.inputContainer]}
-        ref={r => {
-          this._textInput = r;
-        }}
-      />
+      <View style={[styles.container, this.props.containerStyle]}>
+        {this.props.label ? (
+          <Text style={[styles.label, this.props.labelStyle]}>
+            {this.props.label}
+          </Text>
+        ) : null}
+        <TextInput
+          multiline
+          {...this.props}
+          {...this.style}
+          underlineColorAndroid="transparent"
+          style={[
+            this.props.inputStyle,
+            { height: 'auto' },
+            styles.inputContainer,
+          ]}
+          ref={r => {
+            this._textInput = r;
+          }}
+        />
+        {this.props.error ? (
+          <Text style={[styles.error, this.props.errorStyle]}>
+            {this.props.error}
+          </Text>
+        ) : null}
+      </View>
     );
   }
 

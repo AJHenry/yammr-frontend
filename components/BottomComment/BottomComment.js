@@ -52,7 +52,8 @@ export class BottomComment extends React.Component {
           component={TouchableHighlight}
         />
         <LargeInput
-          style={styles.commentInput}
+          inputStyle={styles.commentInput}
+          containerStyle={styles.commentContainer}
           placeholder="Say something.."
           onChangeText={text => this.setState({ comment: text })}
         />

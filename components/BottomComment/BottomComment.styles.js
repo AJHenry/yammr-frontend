@@ -12,7 +12,7 @@ export const style = {
     bottom: 0,
     width: '100%',
   },
-  commentInput: {
+  commentContainer: {
     flex: 1,
   },
   commentButton: {
