@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableNativeFeedback } from 'react-native';
+import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
 import { style, styles } from './CommentItem.styles';
 import { Vote } from '../../Vote/Vote';
@@ -34,8 +34,10 @@ export const CommentItem = ({
     console.log(`Warning, comment with ID: ${postId}, has an empty text body`);
   }
 
+  let TouchablePlatformSpecific =
+    Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
   return (
-    <TouchableNativeFeedback onPress={() => onPress(postId, clickHandler)}>
+    <TouchablePlatformSpecific onPress={() => onPress(postId, clickHandler)}>
       <View style={styles.mainContainer}>
         <View style={styles.topContainer}>
           <Text style={styles.userDisplay}>{user}</Text>
@@ -62,6 +64,6 @@ export const CommentItem = ({
           </View>
         </View>
       </View>
-    </TouchableNativeFeedback>
+    </TouchablePlatformSpecific>
   );
 };

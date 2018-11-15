@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableNativeFeedback } from 'react-native';
+import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
 import { style, styles } from './TextItem.styles';
 import { Vote } from '../../Vote/Vote';
@@ -33,8 +33,11 @@ export const TextItem = ({
     console.log(`Warning, post with ID: ${postId}, has an empty text body`);
   }
 
+  let TouchablePlatformSpecific =
+    Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
+
   return (
-    <TouchableNativeFeedback onPress={() => onPress(postId, clickHandler)}>
+    <TouchablePlatformSpecific onPress={() => onPress(postId, clickHandler)}>
       <View style={styles.mainContainer}>
         <View style={styles.container}>
           <View style={styles.textContainer}>
@@ -67,6 +70,6 @@ export const TextItem = ({
           </View>
         </View>
       </View>
-    </TouchableNativeFeedback>
+    </TouchablePlatformSpecific>
   );
 };

@@ -1,5 +1,10 @@
 import React from 'react';
-import { Image, View, TouchableNativeFeedback } from 'react-native';
+import {
+  Image,
+  View,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+} from 'react-native';
 import {
   Text,
   Icon,
@@ -25,8 +30,11 @@ export const ImageItem = ({
     clickHandler(postId);
   };
 
+  let TouchablePlatformSpecific =
+    Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
+
   return (
-    <TouchableNativeFeedback
+    <TouchablePlatformSpecific
       onPress={this._onPressButton}
       onPress={() => this.onPress()}
     >
@@ -58,6 +66,6 @@ export const ImageItem = ({
           </View>
         </View>
       </View>
-    </TouchableNativeFeedback>
+    </TouchablePlatformSpecific>
   );
 };

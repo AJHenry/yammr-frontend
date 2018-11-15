@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableNativeFeedback } from 'react-native';
+import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import { Icon, Header, ButtonGroup } from 'react-native-elements';
 import { colors } from '../../../config/theme';
 import { style, styles } from './PostCreateHeader.styles';
@@ -22,11 +22,13 @@ export class PostCreateHeader extends React.Component {
   };
 
   render() {
+    let TouchablePlatformSpecific =
+      Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
     return (
       <Header
         containerStyle={style.containerStyle}
         leftComponent={
-          <TouchableNativeFeedback onPress={() => this.goBack()}>
+          <TouchablePlatformSpecific onPress={() => this.goBack()}>
             <View>
               <Icon
                 type="simple-line-icon"
@@ -34,7 +36,7 @@ export class PostCreateHeader extends React.Component {
                 color={colors.white}
               />
             </View>
-          </TouchableNativeFeedback>
+          </TouchablePlatformSpecific>
         }
       />
     );

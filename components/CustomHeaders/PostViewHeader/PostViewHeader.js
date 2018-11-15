@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableNativeFeedback } from 'react-native';
+import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 import { Icon, Header, ButtonGroup } from 'react-native-elements';
 import { colors } from '../../../config/theme';
 import { style, styles } from './PostViewHeader.styles';
@@ -36,6 +36,9 @@ export class PostViewHeader extends React.Component {
     const { selectedIndex } = this.state;
     const { goBack } = this.props;
 
+    let TouchablePlatformSpecific =
+      Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
+
     return (
       <Header
         containerStyle={{
@@ -43,7 +46,7 @@ export class PostViewHeader extends React.Component {
           borderBottomColor: colors.muted,
         }}
         leftComponent={
-          <TouchableNativeFeedback onPress={() => this.goBack()}>
+          <TouchablePlatformSpecific onPress={() => this.goBack()}>
             <View>
               <Icon
                 type="simple-line-icon"
@@ -51,10 +54,10 @@ export class PostViewHeader extends React.Component {
                 color={colors.white}
               />
             </View>
-          </TouchableNativeFeedback>
+          </TouchablePlatformSpecific>
         }
         rightComponent={
-          <TouchableNativeFeedback onPress={() => this.menuHandler()}>
+          <TouchablePlatformSpecific onPress={() => this.menuHandler()}>
             <View>
               <Icon
                 type="simple-line-icon"
@@ -62,7 +65,7 @@ export class PostViewHeader extends React.Component {
                 color={colors.white}
               />
             </View>
-          </TouchableNativeFeedback>
+          </TouchablePlatformSpecific>
         }
       />
     );
