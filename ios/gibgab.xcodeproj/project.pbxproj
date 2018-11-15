@@ -42,6 +42,7 @@
 		B5FDCB6FFA9A4B94A664F669 /* ProximaNova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 831BC88F8D814725BD3CBA33 /* ProximaNova-Regular.ttf */; };
 		572BBB0F07B846C7A74BD546 /* OpenSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52FFFC585D8C4074A93B64F8 /* OpenSans.ttf */; };
 		B9E6A2FC7C264A08AD29C966 /* ProximaNova.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A5F59BEE01FD49479C5FC809 /* ProximaNova.ttf */; };
+		55012EC2FFF3412EB9929302 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C4F110A3E254A2CBF9921DF /* libReactNativePermissions.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -352,6 +353,8 @@
 		831BC88F8D814725BD3CBA33 /* ProximaNova-Regular.ttf */ = {isa = PBXFileReference; name = "ProximaNova-Regular.ttf"; path = "../assets/fonts/ProximaNova-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		52FFFC585D8C4074A93B64F8 /* OpenSans.ttf */ = {isa = PBXFileReference; name = "OpenSans.ttf"; path = "../assets/fonts/OpenSans.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A5F59BEE01FD49479C5FC809 /* ProximaNova.ttf */ = {isa = PBXFileReference; name = "ProximaNova.ttf"; path = "../assets/fonts/ProximaNova.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		14E800FB971D446BAC989072 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativePermissions.xcodeproj"; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9C4F110A3E254A2CBF9921DF /* libReactNativePermissions.a */ = {isa = PBXFileReference; name = "libReactNativePermissions.a"; path = "libReactNativePermissions.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +383,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				55012EC2FFF3412EB9929302 /* libReactNativePermissions.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +570,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				14E800FB971D446BAC989072 /* ReactNativePermissions.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1209,6 +1214,14 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yammr.app/yammr";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1226,6 +1239,14 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yammr.app/yammr";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -1244,6 +1265,10 @@
 				);
 				PRODUCT_NAME = yammr;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1261,6 +1286,10 @@
 				);
 				PRODUCT_NAME = yammr;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -1287,6 +1316,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1313,6 +1350,14 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Release;
 		};
@@ -1338,6 +1383,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yammr-tvOS.app/yammr-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1363,6 +1416,14 @@
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/yammr-tvOS.app/yammr-tvOS";
 				TVOS_DEPLOYMENT_TARGET = 10.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\react-native-permissions\ios/**",
+				);
 			};
 			name = Release;
 		};

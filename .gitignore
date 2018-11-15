@@ -22,9 +22,6 @@ bin/
 gen/
 out/
 
-#expo
-.expo/
-
 # Gradle files
 .gradle/
 build/
@@ -76,6 +73,42 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+### ReactNative.Buck Stack ###
+buck-out/
+.buckconfig.local
+.buckd/
+.buckversion
+.fakebuckversion
+
+### ReactNative.macOS Stack ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
 ### ReactNative.Node Stack ###
 # Logs
@@ -153,35 +186,6 @@ typings/
 
 # FuseBox cache
 .fusebox/
-
-### ReactNative.macOS Stack ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
 
 ### ReactNative.Xcode Stack ###
 # Xcode
@@ -276,13 +280,6 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-### ReactNative.Buck Stack ###
-buck-out/
-.buckconfig.local
-.buckd/
-.buckversion
-.fakebuckversion
-
 ### ReactNative.Linux Stack ###
 *~
 
@@ -297,5 +294,8 @@ buck-out/
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+# expo
+.expo/
 
 # End of https://www.gitignore.io/api/reactnative

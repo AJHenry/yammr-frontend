@@ -3,8 +3,6 @@ import { View, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { styles, style } from './Login.styles';
 import { colors } from '../../config/theme';
-import AuthenticationHeader from '../../components/CustomHeaders/AuthenticationHeaders/AuthenticationHeader';
-
 import { userActions } from '../../actions/user.actions';
 import { userConstants } from '../../constants/user.constants';
 

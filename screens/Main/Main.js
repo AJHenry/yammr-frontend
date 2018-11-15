@@ -10,7 +10,9 @@ import { colors } from '../../config/theme';
 import Feed from '../Feed/Feed';
 import Explore from '../Explore/Explore';
 import Account from '../Account/Account';
+import More from '../More/More';
 import PostView from '../PostView/PostView';
+import PostCreate from '../PostCreate/PostCreate';
 
 const FeedStack = createStackNavigator({
   Feed: {
@@ -19,7 +21,22 @@ const FeedStack = createStackNavigator({
   PostView: {
     screen: PostView,
   },
+  PostCreate: {
+    screen: PostCreate,
+  },
 });
+
+// Needed to make bottomTabBar go away on subsequent screens
+FeedStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
 
 const ExploreStack = createStackNavigator({
   Explore: {
@@ -30,6 +47,12 @@ const ExploreStack = createStackNavigator({
 const AccountStack = createStackNavigator({
   Account: {
     screen: Account,
+  },
+});
+
+const MoreStack = createStackNavigator({
+  More: {
+    screen: More,
   },
 });
 
@@ -44,6 +67,9 @@ const NavBar = createBottomTabNavigator(
     Account: {
       screen: AccountStack,
     },
+    More: {
+      screen: MoreStack,
+    },
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -51,20 +77,23 @@ const NavBar = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Feed') {
-          iconName = `fire`;
+          iconName = focused ? `comment` : `comment-o`;
         }
         if (routeName === 'Explore') {
-          iconName = `map`;
+          iconName = focused ? `map` : `map-o`;
         }
         if (routeName === 'Account') {
-          iconName = `user`;
+          iconName = focused ? `user` : `user-o`;
+        }
+        if (routeName === 'More') {
+          iconName = focused ? `bars` : `navicon`;
         }
 
         return (
           <Icon
-            type="simple-line-icon"
+            type="font-awesome"
             name={iconName}
-            size={25}
+            size={22}
             color={tintColor}
           />
         );
