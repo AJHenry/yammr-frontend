@@ -11,6 +11,7 @@ import {
 import { styles, style } from './PostCreate.styles';
 import { colors } from '../../config/theme';
 import { PostCreateHeader, LargeInput } from '../../components';
+import { userService } from '../../services/user.service';
 
 class PostCreate extends React.Component {
   constructor(props) {
@@ -57,8 +58,14 @@ class PostCreate extends React.Component {
     );
   }
 
-  postHandler = () => {
-    console.log(`Clicked post`);
+  postHandler = async () => {
+    try {
+      await userService.postItem(this.state.postcontent);
+    } catch (e) {
+      this.setState({ error: 'Error occured, please try again' });
+      return;
+    }
+    this.props.navigation.goBack();
   };
 
   render() {

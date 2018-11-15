@@ -1,11 +1,13 @@
 import { AsyncStorage } from 'react-native';
-import { LOGIN, REGISTER } from '../constants/api.constants';
+import { LOGIN, REGISTER, POST_ITEM } from '../constants/api.constants';
+import axios from 'axios';
 
 export const userService = {
   login,
   logout,
   getUser,
   register,
+  postItem,
 };
 
 async function login(email, password) {
@@ -15,28 +17,51 @@ async function login(email, password) {
     body: JSON.stringify({ email: email, password: password }),
   };
 
-  // For when successfully implemented
-  const response = await fetch(LOGIN, requestOptions);
-
-  if (response.status == 403) throw response;
-
-  await AsyncStorage.setItem(
-    'userToken',
-    response.headers.map.authorization[0]
+  const response = await axios.post(
+    LOGIN,
+    {
+      email: email,
+      password: password,
+    },
+    {
+      headers: { 'Content-Type': 'application/json' },
+      validateStatus: status => status == 200,
+    }
   );
+
+  await AsyncStorage.setItem('userToken', response.headers.authorization);
   return response;
 }
 
 async function register(email, password) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: email, password: password }),
-  };
-  console.log(requestOptions);
-  const response = await fetch(REGISTER, requestOptions);
-  console.log(response);
+  const response = await axios.post(
+    REGISTER,
+    {
+      email: email,
+      password: password,
+    },
+    {
+      headers: { 'Content-Type': 'application/json' },
+      validateStatus: status => status == 200,
+    }
+  );
+
   return response;
+}
+
+async function postItem(text) {
+  const token = await AsyncStorage.getItem('userToken');
+  return axios.post(
+    POST_ITEM,
+    { text: text },
+    {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+      validateStatus: status => status == 200,
+    }
+  );
 }
 
 async function logout() {
