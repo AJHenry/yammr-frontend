@@ -1,9 +1,15 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View, ActivityIndicator } from 'react-native';
 import { FeedItem } from '../index';
+import { style, styles } from './FeedList.styles';
+import { colors } from '../../config/theme';
 import PropTypes from 'prop-types';
 
 export class FeedList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   keyExtractor = (item, index) => index.toString();
 
   renderItem = ({ item }) => (
@@ -22,13 +28,27 @@ export class FeedList extends React.Component {
     />
   );
 
-  render() {
-    const { data } = this.props;
+  renderFooter = () => {
     return (
+      <View style={styles.footer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  };
+
+  render() {
+    const { isLoading, showFooter } = this.props;
+
+    return isLoading ? (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    ) : (
       <FlatList
+        {...this.props}
         keyExtractor={this.keyExtractor}
-        data={data}
         renderItem={this.renderItem}
+        ListFooterComponent={showFooter ? this.renderFooter : null}
       />
     );
   }
@@ -36,6 +56,9 @@ export class FeedList extends React.Component {
 
 FeedList.propTypes = {
   data: PropTypes.array.isRequired,
+  addData: PropTypes.func,
   clickHandler: PropTypes.func,
   voteHandler: PropTypes.func,
+  isLoading: PropTypes.bool,
+  showFooter: PropTypes.bool,
 };
