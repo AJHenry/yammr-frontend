@@ -2,6 +2,8 @@
 import { FeedHeader } from './CustomHeaders/FeedHeader/FeedHeader';
 import { PostViewHeader } from './CustomHeaders/PostViewHeader/PostViewHeader';
 import { PostCreateHeader } from './CustomHeaders/PostCreateHeader/PostCreateHeader';
+import { ExploreHeader } from './CustomHeaders/ExploreHeader/ExploreHeader';
+import { GenericHeader } from './CustomHeaders/GenericHeader/GenericHeader';
 
 //Bottom Comment
 import { BottomComment } from './BottomComment/BottomComment';
@@ -19,10 +21,12 @@ import { FeedItem } from './FeedItem/FeedItem';
 import { FeedList } from './FeedList/FeedList';
 
 export {
+  ExploreHeader,
   FeedList,
   FeedHeader,
   FeedItem,
   LargeInput,
+  GenericHeader,
   PostCreateHeader,
   PostViewHeader,
   Vote,
