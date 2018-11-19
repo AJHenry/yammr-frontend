@@ -12,8 +12,8 @@ export const style = {
     marginBottom: 2,
     borderTopColor: colors.muted,
     borderBottomColor: colors.muted,
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
   },
   container: {
     flex: 1,
