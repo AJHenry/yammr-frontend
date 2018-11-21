@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableNativeFeedback } from 'react-native';
+import { View } from 'react-native';
 import {
   Text,
   Icon,
@@ -9,6 +9,7 @@ import {
 } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './Vote.styles';
+import TouchablePlatformSpecific from '../index';
 
 export class Vote extends React.Component {
   constructor(props) {
@@ -87,7 +88,7 @@ export class Vote extends React.Component {
     return (
       <View style={styles.container}>
         <Icon
-          component={TouchableNativeFeedback}
+          component={TouchablePlatformSpecific}
           iconStyle={
             voteType === 'up' ? [style.vote, style.upvote] : style.vote
           }
@@ -97,7 +98,7 @@ export class Vote extends React.Component {
         />
         <Text style={style.scoreStyle}>{score}</Text>
         <Icon
-          component={TouchableNativeFeedback}
+          component={TouchablePlatformSpecific}
           iconStyle={
             voteType === 'down' ? [style.vote, style.downvote] : style.vote
           }

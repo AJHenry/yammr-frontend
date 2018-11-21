@@ -5,6 +5,9 @@ import { PostCreateHeader } from './CustomHeaders/PostCreateHeader/PostCreateHea
 import { ExploreHeader } from './CustomHeaders/ExploreHeader/ExploreHeader';
 import { GenericHeader } from './CustomHeaders/GenericHeader/GenericHeader';
 
+// Touchable
+import { TouchablePlatformSpecific } from './TouchablePlatformSpecific/TouchablePlatformSpecific';
+
 //Bottom Comment
 import { BottomComment } from './BottomComment/BottomComment';
 
@@ -31,4 +34,5 @@ export {
   PostViewHeader,
   Vote,
   BottomComment,
+  TouchablePlatformSpecific,
 };
