@@ -1,15 +1,10 @@
 import React from 'react';
-import { Image, View, TouchableNativeFeedback } from 'react-native';
-import {
-  Text,
-  Icon,
-  Header,
-  ButtonGroup,
-  ListItem,
-} from 'react-native-elements';
+import { Image, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import { style, styles } from './ImageItem.styles';
 import { Vote } from '../../Vote/Vote';
 import { getTimeAgo } from '../../../config/helpers';
+import { TouchablePlatformSpecific } from '../../index';
 
 export const ImageItem = ({
   postId,
@@ -26,7 +21,7 @@ export const ImageItem = ({
   };
 
   return (
-    <TouchableNativeFeedback
+    <TouchablePlatformSpecific
       onPress={this._onPressButton}
       onPress={() => this.onPress()}
     >
@@ -58,6 +53,6 @@ export const ImageItem = ({
           </View>
         </View>
       </View>
-    </TouchableNativeFeedback>
+    </TouchablePlatformSpecific>
   );
 };
