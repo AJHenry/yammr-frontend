@@ -85,7 +85,7 @@ We use [SemVer](http://semver.org/) for versioning
 
 - **Andrew Henry** - _Initial work_ - [AJHenry](https://github.com/AJHenry)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/yammr/yammr-frontend/graphs/contributors) who participated in this project.
 
 ## License
 
