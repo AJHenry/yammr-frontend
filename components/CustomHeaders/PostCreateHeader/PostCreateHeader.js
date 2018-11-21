@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { Icon, Header, ButtonGroup } from 'react-native-elements';
 import { colors } from '../../../config/theme';
 import { style, styles } from './PostCreateHeader.styles';
+import TouchablePlatformSpecific from '../../TouchablePlatformSpecific/TouchablePlatformSpecific';
 
 export class PostCreateHeader extends React.Component {
   constructor(props) {
@@ -22,8 +23,6 @@ export class PostCreateHeader extends React.Component {
   };
 
   render() {
-    let TouchablePlatformSpecific =
-      Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
     return (
       <Header
         containerStyle={style.containerStyle}

@@ -1,20 +1,10 @@
 import React from 'react';
-import {
-  Image,
-  View,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  Text,
-  Icon,
-  Header,
-  ButtonGroup,
-  ListItem,
-} from 'react-native-elements';
+import { Image, View } from 'react-native';
+import { Text } from 'react-native-elements';
 import { style, styles } from './ImageItem.styles';
 import { Vote } from '../../Vote/Vote';
 import { getTimeAgo } from '../../../config/helpers';
+import TouchablePlatformSpecific from '../../TouchablePlatformSpecific/TouchablePlatformSpecific';
 
 export const ImageItem = ({
   postId,
@@ -29,9 +19,6 @@ export const ImageItem = ({
     console.log('Post Clicked');
     clickHandler(postId);
   };
-
-  let TouchablePlatformSpecific =
-    Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
 
   return (
     <TouchablePlatformSpecific

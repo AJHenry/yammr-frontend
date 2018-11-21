@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { Text } from 'react-native-elements';
 import { style, styles } from './CommentItem.styles';
 import { Vote } from '../../Vote/Vote';
 import { getTimeAgo } from '../../../config/helpers';
+import TouchablePlatformSpecific from '../../TouchablePlatformSpecific/TouchablePlatformSpecific';
 
 /**
  * Performs actions when
@@ -34,8 +35,6 @@ export const CommentItem = ({
     console.log(`Warning, comment with ID: ${postId}, has an empty text body`);
   }
 
-  let TouchablePlatformSpecific =
-    Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
   return (
     <TouchablePlatformSpecific onPress={() => onPress(postId, clickHandler)}>
       <View style={styles.mainContainer}>
