@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Icon, Header, ButtonGroup } from 'react-native-elements';
 import { colors } from '../../../config/theme';
 import { style, styles } from './PostViewHeader.styles';
-import TouchablePlatformSpecific from '../../TouchablePlatformSpecific/TouchablePlatformSpecific';
+import { TouchablePlatformSpecific } from '../../index';
 
 export class PostViewHeader extends React.Component {
   constructor(props) {

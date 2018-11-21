@@ -9,7 +9,7 @@ import {
 } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './Vote.styles';
-import TouchablePlatformSpecific from '../TouchablePlatformSpecific/TouchablePlatformSpecific';
+import TouchablePlatformSpecific from '../index';
 
 export class Vote extends React.Component {
   constructor(props) {

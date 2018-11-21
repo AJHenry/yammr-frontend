@@ -4,7 +4,7 @@ import { Text } from 'react-native-elements';
 import { style, styles } from './ImageItem.styles';
 import { Vote } from '../../Vote/Vote';
 import { getTimeAgo } from '../../../config/helpers';
-import TouchablePlatformSpecific from '../../TouchablePlatformSpecific/TouchablePlatformSpecific';
+import { TouchablePlatformSpecific } from '../../index';
 
 export const ImageItem = ({
   postId,

@@ -4,7 +4,5 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-const TouchablePlatformSpecific =
+export const TouchablePlatformSpecific =
   Platform.OS === 'ios' ? TouchableOpacity : TouchableNativeFeedback;
-
-export default TouchablePlatformSpecific;

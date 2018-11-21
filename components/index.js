@@ -3,6 +3,9 @@ import { FeedHeader } from './CustomHeaders/FeedHeader/FeedHeader';
 import { PostViewHeader } from './CustomHeaders/PostViewHeader/PostViewHeader';
 import { PostCreateHeader } from './CustomHeaders/PostCreateHeader/PostCreateHeader';
 
+// Touchable
+import { TouchablePlatformSpecific } from './TouchablePlatformSpecific/TouchablePlatformSpecific';
+
 //Bottom Comment
 import { BottomComment } from './BottomComment/BottomComment';
 
@@ -27,4 +30,5 @@ export {
   PostViewHeader,
   Vote,
   BottomComment,
+  TouchablePlatformSpecific,
 };
