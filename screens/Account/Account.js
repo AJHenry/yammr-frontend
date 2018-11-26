@@ -3,32 +3,23 @@ import { View } from 'react-native';
 import { Text, Icon, Header, Button } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './Account.styles';
-
-import userService from '../../services/user.service';
+import { GenericHeader } from '../../components';
 
 class Account extends React.Component {
   static navigationOptions = {
     title: 'Account',
+    header: null,
   };
 
   constructor(props) {
     super(props);
   }
 
-  _signOutAsync = async () => {
-    const userToken = await userService.logout();
-    if (!userToken) this.props.screenProps.rootNavigation.navigate('Auth');
-  };
-
   render() {
     return (
       <View>
+        <GenericHeader title="ACCOUNT" />
         <Text>Account</Text>
-        <Button
-          buttonStyle={style.loginButton}
-          onPress={this._signOutAsync}
-          title="LOG OUT"
-        />
       </View>
     );
   }

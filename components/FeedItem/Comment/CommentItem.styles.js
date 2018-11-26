@@ -9,7 +9,7 @@ export const style = {
     backgroundColor: colors.white,
     borderTopColor: colors.muted,
     borderBottomColor: colors.muted,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
   },
   container: {
     flexDirection: 'row',
