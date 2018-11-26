@@ -8,10 +8,13 @@ import { GenericHeader } from './CustomHeaders/GenericHeader/GenericHeader';
 // Touchable
 import { TouchablePlatformSpecific } from './TouchablePlatformSpecific/TouchablePlatformSpecific';
 
-//Bottom Comment
+// Bottom Comment
 import { BottomComment } from './BottomComment/BottomComment';
 
-//Vote
+// Modal
+import { CustomModal as Modal } from './Modal/Modal';
+
+// Vote
 import { Vote } from './Vote/Vote';
 
 // Input
@@ -35,4 +38,5 @@ export {
   Vote,
   BottomComment,
   TouchablePlatformSpecific,
+  Modal,
 };
