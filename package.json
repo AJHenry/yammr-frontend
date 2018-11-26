@@ -5,6 +5,7 @@
   "repository": "https://github.com/yammr/yammr-frontend",
   "description": "An anonymous social platform for posting text, pictures, and 'vine-style' videos, exclusively for college students.",
   "devDependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
     "eslint": "^5.5.0",
     "eslint-plugin-prettier": "^2.6.2",
     "husky": "^0.14.3",
@@ -30,6 +31,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "expo": "^27.0.1",
+    "mobx": "^5.6.0",
+    "mobx-react": "^5.4.2",
     "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-native": "~0.55.2",
@@ -38,9 +41,6 @@
     "react-native-progress": "^3.5.0",
     "react-native-status-bar-height": "^2.1.0",
     "react-navigation": "^2.18.0",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.1",
-    "redux-axios-middleware": "^4.0.0",
     "whatwg-fetch": "^2.0.4"
   },
   "rnpm": {

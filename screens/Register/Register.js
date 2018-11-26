@@ -8,8 +8,7 @@ import {
 import { Button, Text, CheckBox, Input, Icon } from 'react-native-elements';
 import { styles, style } from './Register.styles';
 import { colors } from '../../config/theme';
-
-import { userActions } from '../../actions/user.actions';
+import userService from '../../services/user.service';
 
 class Register extends React.Component {
   constructor(props) {
@@ -83,9 +82,7 @@ class Register extends React.Component {
     }
 
     if (shouldReturn) return;
-
-    const { dispatch } = this.props.navigation;
-    dispatch(userActions.register(this.state.email, this.state.password));
+    userService.register(this.state.email, this.state.password);
     this.props.navigation.navigate('Login');
   };
 

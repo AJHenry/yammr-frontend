@@ -11,7 +11,7 @@ import {
 import { styles, style } from './PostCreate.styles';
 import { colors } from '../../config/theme';
 import { PostCreateHeader, LargeInput } from '../../components';
-import { userService } from '../../services/user.service';
+import userService from '../../services/user.service';
 
 class PostCreate extends React.Component {
   constructor(props) {
