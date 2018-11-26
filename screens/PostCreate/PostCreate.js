@@ -59,13 +59,15 @@ class PostCreate extends React.Component {
   }
 
   postHandler = async () => {
-    try {
+    /*try {
       await userService.postItem(this.state.postcontent);
     } catch (e) {
       this.setState({ error: 'Error occured, please try again' });
       return;
     }
-    this.props.navigation.goBack();
+    this.props.navigation.goBack();*/
+    let { postStore } = this.props;
+    postStore.addPost(this.state.postconent);
   };
 
   render() {

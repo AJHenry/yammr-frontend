@@ -12,7 +12,8 @@ import { Font, AppLoading } from 'expo';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import Main from './screens/Main/Main';
 
-import ListStore from './mobx/listStore';
+import userService from './services/user.service';
+import PostStore from './mobx/postStore';
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -53,9 +54,12 @@ const RootNav = createSwitchNavigator(
 );
 
 export default class App extends React.Component {
+  store;
+
   constructor(props) {
     super(props);
     this.state = { loading: true };
+    score = new PostStore(userService);
   }
 
   // STUPID EXPO FONT HACK
@@ -76,7 +80,7 @@ export default class App extends React.Component {
     // END OF STUPID HACK
 
     return (
-      <Provider store={ListStore}>
+      <Provider postStore={score}>
         <ThemeProvider theme={theme}>
           <RootNav />
         </ThemeProvider>
