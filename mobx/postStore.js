@@ -75,9 +75,9 @@ class PostStore {
         });
     }*/
 
-  @computed
+  /*@computed
   getPosts = name => {
     return this.posts[name];
-  };
+  };*/
 }
 export default PostStore;

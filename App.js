@@ -54,12 +54,12 @@ const RootNav = createSwitchNavigator(
 );
 
 export default class App extends React.Component {
-  store;
+  postStore;
 
   constructor(props) {
     super(props);
     this.state = { loading: true };
-    this.store = new PostStore(userService);
+    this.postStore = new PostStore(userService);
   }
 
   // STUPID EXPO FONT HACK
@@ -78,9 +78,8 @@ export default class App extends React.Component {
       return <AppLoading />;
     }
     // END OF STUPID HACK
-
     return (
-      <Provider postStore={this.store}>
+      <Provider postStore={this.postStore}>
         <ThemeProvider theme={theme}>
           <RootNav />
         </ThemeProvider>
