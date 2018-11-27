@@ -15,7 +15,7 @@ class PostStore {
   constructor(service) {
     this.service = service;
     this.reset = this.reset.bind(this);
-    //this.reset();
+    this.reset();
   }
 
   @action
@@ -51,12 +51,13 @@ class PostStore {
     const newPost = await this.service.postItem(text);
     if (newPost.error) {
       this.postError = true;
-      this.postComplete = true;
+      this.postComplete = false;
       return;
     }
     this.postError = false;
     this.postComplete = true;
     this.posts.new.unshift(newPost);
+    console.log('oops');
   };
 
   @action
@@ -76,7 +77,7 @@ class PostStore {
     }*/
 
   @computed
-  posts = name => {
+  getPosts = name => {
     return this.posts[name];
   };
 }

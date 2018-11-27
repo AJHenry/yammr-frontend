@@ -59,7 +59,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading: true };
-    score = new PostStore(userService);
+    this.store = new PostStore(userService);
   }
 
   // STUPID EXPO FONT HACK
@@ -80,7 +80,7 @@ export default class App extends React.Component {
     // END OF STUPID HACK
 
     return (
-      <Provider postStore={score}>
+      <Provider postStore={this.store}>
         <ThemeProvider theme={theme}>
           <RootNav />
         </ThemeProvider>

@@ -35,9 +35,7 @@ class UserService {
   };
 
   postItem = async text => {
-    console.log('in service');
     const token = await AsyncStorage.getItem('userToken');
-    console.log(token);
     let response;
     try {
       response = await axios.post(
