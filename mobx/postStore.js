@@ -70,7 +70,7 @@ class PostStore {
         const posts = await this.service.getPosts(name);
         if (!posts) return;
 
-        posts.array.forEach(element => {
+        posts.forEach(element => {
             this.posts[name].push(element);
         });
     }*/

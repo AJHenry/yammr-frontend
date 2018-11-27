@@ -21,17 +21,23 @@ class UserService {
   };
 
   register = async (email, password) => {
-    return await axios.post(
-      REGISTER,
-      {
-        email: email,
-        password: password,
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        validateStatus: status => status == 200,
-      }
-    );
+    let response;
+    try {
+      response = await axios.post(
+        REGISTER,
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          validateStatus: status => status == 200,
+        }
+      );
+    } catch (e) {
+      response = { error: e };
+    }
+    return response;
   };
 
   postItem = async text => {
@@ -50,7 +56,7 @@ class UserService {
         }
       );
     } catch (e) {
-      response = { error: e };
+      response = { error: 'error' };
     }
     return response;
   };
