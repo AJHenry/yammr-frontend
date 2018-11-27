@@ -4,19 +4,23 @@ import axios from 'axios';
 
 class UserService {
   login = async (email, password) => {
-    const response = await axios.post(
-      LOGIN,
-      {
-        email: email,
-        password: password,
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        validateStatus: status => status == 200,
-      }
-    );
-
-    await AsyncStorage.setItem('userToken', response.headers.authorization);
+    let response;
+    try {
+      response = await axios.post(
+        LOGIN,
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: { 'Content-Type': 'application/json' },
+          validateStatus: status => status == 200,
+        }
+      );
+      await AsyncStorage.setItem('userToken', response.headers.authorization);
+    } catch (e) {
+      response = { error: e };
+    }
     return response;
   };
 

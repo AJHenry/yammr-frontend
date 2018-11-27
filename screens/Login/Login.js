@@ -36,16 +36,15 @@ class Login extends React.Component {
 
     if (shouldReturn) return;
 
-    userService.login(this.state.email, this.state.password).then(
-      res => {
-        this.props.navigation.navigate('App');
-      },
-      error => {
-        this.setState({
-          passwordError: 'Invalid email/password. Please try again.',
-        });
-      }
+    const response = await userService.login(
+      this.state.email,
+      this.state.password
     );
+    if (response.error)
+      this.setState({
+        passwordError: 'Invalid email/password. Please try again.',
+      });
+    else this.props.navigation.navigate('App');
   };
 
   static navigationOptions = ({ navigation }) => {
