@@ -4,21 +4,28 @@ class PostStore {
   @observable
   posts = {};
 
+  @observable
+  postError = false;
+
+  @observable
+  postComplete = false;
+
   service;
 
   constructor(service) {
     this.service = service;
-    reset();
+    this.reset = this.reset.bind(this);
+    //this.reset();
   }
 
   @action
-  reset() {
+  reset = () => {
     this.posts = {
       top: [],
       hot: [],
       new: [],
     };
-  }
+  };
 
   /*@action deletePost = async (postID) => {
         // use service delete
@@ -39,10 +46,23 @@ class PostStore {
 
   @action
   addPost = async text => {
+    this.postComplete = false;
+    this.postError = false;
     const newPost = await this.service.postItem(text);
-    if (!newPost) return;
+    if (newPost.error) {
+      this.postError = true;
+      this.postComplete = true;
+      return;
+    }
+    this.postError = false;
+    this.postComplete = true;
     this.posts.new.unshift(newPost);
-    console.log(this.posts);
+  };
+
+  @action
+  postScreen = () => {
+    this.postComplete = false;
+    this.postError = false;
   };
 
   /*@action loadPosts = async (name) => {

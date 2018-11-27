@@ -3,7 +3,7 @@ import { LOGIN, REGISTER, POST_ITEM } from '../constants/api.constants';
 import axios from 'axios';
 
 class UserService {
-  async login(email, password) {
+  login = async (email, password) => {
     const response = await axios.post(
       LOGIN,
       {
@@ -18,9 +18,9 @@ class UserService {
 
     await AsyncStorage.setItem('userToken', response.headers.authorization);
     return response;
-  }
+  };
 
-  async register(email, password) {
+  register = async (email, password) => {
     return await axios.post(
       REGISTER,
       {
@@ -32,31 +32,38 @@ class UserService {
         validateStatus: status => status == 200,
       }
     );
-  }
+  };
 
-  async postItem(text) {
+  postItem = async text => {
+    console.log('in service');
     const token = await AsyncStorage.getItem('userToken');
-    return await axios.post(
-      POST_ITEM,
-      { text: text },
-      {
-        headers: {
-          Authorization: token,
-          'Content-Type': 'application/json',
-        },
-        validateStatus: status => status == 200,
-      }
-    );
-  }
+    console.log(token);
+    let response;
+    try {
+      response = await axios.post(
+        POST_ITEM,
+        { text: text },
+        {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+          validateStatus: status => status == 200,
+        }
+      );
+    } catch (e) {
+      response = { error: e };
+    }
+    return response;
+  };
 
-  async logout() {
-    console.log('logging out');
+  logout = async () => {
     return await AsyncStorage.removeItem('userToken');
-  }
+  };
 
-  async getUser() {
+  getUser = async () => {
     return await AsyncStorage.getItem('userToken');
-  }
+  };
 }
 
 const userService = new UserService();
