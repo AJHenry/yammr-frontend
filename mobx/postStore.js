@@ -57,7 +57,6 @@ class PostStore {
     this.postError = false;
     this.postComplete = true;
     this.posts.new.unshift(newPost);
-    console.log('oops');
   };
 
   @action
