@@ -87,7 +87,6 @@ class Register extends React.Component {
       this.state.email,
       this.state.password
     );
-    console.log(response);
     if (response.error) {
       this.setState({ registerFail: true });
       return;

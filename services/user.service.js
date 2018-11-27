@@ -56,7 +56,7 @@ class UserService {
         }
       );
     } catch (e) {
-      response = { error: 'error' };
+      response = { error: e };
     }
     return response;
   };
