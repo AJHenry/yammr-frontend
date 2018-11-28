@@ -1,9 +1,7 @@
 import React from 'react';
 import { ThemeProvider, Button, colors } from 'react-native-elements';
-import { View } from 'react-native';
 import { theme } from './config/theme';
-import { Provider } from 'react-redux';
-import store from './store/index';
+import { Provider } from 'mobx-react';
 import Register from './screens/Register/Register';
 import Login from './screens/Login/Login';
 import Authentication from './screens/Authentication/Authentication';
@@ -13,6 +11,9 @@ import AuthLoadingScreen from './screens/AuthLoadingScreen/AuthLoadingScreen';
 import { Font, AppLoading } from 'expo';
 import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import Main from './screens/Main/Main';
+
+import userService from './services/user.service';
+import PostStore from './mobx/postStore';
 
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
@@ -53,9 +54,12 @@ const RootNav = createSwitchNavigator(
 );
 
 export default class App extends React.Component {
+  postStore;
+
   constructor(props) {
     super(props);
     this.state = { loading: true };
+    this.postStore = new PostStore(userService);
   }
 
   // STUPID EXPO FONT HACK
@@ -74,9 +78,8 @@ export default class App extends React.Component {
       return <AppLoading />;
     }
     // END OF STUPID HACK
-
     return (
-      <Provider store={store}>
+      <Provider postStore={this.postStore}>
         <ThemeProvider theme={theme}>
           <RootNav />
         </ThemeProvider>

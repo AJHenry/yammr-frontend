@@ -5,9 +5,6 @@ import { colors } from '../../config/theme';
 import { style, styles } from './Account.styles';
 import { GenericHeader } from '../../components';
 
-import { userActions } from '../../actions/user.actions';
-import { userService } from '../../services';
-
 class Account extends React.Component {
   static navigationOptions = {
     title: 'Account',

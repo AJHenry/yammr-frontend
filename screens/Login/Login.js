@@ -3,8 +3,7 @@ import { View, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Header, Input, Icon } from 'react-native-elements';
 import { styles, style } from './Login.styles';
 import { colors } from '../../config/theme';
-import { userActions } from '../../actions/user.actions';
-import { userConstants } from '../../constants/user.constants';
+import userService from '../../services/user.service';
 
 class Login extends React.Component {
   constructor(props) {
@@ -37,19 +36,15 @@ class Login extends React.Component {
 
     if (shouldReturn) return;
 
-    const { dispatch } = this.props.navigation;
-    dispatch(
-      userActions.login(this.state.email, this.state.password).then(res => {
-        if (res.type === userConstants.LOGIN_SUCCESS) {
-          this.props.navigation.navigate('App');
-        } else {
-          this.setState({
-            passwordError: 'Invalid email/password. Please try again.',
-          });
-        }
-        return res;
-      })
+    const response = await userService.login(
+      this.state.email,
+      this.state.password
     );
+    if (response.error)
+      this.setState({
+        passwordError: 'Invalid email/password. Please try again.',
+      });
+    else this.props.navigation.navigate('App');
   };
 
   static navigationOptions = ({ navigation }) => {

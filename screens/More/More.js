@@ -16,8 +16,7 @@ import { styles, style } from './More.styles';
 import { colors } from '../../config/theme';
 import { GenericHeader } from '../../components';
 
-import { userActions } from '../../actions/user.actions';
-import { userService } from '../../services';
+import userService from '../../services/user.service';
 
 class More extends React.Component {
   constructor(props) {
@@ -37,9 +36,7 @@ class More extends React.Component {
   };
 
   _signOutAsync = async () => {
-    const { dispatch } = this.props.navigation;
-    dispatch(userActions.logout());
-    const userToken = await userService.getUser();
+    const userToken = await userService.logout();
     if (!userToken) this.props.screenProps.rootNavigation.navigate('Auth');
   };
 

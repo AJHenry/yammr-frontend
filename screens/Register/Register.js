@@ -8,8 +8,7 @@ import {
 import { Button, Text, CheckBox, Input, Icon } from 'react-native-elements';
 import { styles, style } from './Register.styles';
 import { colors } from '../../config/theme';
-
-import { userActions } from '../../actions/user.actions';
+import userService from '../../services/user.service';
 
 class Register extends React.Component {
   constructor(props) {
@@ -22,6 +21,7 @@ class Register extends React.Component {
       error: false,
       passwordError: false,
       emailError: false,
+      registerFail: false,
     };
 
     this.viewPassword = this.viewPassword.bind(this);
@@ -83,9 +83,15 @@ class Register extends React.Component {
     }
 
     if (shouldReturn) return;
-
-    const { dispatch } = this.props.navigation;
-    dispatch(userActions.register(this.state.email, this.state.password));
+    const response = await userService.register(
+      this.state.email,
+      this.state.password
+    );
+    if (response.error) {
+      this.setState({ registerFail: true });
+      return;
+    }
+    this.setState({ registerFail: false });
     this.props.navigation.navigate('Login');
   };
 
@@ -130,12 +136,17 @@ class Register extends React.Component {
             title="I agree to Yammer Terms of Service"
           />
         </View>
-
         <Button
           buttonStyle={style.registerButton}
           onPress={this._registerAsync}
           title="REGISTER"
         />
+        {this.state.registerFail ? (
+          <Text style={styles.labelStyle}> Error occured, try again. </Text>
+        ) : (
+          ' '
+        )}{' '}
+        }
       </KeyboardAvoidingView>
     );
   }

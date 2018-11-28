@@ -11,8 +11,10 @@ import {
 import { styles, style } from './PostCreate.styles';
 import { colors } from '../../config/theme';
 import { PostCreateHeader, LargeInput } from '../../components';
-import { userService } from '../../services/user.service';
+import { inject, observer, intercept } from 'mobx-react';
 
+@inject('postStore')
+@observer
 class PostCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +24,7 @@ class PostCreate extends React.Component {
       error: null,
       postconent: '',
     };
+    this.props.postStore.postScreen();
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -59,17 +62,13 @@ class PostCreate extends React.Component {
   }
 
   postHandler = async () => {
-    try {
-      await userService.postItem(this.state.postcontent);
-    } catch (e) {
-      this.setState({ error: 'Error occured, please try again' });
-      return;
-    }
-    this.props.navigation.goBack();
+    this.props.postStore.addPost(this.state.postconent);
   };
 
   render() {
     const { navigation } = this.props;
+    const ERROR = 'Error occured, please try again';
+    if (this.props.postStore.postComplete) this.props.navigation.goBack();
     return (
       <View>
         <PostCreateHeader goBack={navigation.goBack} />
@@ -82,7 +81,7 @@ class PostCreate extends React.Component {
               placeholder="Create something great"
               inputStyle={styles.inputContainer}
               multiline={true}
-              error={this.state.error || ''}
+              error={this.props.postStore.postError ? ERROR : ' '}
             />
             <View style={styles.iconContainer}>
               <Icon
