@@ -2,14 +2,19 @@
 import { FeedHeader } from './CustomHeaders/FeedHeader/FeedHeader';
 import { PostViewHeader } from './CustomHeaders/PostViewHeader/PostViewHeader';
 import { PostCreateHeader } from './CustomHeaders/PostCreateHeader/PostCreateHeader';
+import { ExploreHeader } from './CustomHeaders/ExploreHeader/ExploreHeader';
+import { GenericHeader } from './CustomHeaders/GenericHeader/GenericHeader';
 
 // Touchable
 import { TouchablePlatformSpecific } from './TouchablePlatformSpecific/TouchablePlatformSpecific';
 
-//Bottom Comment
+// Bottom Comment
 import { BottomComment } from './BottomComment/BottomComment';
 
-//Vote
+// Modal
+import { CustomModal as Modal } from './Modal/Modal';
+
+// Vote
 import { Vote } from './Vote/Vote';
 
 // Input
@@ -22,13 +27,16 @@ import { FeedItem } from './FeedItem/FeedItem';
 import { FeedList } from './FeedList/FeedList';
 
 export {
+  ExploreHeader,
   FeedList,
   FeedHeader,
   FeedItem,
   LargeInput,
+  GenericHeader,
   PostCreateHeader,
   PostViewHeader,
   Vote,
   BottomComment,
   TouchablePlatformSpecific,
+  Modal,
 };

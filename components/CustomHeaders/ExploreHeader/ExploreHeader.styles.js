@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../config/theme';
+import { colors } from '../../../config/theme';
 
 export const style = {
-  container: {},
-  listItemContainer: {
-    borderBottomWidth: 0.5,
+  containerStyle: {
+    borderBottomWidth: 1,
     borderBottomColor: colors.muted,
   },
 };

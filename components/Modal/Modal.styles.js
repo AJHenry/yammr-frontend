@@ -2,10 +2,12 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/theme';
 
 export const style = {
-  container: {},
-  listItemContainer: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: colors.muted,
+  containerStyle: {
+    flex: 1,
+  },
+  viewContainer: {
+    backgroundColor: colors.white,
+    borderRadius: 20,
   },
 };
 

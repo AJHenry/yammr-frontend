@@ -5,12 +5,18 @@ import {
   FlatList,
   TouchableHighlight,
 } from 'react-native';
-import { Text, Icon, Divider, Button } from 'react-native-elements';
+import { Text, Icon, Divider, Button, ListItem } from 'react-native-elements';
 import { colors } from '../../config/theme';
 import { style, styles } from './PostView.styles';
 import { PostViewHeader, Vote } from '../../components';
 import { getTimeAgo } from '../../config/helpers';
-import { FeedItem, BottomComment, FeedList } from '../../components';
+import {
+  FeedItem,
+  BottomComment,
+  FeedList,
+  Modal,
+  TouchablePlatformSpecific,
+} from '../../components';
 
 class PostView extends React.Component {
   constructor(props) {
@@ -38,6 +44,7 @@ class PostView extends React.Component {
 
     this.state = {
       feedItems: feedItems,
+      modalVisible: false,
     };
   }
 
@@ -58,10 +65,16 @@ class PostView extends React.Component {
 
   menuHandler = () => {
     console.log(`Clicked menu handler`);
+    this.toggleModal();
+  };
+
+  toggleModal = () => {
+    this.setState({ modalVisible: !this.state.modalVisible });
   };
 
   render() {
     const { navigation } = this.props;
+    const { modalVisible } = this.state;
     const postData = navigation.getParam('postData', {});
     const {
       text,
@@ -108,6 +121,23 @@ class PostView extends React.Component {
             <BottomComment />
           </View>
         </KeyboardAvoidingView>
+        <Modal
+          isVisible={modalVisible}
+          onBackdropPress={this.toggleModal}
+          onBackButtonPress={this.toggleModal}
+        >
+          <ListItem
+            component={TouchablePlatformSpecific}
+            title="Report"
+            leftIcon={<Icon name="flag" />}
+          />
+          <Divider />
+          <ListItem
+            component={TouchablePlatformSpecific}
+            title="Delete Post"
+            leftIcon={<Icon name="flag" />}
+          />
+        </Modal>
       </React.Fragment>
     );
   }

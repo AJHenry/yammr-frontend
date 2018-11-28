@@ -41,6 +41,9 @@ class Feed extends React.Component {
     this.state = {
       text: 'Top Feed',
       feedItems: feedItems,
+      isFetching: false,
+      isLoading: false,
+      showFooter: true,
     };
   }
 
@@ -66,17 +69,21 @@ class Feed extends React.Component {
     return selectedPost;
   };
 
-  /**
-   * Called when the compose button in the header is clicked
-   */
+  onRefresh = () => {
+    this.setState({ isFetching: true }, () => {
+      setTimeout(() => {
+        this.setState({ isFetching: false });
+      }, 2000);
+    });
+  };
+
+  // Called when the compose button in the header is clicked
   composeHandle = () => {
     console.log('Compose Handler');
     this.props.navigation.push('PostCreate');
   };
 
-  /**
-   * Called when a post is clicked on
-   */
+  // Called when a post is clicked on
   clickHandler = postId => {
     let postData = this.getPostData(postId);
 
@@ -85,9 +92,7 @@ class Feed extends React.Component {
     });
   };
 
-  /**
-   * Called when a vote is cast on a post
-   */
+  // Called when a vote is cast on a post
   voteHandler = (postId, voteType) => {
     console.log(`VoteType: ${voteType} vote on postID: ${postId}`);
   };
@@ -125,6 +130,10 @@ class Feed extends React.Component {
           feedHandler={this.feedHandler}
         />
         <FeedList
+          isLoading={this.state.isLoading}
+          showFooter={this.state.showFooter}
+          refreshing={this.state.isFetching}
+          onRefresh={this.onRefresh}
           data={this.state.feedItems}
           clickHandler={this.clickHandler}
           voteHandler={this.voteHandler}
