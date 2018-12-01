@@ -17,7 +17,10 @@ import {
   Modal,
   TouchablePlatformSpecific,
 } from '../../components';
+import { inject, observer } from 'mobx-react';
 
+@inject('postStore')
+@observer
 class PostView extends React.Component {
   constructor(props) {
     super(props);
@@ -73,8 +76,10 @@ class PostView extends React.Component {
   };
 
   // Used for issuing a service command for a vote on a comment
-  commentVoteHandler = (postId, type) => {
-    console.log(`Comment vote handler: ${type} on postID:${postId}`);
+  commentVoteHandler = (postId, type, score) => {
+    console.log(
+      `Comment vote handler: ${type} on postID:${postId} with score" ${score}`
+    );
   };
 
   render() {

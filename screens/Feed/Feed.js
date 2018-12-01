@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import { FeedHeader, FeedList, FeedItem } from '../../components';
 import { observer, inject } from 'mobx-react';
 
@@ -75,9 +75,17 @@ class Feed extends React.Component {
     });
   };
 
+  componentWillUnmount = () => {
+    console.log('Component unmounted');
+  };
+
   // Called when a vote is cast on a post
-  voteHandler = (postId, voteType) => {
-    console.log(`VoteType: ${voteType} vote on postID: ${postId}`);
+  voteHandler = (postId, voteType, score) => {
+    const { postStore } = this.props;
+    console.log(
+      `VoteType: ${voteType} vote on postID: ${postId} with score: ${score}`
+    );
+    postStore.updatePostVote(postId, voteType, score);
   };
 
   feedHandler = index => {

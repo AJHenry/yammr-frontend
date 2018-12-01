@@ -228,7 +228,37 @@ class PostStore {
 
   @computed
   get getFeed() {
+    //console.log(this.posts[this.selectedFeed]);
     return this.posts[this.selectedFeed].slice();
+  }
+
+  @action
+  updatePostVote(postId, type, score) {
+    console.log(
+      `Called mobx: updated post store (${postId}, ${type}, ${score})`
+    );
+    var newPostData = [...this.posts[this.selectedFeed]];
+
+    // TODO: Change this to a hashmap
+    newPostData.forEach(post => {
+      if (post.postId === postId) {
+        post.score = score;
+        post.voteType = type;
+      }
+    });
+
+    this.posts[this.selectedFeed] = newPostData;
+  }
+
+  getPostById(postId) {
+    console.log(`Called mobx: search by postID: ${postId}`);
+    // TODO: Change this to a hashmap
+    this.posts[this.selectedFeed].forEach(post => {
+      if (post.postId === postId) {
+        return post;
+      }
+    });
+    return null;
   }
 }
 export default PostStore;

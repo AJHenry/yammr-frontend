@@ -1,6 +1,8 @@
 import { Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
+const fontFamily = 'ProximaNova';
+
 export const colors = {
   primary: '#279af1',
   secondary: '#9f2042',
@@ -28,6 +30,9 @@ export const Badge = {
   containerStyle: {
     margin: 5,
   },
+  textStyle: {
+    fontFamily: fontFamily,
+  },
 };
 
 export const Button = {
@@ -44,10 +49,18 @@ export const Button = {
   },
   titleStyle: {
     fontWeight: '100',
+    fontFamily: fontFamily,
   },
 };
 
-export const ButtonGroup = {};
+export const ButtonGroup = {
+  selectedTextStyle: {
+    fontFamily: fontFamily,
+  },
+  textStyle: {
+    fontFamily: fontFamily,
+  },
+};
 
 export const Card = {
   containerStyle: {
@@ -58,6 +71,11 @@ export const Card = {
   titleStyle: {
     fontWeight: '100',
   },
+  fontFamily: fontFamily,
+};
+
+export const CheckBox = {
+  fontFamily: fontFamily,
 };
 
 export const Header = {
@@ -72,21 +90,42 @@ export const Input = {
     fontSize: 12,
     fontWeight: '100',
     color: colors.error,
+    fontFamily: fontFamily,
   },
   labelStyle: {
     fontSize: 12,
+    fontFamily: fontFamily,
   },
   containerStyle: {
     paddingTop: 5,
     paddingBottom: 5,
   },
+  inputStyle: {
+    fontFamily: fontFamily,
+  },
   inputContainerStyle: {},
+};
+
+export const ListItem = {
+  titleStyle: {
+    fontFamily: fontFamily,
+  },
+  subtitleStyle: {
+    fontFamily: fontFamily,
+  },
+  rightTitleStyle: {
+    fontFamily: fontFamily,
+  },
+  rightSubtitleStyle: {
+    fontFamily: fontFamily,
+  },
 };
 
 export const Text = {
   style: {
     fontWeight: '100',
   },
+  fontFamily: fontFamily,
 };
 
 export const theme = {
@@ -96,7 +135,9 @@ export const theme = {
   Button,
   ButtonGroup,
   Card,
+  CheckBox,
   Header,
   Input,
+  ListItem,
   Text,
 };
