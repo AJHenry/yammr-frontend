@@ -1,8 +1,25 @@
 import { observable, action, computed } from 'mobx';
 
 class PostStore {
+  // Main Feed
   @observable
-  posts = {};
+  posts = {
+    topFeed: [],
+    hotFeed: [],
+    newFeed: [],
+  };
+
+  @observable
+  selectedFeed = null;
+
+  @observable
+  mFeedFooter = false;
+
+  @observable
+  mFeedRefresh = false;
+
+  @observable
+  mFeedLoading = true;
 
   @observable
   postError = false;
@@ -16,33 +33,35 @@ class PostStore {
     this.service = service;
     this.reset = this.reset.bind(this);
     this.reset();
+
+    this.selectedFeed = 'topFeed';
   }
 
   @action
   reset = () => {
-    this.posts = {
-      top: [],
-      hot: [],
-      new: [],
-    };
+    this.posts.topFeed = [];
+    this.posts.hotFeed = [];
+    this.posts.newFeed = [];
   };
 
-  /*@action deletePost = async (postID) => {
+  /*
+  @action deletePost = async (postID) => {
         // use service delete
         const post = await this.service.deletePost(postID);
         if (!post) return;
 
-        this.posts.top = this.posts.top.filter(p => {
+        this.topFeed = this.topFeed.filter(p => {
             return p.postID !== post.postID;
         });
 
-        this.posts.hot = this.posts.hot.filter(p => {
+        this.hotFeed = this.hotFeed.filter(p => {
             return p.postID !== post.postID;
         });
-        this.posts.new = this.posts.new.filter(p => {
+        this.newFeed = this.newFeed.filter(p => {
             return p.postID !== post.postID;
         });
-    }*/
+    }
+    */
 
   @action
   addPost = async text => {
@@ -56,7 +75,117 @@ class PostStore {
     }
     this.postError = false;
     this.postComplete = true;
-    this.posts.new.unshift(newPost);
+    this.posts.newFeed.unshift(newPost);
+  };
+
+  @action
+  getMorePosts = async () => {
+    this.mFeedFooter = true;
+
+    // TODO: const newPost = await this.service.postItem(text);
+    setTimeout(() => {
+      this.mFeedFooter = false;
+
+      this.posts[this.selectedFeed] = [
+        ...this.posts[this.selectedFeed],
+        {
+          text: 'Add Post 1',
+          score: 1,
+          postId: 'pwmfi1',
+          postTime: new Date(Date.now() - 0),
+        },
+        {
+          text: 'Add Post 2',
+          score: 0,
+          postId: 'pwmfi2',
+          postTime: new Date(Date.now() - 455450),
+        },
+        {
+          text: 'Add Post 3',
+          score: 1,
+          postId: 'pwmfi3',
+          postTime: new Date(Date.now() - 0),
+        },
+        {
+          text: 'Add Post 4',
+          score: 0,
+          postId: 'pwmfi4',
+          postTime: new Date(Date.now() - 455450),
+        },
+      ];
+    }, 2000);
+  };
+
+  @action
+  getPosts = async () => {
+    this.mFeedLoading = true;
+
+    // TODO: const newPost = await this.service.postItem(text);
+    setTimeout(() => {
+      this.mFeedLoading = false;
+
+      this.posts[this.selectedFeed] = [
+        {
+          text: 'Watermelon is a food?',
+          score: 99,
+          postId: 'asdf1',
+          postTime: new Date(),
+          replyCount: 1,
+          postType: 'text',
+          voteType: 'down',
+        },
+        {
+          text: `Those who survived the San Francisco earthquake said, "Thank God, I'm still alive." But, of course, those who died, their lives will never be the same again.`,
+          score: 50,
+          postId: 'lkj4',
+          postTime: new Date(Date.now() - 24 * 60 * 60 * 1000),
+          voteType: 'down',
+        },
+        {
+          text: 'Negative Post',
+          score: -8,
+          postId: 'gfbfg8',
+          postTime: new Date(Date.now() - 546456),
+          replyCount: 2,
+        },
+        {
+          text: 'Overflow Post',
+          score: 0,
+          postId: 'weroiw9',
+          postTime: new Date(Date.now() - 346457457),
+        },
+        {
+          text: 'Overflow Post 1',
+          score: 0,
+          postId: 'weroiw6',
+          postTime: new Date(Date.now() - 346457457),
+        },
+        {
+          text: 'Overflow Post 2',
+          score: 0,
+          postId: 'weroiw5',
+          postTime: new Date(Date.now() - 346457457),
+        },
+        {
+          text: 'Overflow Post 3',
+          score: 0,
+          postId: 'weroiw4',
+          postTime: new Date(Date.now() - 346457457),
+        },
+        {
+          text: 'Overflow Post 4',
+          score: 2,
+          postId: 'weroiw3',
+          postTime: new Date(Date.now() - 346457457),
+        },
+        {
+          text: 'Overflow Post 5',
+          score: 1,
+          postId: 'weroiw2',
+          postTime: new Date(Date.now() - 346457457),
+        },
+      ];
+    }, 2000);
   };
 
   @action
@@ -65,7 +194,8 @@ class PostStore {
     this.postError = false;
   };
 
-  /*@action loadPosts = async (name) => {
+  /*
+  @action loadPosts = async (name) => {
         // get posts (not actual call yet)
         const posts = await this.service.getPosts(name);
         if (!posts) return;
@@ -73,11 +203,32 @@ class PostStore {
         posts.forEach(element => {
             this.posts[name].push(element);
         });
-    }*/
+    }
+    */
 
-  /*@computed
-  getPosts = name => {
-    return this.posts[name];
-  };*/
+  @action
+  setFeed = name => {
+    console.log(name);
+    switch (name) {
+      case 0:
+        this.selectedFeed = 'newFeed';
+        break;
+      case 1:
+        console.log('SEt feed to top');
+        this.selectedFeed = 'topFeed';
+        break;
+      case 2:
+        this.selectedFeed = 'hotFeed';
+        break;
+      default:
+        console.log('Default');
+        this.selectedFeed = 'newFeed';
+    }
+  };
+
+  @computed
+  get getFeed() {
+    return this.posts[this.selectedFeed].slice();
+  }
 }
 export default PostStore;

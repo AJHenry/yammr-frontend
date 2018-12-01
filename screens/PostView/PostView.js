@@ -56,26 +56,32 @@ class PostView extends React.Component {
     };
   };
 
-  /**
-   * Used for handling the back arrow on the header
-   */
+  // Used for handling the back arrow on the header
   goBack = () => {
     this.props.navigation.goBack();
   };
 
+  // Used for menu press
   menuHandler = () => {
     console.log(`Clicked menu handler`);
     this.toggleModal();
   };
 
+  // Toggles the menu
   toggleModal = () => {
     this.setState({ modalVisible: !this.state.modalVisible });
+  };
+
+  // Used for issuing a service command for a vote on a comment
+  commentVoteHandler = (postId, type) => {
+    console.log(`Comment vote handler: ${type} on postID:${postId}`);
   };
 
   render() {
     const { navigation } = this.props;
     const { modalVisible } = this.state;
     const postData = navigation.getParam('postData', {});
+    const voteHandler = navigation.getParam('voteHandler', () => {});
     const {
       text,
       score,
@@ -85,12 +91,6 @@ class PostView extends React.Component {
       postType,
       voteType,
     } = postData;
-
-    voteHander = (postId, type) => {
-      console.log(
-        `Vote (type: ${type}) handler called on PostView with postId: ${postId}`
-      );
-    };
 
     return (
       <React.Fragment>
@@ -106,7 +106,12 @@ class PostView extends React.Component {
               <Text style={styles.contentStyle}>{text}</Text>
             </View>
             <View style={styles.sideContainer}>
-              <Vote score={score} voteType={voteType} />
+              <Vote
+                postId={postId}
+                voteHandler={voteHandler}
+                score={score}
+                voteType={voteType}
+              />
               <Text>{getTimeAgo(postTime)}</Text>
             </View>
           </View>
@@ -115,7 +120,10 @@ class PostView extends React.Component {
             <Text style={styles.commentHeader}>COMMENTS</Text>
             <Divider />
             <View style={styles.commentFeed}>
-              <FeedList data={this.state.feedItems} />
+              <FeedList
+                data={this.state.feedItems}
+                voteHandler={this.commentVoteHandler}
+              />
             </View>
 
             <BottomComment />
