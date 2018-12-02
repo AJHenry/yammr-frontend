@@ -78,6 +78,9 @@ const FeedStack = createStackNavigator(
     transitionConfig,
     navigationOptions: {
       gesturesEnabled: true,
+      gestureResponseDistance: {
+        horizontal: 500,
+      },
     },
   }
 );

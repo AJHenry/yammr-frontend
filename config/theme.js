@@ -19,6 +19,7 @@ export const colors = {
   white: '#fff',
   grey: '#A9A9A9',
   transparent: 'rgba(0,0,0,0)',
+  background: '#E0E0E0',
 };
 
 export const Avatar = {

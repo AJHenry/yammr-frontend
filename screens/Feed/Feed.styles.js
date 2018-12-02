@@ -24,6 +24,10 @@ export const style = {
     height: 50,
     width: '100%',
   },
+  mainContainer: {
+    backgroundColor: colors.background,
+    height: '100%',
+  },
 };
 
 export const styles = StyleSheet.create(style);

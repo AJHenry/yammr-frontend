@@ -41,6 +41,7 @@ export const style = {
   },
   commentFeed: {
     marginBottom: 50,
+    backgroundColor: colors.background,
   },
 };
 

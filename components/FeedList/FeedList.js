@@ -45,6 +45,7 @@ export class FeedList extends React.Component {
       </View>
     ) : (
       <FlatList
+        style={styles.flatListStyle}
         {...this.props}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
