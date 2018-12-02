@@ -4,7 +4,7 @@ import { colors } from '../../config/theme';
 export const style = {
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.backgroundColor,
   },
   aboveContainer: {
     margin: 0, // Currently unused
@@ -15,6 +15,7 @@ export const style = {
     justifyContent: 'space-between',
     width: '100%',
     paddingBottom: 50,
+    backgroundColor: colors.white,
   },
   postContainer: {
     paddingTop: 15,
@@ -33,6 +34,7 @@ export const style = {
   },
   commentContainer: {
     flex: 1,
+    backgroundColor: colors.white,
   },
   commentHeader: {
     marginLeft: 10,
