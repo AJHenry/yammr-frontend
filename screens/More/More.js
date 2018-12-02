@@ -43,7 +43,7 @@ class More extends React.Component {
   render() {
     return (
       <View>
-        <GenericHeader title="MORE" />
+        <GenericHeader title="More" />
         <View style={styles.listContainer}>
           <ListItem
             containerStyle={style.listItemContainer}

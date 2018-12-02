@@ -18,7 +18,7 @@ class Account extends React.Component {
   render() {
     return (
       <View>
-        <GenericHeader title="ACCOUNT" />
+        <GenericHeader title="Account" />
         <Text>Account</Text>
       </View>
     );

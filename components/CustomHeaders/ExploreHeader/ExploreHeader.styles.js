@@ -6,6 +6,10 @@ export const style = {
     borderBottomWidth: 1,
     borderBottomColor: colors.muted,
   },
+  titleStyle: {
+    color: colors.white,
+    fontSize: 20,
+  },
 };
 
 export const styles = StyleSheet.create(style);
