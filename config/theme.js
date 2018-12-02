@@ -1,7 +1,8 @@
 import { Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { TouchablePlatformSpecific } from '../components/TouchablePlatformSpecific/TouchablePlatformSpecific';
 
-const fontFamily = 'ProximaNova';
+const fontFamily = 'Raleway';
 
 export const colors = {
   primary: '#279af1',
@@ -85,6 +86,8 @@ export const Header = {
   },
 };
 
+export const Icon = {};
+
 export const Input = {
   errorStyle: {
     fontSize: 12,
@@ -119,6 +122,7 @@ export const ListItem = {
   rightSubtitleStyle: {
     fontFamily: fontFamily,
   },
+  component: TouchablePlatformSpecific,
 };
 
 export const Text = {
@@ -138,6 +142,7 @@ export const theme = {
   CheckBox,
   Header,
   Input,
+  Icon,
   ListItem,
   Text,
 };
