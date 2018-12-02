@@ -4,7 +4,6 @@ import { colors } from '../../config/theme';
 export const style = {
   mainContainer: {
     flex: 1,
-    backgroundColor: colors.backgroundColor,
   },
   aboveContainer: {
     margin: 0, // Currently unused
@@ -34,12 +33,13 @@ export const style = {
   },
   commentContainer: {
     flex: 1,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   commentHeader: {
     marginLeft: 10,
     fontSize: 12,
     color: colors.grey,
+    backgroundColor: colors.white,
   },
   commentFeed: {
     marginBottom: 50,
