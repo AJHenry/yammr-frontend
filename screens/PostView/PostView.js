@@ -27,21 +27,37 @@ class PostView extends React.Component {
 
     const feedItems = [
       {
+        text: 'Post One',
+        score: 3,
+        postId: 'asdf1',
+        postTime: new Date(Date.now()),
+        creatorId: '9dgf8j34',
+        displayName: 'HairyOrange5',
+        postType: 'text',
+        voteType: 'down',
+        comments: [
+          {
+            text: 'Comment One',
+            score: 0,
+            postId: 'sdfef',
+            postTime: new Date(Date.now()),
+            creatorId: '93nde0t',
+            displayName: 'MangledPear3',
+            postType: 'comment',
+            parentPostId: 'asdf1',
+          },
+        ],
+      },
+      {
         text: 'Comment One',
         score: 3,
         postId: 'asdf1',
-        postTime: new Date(Date.now() - 24 * 60 * 60 * 4587),
-        user: 'HairyOrange67',
+        postTime: new Date(Date.now()),
+        creatorId: '9dgf8j34',
+        displayName: 'HairyOrange5',
         postType: 'comment',
+        parentPostId: 'sdfef',
         voteType: 'down',
-      },
-      {
-        text: 'Comment Two',
-        score: 0,
-        postId: 'sdfef',
-        postTime: new Date(Date.now() - 24 * 60 * 60),
-        user: 'WireyTumbleWeed45',
-        postType: 'comment',
       },
     ];
 
