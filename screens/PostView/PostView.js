@@ -18,6 +18,7 @@ import {
   TouchablePlatformSpecific,
 } from '../../components';
 import { inject, observer } from 'mobx-react';
+import PostStore from '../../mobx/postStore';
 
 @inject('postStore')
 @observer
@@ -25,44 +26,7 @@ class PostView extends React.Component {
   constructor(props) {
     super(props);
 
-    const feedItems = [
-      {
-        text: 'Post One',
-        score: 3,
-        postId: 'asdf1',
-        postTime: new Date(Date.now()),
-        creatorId: '9dgf8j34',
-        displayName: 'HairyOrange5',
-        postType: 'text',
-        voteType: 'down',
-        comments: [
-          {
-            text: 'Comment One',
-            score: 0,
-            postId: 'sdfef',
-            postTime: new Date(Date.now()),
-            creatorId: '93nde0t',
-            displayName: 'MangledPear3',
-            postType: 'comment',
-            parentPostId: 'asdf1',
-          },
-        ],
-      },
-      {
-        text: 'Comment One',
-        score: 3,
-        postId: 'asdf1',
-        postTime: new Date(Date.now()),
-        creatorId: '9dgf8j34',
-        displayName: 'HairyOrange5',
-        postType: 'comment',
-        parentPostId: 'sdfef',
-        voteType: 'down',
-      },
-    ];
-
     this.state = {
-      feedItems: feedItems,
       modalVisible: false,
     };
   }
@@ -73,6 +37,15 @@ class PostView extends React.Component {
       header: null,
       tabBarVisible: false,
     };
+  };
+
+  componentDidMount = () => {
+    const { postStore, navigation } = this.props;
+    const postData = navigation.getParam('postData', {});
+    const { postId } = postData;
+    console.log(`Getting initial comments`);
+    postStore.setSelectedPost(postId);
+    postStore.getComments(postId);
   };
 
   // Used for handling the back arrow on the header
@@ -92,26 +65,34 @@ class PostView extends React.Component {
   };
 
   // Used for issuing a service command for a vote on a comment
-  commentVoteHandler = (postId, type, score) => {
+  commentVoteHandler = (commentId, type, score) => {
+    const { postStore, navigation } = this.props;
+    const postData = navigation.getParam('postData', {});
+    const { postId } = postData;
     console.log(
-      `Comment vote handler: ${type} on postID:${postId} with score" ${score}`
+      `Comment vote handler: ${type} on parentID:${postId} on commentID: ${commentId} with score" ${score}`
     );
+    postStore.updateCommentScore(postId, commentId, type, score);
   };
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, postStore } = this.props;
     const { modalVisible } = this.state;
     const postData = navigation.getParam('postData', {});
     const voteHandler = navigation.getParam('voteHandler', () => {});
+    const parentId = postData.postId;
+
     const {
+      comments,
+      postId,
       text,
       score,
-      postId,
       postTime,
       replyCount,
       postType,
       voteType,
-    } = postData;
+    } = postStore.getPostById(parentId);
+    console.log(comments);
 
     return (
       <React.Fragment>
@@ -141,10 +122,15 @@ class PostView extends React.Component {
             <Text style={styles.commentHeader}>COMMENTS</Text>
             <Divider />
             <View style={styles.commentFeed}>
-              <FeedList
-                data={this.state.feedItems}
-                voteHandler={this.commentVoteHandler}
-              />
+              {comments && comments.length > 0 ? (
+                <FeedList
+                  data={comments}
+                  voteHandler={this.commentVoteHandler}
+                  isLoading={comments ? false : true}
+                />
+              ) : (
+                <Text>Sorry no posts here</Text>
+              )}
             </View>
 
             <BottomComment />

@@ -13,6 +13,9 @@ class PostStore {
   selectedFeed = null;
 
   @observable
+  selectedPost = null;
+
+  @observable
   mFeedFooter = false;
 
   @observable
@@ -194,6 +197,55 @@ class PostStore {
     this.postError = false;
   };
 
+  @action
+  getComments = postId => {
+    comments = [
+      {
+        parentId: 'weroiw3',
+        text: 'Comment',
+        score: 34,
+        postId: 'sdfsdf',
+        postTime: new Date(),
+        postType: 'comment',
+        voteType: 'up',
+      },
+    ];
+
+    var newPostData = [...this.posts[this.selectedFeed]];
+
+    // TODO: Change this to a hashmap
+    newPostData.forEach(post => {
+      if (post.postId === postId) {
+        post.comments = comments;
+      }
+    });
+
+    this.posts[this.selectedFeed] = newPostData;
+  };
+
+  @action
+  updateCommentScore = (parentId, postId, type, score) => {
+    console.log(
+      `Called mobx: update comment score (${postId}, ${type}, ${score})`
+    );
+    var newPostData = [...this.posts[this.selectedFeed]];
+
+    // TODO: Change this to a hashmap
+    newPostData.forEach(post => {
+      if (post.postId === parentId) {
+        post.comments.forEach(comment => {
+          if (comment.postId === postId) {
+            comment.voteType = type;
+            comment.score = score;
+          }
+        });
+      }
+    });
+
+    console.log(this.posts[this.selectedFeed]);
+
+    this.posts[this.selectedFeed] = newPostData;
+  };
   /*
   @action loadPosts = async (name) => {
         // get posts (not actual call yet)
@@ -233,7 +285,30 @@ class PostStore {
   }
 
   @action
-  updatePostVote(postId, type, score) {
+  setSelectedPost = parentPostId => {
+    this.posts[this.selectedFeed].forEach(post => {
+      if (post.postId === parentPostId) {
+        this.selectedPost = post;
+      }
+    });
+  };
+
+  @computed
+  get getPostById() {
+    return parentPostId => {
+      let p = null;
+      this.posts[this.selectedFeed].forEach(post => {
+        if (post.postId === parentPostId) {
+          console.log('Found one');
+          p = post;
+        }
+      });
+      return p;
+    };
+  }
+
+  @action
+  updatePostVote = (postId, type, score) => {
     console.log(
       `Called mobx: updated post store (${postId}, ${type}, ${score})`
     );
@@ -248,9 +323,10 @@ class PostStore {
     });
 
     this.posts[this.selectedFeed] = newPostData;
-  }
+  };
 
-  getPostById(postId) {
+  /*
+  getPostById = postId => {
     console.log(`Called mobx: search by postID: ${postId}`);
     // TODO: Change this to a hashmap
     this.posts[this.selectedFeed].forEach(post => {
@@ -259,6 +335,7 @@ class PostStore {
       }
     });
     return null;
-  }
+  };
+  */
 }
 export default PostStore;

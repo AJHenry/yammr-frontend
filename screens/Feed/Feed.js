@@ -96,7 +96,7 @@ class Feed extends React.Component {
   };
 
   render() {
-    const { postStore } = this.props;
+    const { postStore, navigation } = this.props;
     return (
       <React.Fragment>
         <FeedHeader
