@@ -21,6 +21,7 @@ export const style = {
   changeNameButton: {
     backgroundColor: colors.primary,
     height: 25,
+    alignItems: 'center',
   },
 };
 
