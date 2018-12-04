@@ -119,6 +119,20 @@ const NavBar = createMaterialTopTabNavigator(
       },
     }),
     lazy: true,
+    tabBarOptions: {
+      activeTintColor: colors.white,
+      style: {
+        height: 35,
+        backgroundColor: colors.primary,
+        justifyContent: 'flex-start',
+        padding: 0,
+      },
+      labelStyle: {
+        margin: 0,
+        padding: 0,
+      },
+    },
+    initialRouteName: 'List',
   }
 );
 

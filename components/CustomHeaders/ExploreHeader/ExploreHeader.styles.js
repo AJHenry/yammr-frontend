@@ -3,8 +3,7 @@ import { colors } from '../../../config/theme';
 
 export const style = {
   containerStyle: {
-    borderBottomWidth: 1,
-    borderBottomColor: colors.muted,
+    borderBottomWidth: 0,
   },
   titleStyle: {
     color: colors.white,

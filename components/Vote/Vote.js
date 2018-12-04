@@ -85,7 +85,7 @@ export class Vote extends React.Component {
           name="ios-arrow-up"
           onPress={() => this.handleScore('up')}
         />
-        <Text style={style.scoreStyle}>{score}</Text>
+        <Text style={style.scoreStyle}>{score ? score : 0}</Text>
         <Icon
           component={TouchablePlatformSpecific}
           iconStyle={
