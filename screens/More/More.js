@@ -97,7 +97,9 @@ class More extends React.Component {
 
   deleteAccount = async () => {
     console.log('More Screen: Delete account clicked');
-    await userService.deleteAccount();
+    const res = await userService.deleteAccount();
+    if (res.error) return;
+    await this._signOutAsync();
   };
 
   _signOutAsync = async () => {

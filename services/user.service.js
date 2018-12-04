@@ -95,6 +95,7 @@ class UserService {
 
   getFeedFresh = async () => {
     const token = await AsyncStorage.getItem('userToken');
+    console.log(token);
     let response;
     try {
       response = await axios.get(
