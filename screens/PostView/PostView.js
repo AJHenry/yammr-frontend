@@ -85,6 +85,9 @@ class PostView extends React.Component {
     const postData = navigation.getParam('postData', {});
     const voteHandler = navigation.getParam('voteHandler', () => {});
     const parentId = postData.postId;
+    const storeData = postStore.getPostById(parentId);
+
+    const data = storeData ? storeData : postData;
 
     const {
       comments,
@@ -95,7 +98,7 @@ class PostView extends React.Component {
       replyCount,
       postType,
       voteType,
-    } = postStore.getPostById(parentId);
+    } = data;
 
     return (
       <React.Fragment>

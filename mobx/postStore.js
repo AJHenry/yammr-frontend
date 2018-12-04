@@ -223,7 +223,9 @@ class PostStore {
     // TODO: Change this to a hashmap
     newPostData.forEach(post => {
       if (post.postId === postId) {
-        post.comments = comments;
+        if (!post.comments) {
+          post.comments = comments;
+        }
       }
     }, this);
 
