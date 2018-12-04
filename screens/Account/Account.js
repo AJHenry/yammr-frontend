@@ -81,14 +81,16 @@ class Account extends React.Component {
     );
   };
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
     console.log(`Account page mounted`);
-    const posts = await userService.getUserFeed();
-    if (posts.error) {
-      this.setState({ feedItems: [] });
-      return;
-    }
-    this.setState({ feedItems: posts });
+    userService.getUserFeed().then(posts => {
+      if (posts.error) {
+        this.setState({ feedItems: [] });
+        return;
+      }
+      this.setState({ feedItems: posts });
+      this.setState({ feedItems: posts });
+    });
   };
 
   changeNameHandler = () => {

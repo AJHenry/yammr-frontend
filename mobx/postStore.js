@@ -135,7 +135,12 @@ class PostStore {
       this.mFeedRefresh = false;
       return;
     }
-    const temp = [...newPosts, ...this.posts[this.selectedFeed]];
+    const t = newPosts.map(post => post.postID);
+    const newIDs = new Set(t);
+    const filteredOld = this.posts[this.selectedFeed].filter(
+      post => !newIDs.has(post.postID)
+    );
+    const temp = [...newPosts, ...filteredOld];
     this.posts[this.selectedFeed] = temp;
 
     this.mFeedRefresh = false;

@@ -5,6 +5,7 @@ import {
   POST_ITEM,
   GET_FEED,
   DELETE_ACC,
+  GET_ME,
 } from '../constants/api.constants';
 import axios from 'axios';
 
@@ -95,7 +96,6 @@ class UserService {
 
   getFeedFresh = async () => {
     const token = await AsyncStorage.getItem('userToken');
-    console.log(token);
     let response;
     try {
       response = await axios.get(
@@ -134,6 +134,7 @@ class UserService {
     } catch (e) {
       response = { error: e };
     }
+    console.log('get user');
     if (response.error) return response;
     return response.data;
   };
