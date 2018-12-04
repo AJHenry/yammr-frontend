@@ -81,8 +81,15 @@ class PostStore {
     this.posts.newFeed.unshift(newPost);
   };
 
+  isFetchingPosts = false;
+
   @action
   getMorePosts = async () => {
+    if (this.mFeedFooter) {
+      console.log(`Already fetching more posts`);
+      return;
+    }
+
     this.mFeedFooter = true;
 
     // TODO: const newPost = await this.service.postItem(text);
