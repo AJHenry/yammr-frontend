@@ -1,7 +1,9 @@
 import React from 'react';
 import PostView from './PostView';
-
+import { Provider } from 'mobx-react';
 import renderer from 'react-test-renderer';
+import PostStore from '../../mobx/postStore';
+import userService from '../../services/user.service';
 
 it('renders without crashing', () => {
   const navigation = {
@@ -10,8 +12,13 @@ it('renders without crashing', () => {
     }),
   };
 
+  const postStore = new PostStore(userService);
   const rendered = renderer
-    .create(<PostView navigation={navigation} />)
+    .create(
+      <Provider postStore={postStore}>
+        <PostView navigation={navigation} />
+      </Provider>
+    )
     .toJSON();
   expect(rendered).toBeTruthy();
 });
