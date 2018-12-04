@@ -35,7 +35,7 @@ class List extends React.Component {
       <View style={styles.mainContainer}>
         <ListItem
           containerStyle={style.listItemContainer}
-          key={2}
+          key={1}
           leftIcon={
             <Avatar
               size="medium"

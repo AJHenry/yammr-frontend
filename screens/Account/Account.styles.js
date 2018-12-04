@@ -22,7 +22,6 @@ export const style = {
     backgroundColor: colors.primary,
     height: 25,
     alignItems: 'center',
-    paddingVertical: 0,
   },
 };
 
