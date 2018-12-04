@@ -40,11 +40,8 @@ class Feed extends React.Component {
   };
 
   onRefresh = () => {
-    this.setState({ isFetching: true }, () => {
-      setTimeout(() => {
-        this.setState({ isFetching: false });
-      }, 2000);
-    });
+    const { postStore } = this.props;
+    postStore.getRefreshPosts();
   };
 
   // Called when the compose button in the header is clicked

@@ -48,23 +48,23 @@ class PostStore {
   };
 
   /*
-  @action deletePost = async (postID) => {
-        // use service delete
-        const post = await this.service.deletePost(postID);
-        if (!post) return;
-
-        this.topFeed = this.topFeed.filter(p => {
-            return p.postID !== post.postID;
-        });
-
-        this.hotFeed = this.hotFeed.filter(p => {
-            return p.postID !== post.postID;
-        });
-        this.newFeed = this.newFeed.filter(p => {
-            return p.postID !== post.postID;
-        });
-    }
-    */
+    @action deletePost = async (postID) => {
+          // use service delete
+          const post = await this.service.deletePost(postID);
+          if (!post) return;
+  
+          this.topFeed = this.topFeed.filter(p => {
+              return p.postID !== post.postID;
+          });
+  
+          this.hotFeed = this.hotFeed.filter(p => {
+              return p.postID !== post.postID;
+          });
+          this.newFeed = this.newFeed.filter(p => {
+              return p.postID !== post.postID;
+          });
+      }
+      */
 
   @action
   addPost = async text => {
@@ -86,116 +86,59 @@ class PostStore {
   @action
   getMorePosts = async () => {
     if (this.mFeedFooter) {
-      console.log(`Already fetching more posts`);
       return;
     }
 
     this.mFeedFooter = true;
+    const index = this.posts[this.selectedFeed].length - 1;
+    const lastID = this.posts[this.selectedFeed][index].postID;
+    const newPosts = await this.service.getFeed(lastID);
 
-    // TODO: const newPost = await this.service.postItem(text);
-    setTimeout(() => {
-      this.mFeedFooter = false;
-
-      this.posts[this.selectedFeed] = [
-        ...this.posts[this.selectedFeed],
-        {
-          text: 'Add Post 1',
-          score: 1,
-          postId: 'pwmfi1',
-          postTime: new Date(Date.now() - 0),
-        },
-        {
-          text: 'Add Post 2',
-          score: 0,
-          postId: 'pwmfi2',
-          postTime: new Date(Date.now() - 455450),
-        },
-        {
-          text: 'Add Post 3',
-          score: 1,
-          postId: 'pwmfi3',
-          postTime: new Date(Date.now() - 0),
-        },
-        {
-          text: 'Add Post 4',
-          score: 0,
-          postId: 'pwmfi4',
-          postTime: new Date(Date.now() - 455450),
-        },
-      ];
-    }, 2000);
+    if (newPosts.error) {
+      this.mFeedLoading = false;
+      return;
+    }
+    const t = newPosts.map(post => post.postID);
+    const newIDs = new Set(t);
+    const filteredOld = this.posts[this.selectedFeed].filter(
+      post => !newIDs.has(post.postID)
+    );
+    const temp = [...filteredOld, ...newPosts];
+    this.posts[this.selectedFeed] = temp;
+    this.mFeedFooter = false;
   };
 
   @action
   getPosts = async () => {
     this.mFeedLoading = true;
-
-    // TODO: const newPost = await this.service.postItem(text);
-    setTimeout(() => {
+    let newPosts = await this.service.getFeedFresh();
+    if (newPosts.error) {
       this.mFeedLoading = false;
+      console.log(newPosts.error.response.status);
+      return;
+    }
+    const t = newPosts.map(post => post.postID);
+    const newIDs = new Set(t);
+    const filteredOld = this.posts[this.selectedFeed].filter(
+      post => !newIDs.has(post.postID)
+    );
+    const temp = [...newPosts, ...filteredOld];
+    this.posts[this.selectedFeed] = temp;
+    this.mFeedLoading = false;
+  };
 
-      this.posts[this.selectedFeed] = [
-        {
-          text: 'Watermelon is a food?',
-          score: 99,
-          postId: 'asdf1',
-          postTime: new Date(),
-          replyCount: 1,
-          postType: 'text',
-          voteType: 'down',
-        },
-        {
-          text: `Those who survived the San Francisco earthquake said, "Thank God, I'm still alive." But, of course, those who died, their lives will never be the same again.`,
-          score: 50,
-          postId: 'lkj4',
-          postTime: new Date(Date.now() - 24 * 60 * 60 * 1000),
-          voteType: 'down',
-        },
-        {
-          text: 'Negative Post',
-          score: -8,
-          postId: 'gfbfg8',
-          postTime: new Date(Date.now() - 546456),
-          replyCount: 2,
-        },
-        {
-          text: 'Overflow Post',
-          score: 0,
-          postId: 'weroiw9',
-          postTime: new Date(Date.now() - 346457457),
-        },
-        {
-          text: 'Overflow Post 1',
-          score: 0,
-          postId: 'weroiw6',
-          postTime: new Date(Date.now() - 346457457),
-        },
-        {
-          text: 'Overflow Post 2',
-          score: 0,
-          postId: 'weroiw5',
-          postTime: new Date(Date.now() - 346457457),
-        },
-        {
-          text: 'Overflow Post 3',
-          score: 0,
-          postId: 'weroiw4',
-          postTime: new Date(Date.now() - 346457457),
-        },
-        {
-          text: 'Overflow Post 4',
-          score: 2,
-          postId: 'weroiw3',
-          postTime: new Date(Date.now() - 346457457),
-        },
-        {
-          text: 'Overflow Post 5',
-          score: 1,
-          postId: 'weroiw2',
-          postTime: new Date(Date.now() - 346457457),
-        },
-      ];
-    }, 2000);
+  @action
+  getRefreshPosts = async () => {
+    this.mFeedRefresh = true;
+    const newPosts = await this.service.getFeedFresh();
+    if (newPosts.error) {
+      this.mFeedRefresh = false;
+      return;
+    }
+    const temp = [...newPosts, ...this.posts[this.selectedFeed]];
+    this.posts[this.selectedFeed] = temp;
+
+    this.mFeedRefresh = false;
   };
 
   @action
@@ -257,16 +200,16 @@ class PostStore {
     this.posts[this.selectedFeed] = newPostData;
   };
   /*
-  @action loadPosts = async (name) => {
-        // get posts (not actual call yet)
-        const posts = await this.service.getPosts(name);
-        if (!posts) return;
-
-        posts.forEach(element => {
-            this.posts[name].push(element);
-        });
-    }
-    */
+    @action loadPosts = async (name) => {
+          // get posts (not actual call yet)
+          const posts = await this.service.getPosts(name);
+          if (!posts) return;
+  
+          posts.forEach(element => {
+              this.posts[name].push(element);
+          });
+      }
+      */
 
   @action
   setFeed = name => {
@@ -336,16 +279,16 @@ class PostStore {
   };
 
   /*
-  getPostById = postId => {
-    console.log(`Called mobx: search by postID: ${postId}`);
-    // TODO: Change this to a hashmap
-    this.posts[this.selectedFeed].forEach(post => {
-      if (post.postId === postId) {
-        return post;
-      }
-    });
-    return null;
-  };
-  */
+    getPostById = postId => {
+      console.log(`Called mobx: search by postID: ${postId}`);
+      // TODO: Change this to a hashmap
+      this.posts[this.selectedFeed].forEach(post => {
+        if (post.postId === postId) {
+          return post;
+        }
+      });
+      return null;
+    };
+    */
 }
 export default PostStore;

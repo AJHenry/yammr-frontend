@@ -62,7 +62,7 @@ class PostCreate extends React.Component {
   }
 
   postHandler = async () => {
-    this.props.postStore.addPost(this.state.postconent);
+    this.props.postStore.addPost(this.state.postcontent);
   };
 
   render() {
