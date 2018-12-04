@@ -112,9 +112,9 @@ class PostStore {
   getPosts = async () => {
     this.mFeedLoading = true;
     let newPosts = await this.service.getFeedFresh();
+    console.log(newPosts);
     if (newPosts.error) {
       this.mFeedLoading = false;
-      console.log(newPosts.error.response.status);
       return;
     }
     const t = newPosts.map(post => post.postID);

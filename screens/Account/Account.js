@@ -11,6 +11,7 @@ import {
 import { colors } from '../../config/theme';
 import { style, styles } from './Account.styles';
 import { GenericHeader, FeedList, Modal } from '../../components';
+import userService from '../../services/user.service';
 
 class Account extends React.Component {
   static navigationOptions = {
@@ -80,8 +81,14 @@ class Account extends React.Component {
     );
   };
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     console.log(`Account page mounted`);
+    const posts = await userService.getUserFeed();
+    if (posts.error) {
+      this.setState({ feedItems: [] });
+      return;
+    }
+    this.setState({ feedItems: posts });
   };
 
   changeNameHandler = () => {
@@ -104,6 +111,7 @@ class Account extends React.Component {
               }}
             >
               <Button
+                titleStyle={{ paddingVertical: 0 }}
                 title="Change Name"
                 buttonStyle={style.changeNameButton}
                 onPress={this.togglePopUp}

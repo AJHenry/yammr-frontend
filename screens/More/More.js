@@ -31,8 +31,9 @@ class More extends React.Component {
     };
   };
 
-  deleteAccount = () => {
+  deleteAccount = async () => {
     console.log('More Screen: Delete account clicked');
+    await userService.deleteAccount();
   };
 
   _signOutAsync = async () => {

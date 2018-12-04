@@ -4,6 +4,7 @@ import {
   REGISTER,
   POST_ITEM,
   GET_FEED,
+  DELETE_ACC,
 } from '../constants/api.constants';
 import axios from 'axios';
 
@@ -134,6 +135,28 @@ class UserService {
     }
     if (response.error) return response;
     return response.data;
+  };
+
+  deleteAccount = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    let response;
+    try {
+      response = await axios.get(
+        DELETE_ACC,
+        {},
+        {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+          validateStatus: status => status == 200,
+        }
+      );
+    } catch (e) {
+      response = { error: e };
+    }
+    if (response.error) return response;
+    return this.logout();
   };
 
   logout = async () => {
