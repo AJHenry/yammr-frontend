@@ -48,6 +48,10 @@ class PostView extends React.Component {
     postStore.getComments(postId);
   };
 
+  componentWillUnmount = () => {
+    console.log(`Postview unmounted`);
+  };
+
   // Used for handling the back arrow on the header
   goBack = () => {
     this.props.navigation.goBack();
@@ -92,7 +96,6 @@ class PostView extends React.Component {
       postType,
       voteType,
     } = postStore.getPostById(parentId);
-    console.log(comments);
 
     return (
       <React.Fragment>
@@ -124,7 +127,7 @@ class PostView extends React.Component {
             <View style={styles.commentFeed}>
               {comments && comments.length > 0 ? (
                 <FeedList
-                  data={comments}
+                  data={comments.slice()}
                   voteHandler={this.commentVoteHandler}
                   isLoading={comments ? false : true}
                 />

@@ -218,7 +218,7 @@ class PostStore {
       if (post.postId === postId) {
         post.comments = comments;
       }
-    });
+    }, this);
 
     this.posts[this.selectedFeed] = newPostData;
   };
@@ -226,7 +226,7 @@ class PostStore {
   @action
   updateCommentScore = (parentId, postId, type, score) => {
     console.log(
-      `Called mobx: update comment score (${postId}, ${type}, ${score})`
+      `Called mobx: update comment score (${parentId}, ${postId}, ${type}, ${score})`
     );
     var newPostData = [...this.posts[this.selectedFeed]];
 
@@ -235,14 +235,15 @@ class PostStore {
       if (post.postId === parentId) {
         post.comments.forEach(comment => {
           if (comment.postId === postId) {
+            //console.log("Updated comment")
             comment.voteType = type;
             comment.score = score;
           }
-        });
+        }, this);
       }
-    });
+    }, this);
 
-    console.log(this.posts[this.selectedFeed]);
+    //console.log(this.posts[this.selectedFeed]);
 
     this.posts[this.selectedFeed] = newPostData;
   };
@@ -297,9 +298,9 @@ class PostStore {
   get getPostById() {
     return parentPostId => {
       let p = null;
-      this.posts[this.selectedFeed].forEach(post => {
+      this.posts[this.selectedFeed].forEach((post, index) => {
         if (post.postId === parentPostId) {
-          console.log('Found one');
+          console.log(`Found one at ${index}`);
           p = post;
         }
       });
