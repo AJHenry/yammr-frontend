@@ -7,7 +7,8 @@ export const style = {
   },
   viewContainer: {
     backgroundColor: colors.white,
-    borderRadius: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
   },
 };
 

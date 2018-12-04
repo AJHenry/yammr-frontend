@@ -37,9 +37,9 @@ export class FeedList extends React.Component {
   };
 
   render() {
-    const { isLoading, showFooter } = this.props;
-
-    return isLoading ? (
+    const { isLoading, showFooter, data } = this.props;
+    //console.log('Data ' + data);
+    return isLoading || !data || data == null ? (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color={colors.primary} />
       </View>
@@ -56,7 +56,7 @@ export class FeedList extends React.Component {
 }
 
 FeedList.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
   addData: PropTypes.func,
   clickHandler: PropTypes.func,
   voteHandler: PropTypes.func,
