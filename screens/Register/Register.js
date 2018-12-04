@@ -143,10 +143,7 @@ class Register extends React.Component {
         />
         {this.state.registerFail ? (
           <Text style={styles.labelStyle}> Error occured, try again. </Text>
-        ) : (
-          ' '
-        )}{' '}
-        }
+        ) : null}
       </KeyboardAvoidingView>
     );
   }
