@@ -42,7 +42,7 @@ class UserService {
         },
         {
           headers: { 'Content-Type': 'application/json' },
-          validateStatus: status => status == 200,
+          validateStatus: status => status == 200 || status == 500,
         }
       );
     } catch (e) {
@@ -76,17 +76,16 @@ class UserService {
     const token = await AsyncStorage.getItem('userToken');
     let response;
     try {
-      response = await axios.get(
-        GET_FEED,
-        { start: start },
-        {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'application/json',
-          },
-          validateStatus: status => status == 200,
-        }
-      );
+      response = await axios.get(GET_FEED, {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json',
+        },
+        param: {
+          start: start,
+        },
+        validateStatus: status => status == 200,
+      });
     } catch (e) {
       response = { error: e };
     }
@@ -98,17 +97,13 @@ class UserService {
     const token = await AsyncStorage.getItem('userToken');
     let response;
     try {
-      response = await axios.get(
-        GET_FEED,
-        {},
-        {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'application/json',
-          },
-          validateStatus: status => status == 200,
-        }
-      );
+      response = await axios.get(GET_FEED, {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json',
+        },
+        validateStatus: status => status == 200,
+      });
     } catch (e) {
       response = { error: e };
     }
@@ -120,21 +115,16 @@ class UserService {
     const token = await AsyncStorage.getItem('userToken');
     let response;
     try {
-      response = await axios.get(
-        GET_ME,
-        {},
-        {
-          headers: {
-            Authorization: token,
-            'Content-Type': 'application/json',
-          },
-          validateStatus: status => status == 200,
-        }
-      );
+      response = await axios.get(GET_ME, {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json',
+        },
+        validateStatus: status => status == 200,
+      });
     } catch (e) {
       response = { error: e };
     }
-    console.log('get user');
     if (response.error) return response;
     return response.data;
   };

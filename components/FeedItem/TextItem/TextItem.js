@@ -33,7 +33,8 @@ export const TextItem = ({
   if (!text || text.length == 0) {
     console.log(`Warning, post with ID: ${postId}, has an empty text body`);
   }
-
+  //timestamp = new Date();
+  timestamp = new Date(timestamp.split('.000+0000')[0]);
   return (
     <TouchablePlatformSpecific onPress={() => onPress(postId, clickHandler)}>
       <View style={styles.mainContainer}>
