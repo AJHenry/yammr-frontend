@@ -93,11 +93,12 @@ class PostStore {
     const index = this.posts[this.selectedFeed].length - 1;
     const lastID = this.posts[this.selectedFeed][index].postID;
     const newPosts = await this.service.getFeed(lastID);
-
+    console.log(newPosts);
     if (newPosts.error) {
       this.mFeedLoading = false;
       return;
     }
+
     const t = newPosts.map(post => post.postID);
     const newIDs = new Set(t);
     const filteredOld = this.posts[this.selectedFeed].filter(

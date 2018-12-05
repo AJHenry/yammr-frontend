@@ -135,7 +135,21 @@ class PostView extends React.Component {
                   isLoading={comments ? false : true}
                 />
               ) : (
-                <Text>Sorry no posts here</Text>
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 16,
+                    }}
+                  >
+                    No comments yet
+                  </Text>
+                </View>
               )}
             </View>
 
@@ -150,13 +164,13 @@ class PostView extends React.Component {
           <ListItem
             component={TouchablePlatformSpecific}
             title="Report"
-            leftIcon={<Icon name="flag" />}
+            leftIcon={<Icon type="font-awesome" name="flag" />}
           />
           <Divider />
           <ListItem
             component={TouchablePlatformSpecific}
             title="Delete Post"
-            leftIcon={<Icon name="flag" />}
+            leftIcon={<Icon type="font-awesome" name="close" />}
           />
         </Modal>
       </React.Fragment>
