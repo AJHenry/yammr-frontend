@@ -5,7 +5,7 @@ import { TouchablePlatformSpecific } from '../components/TouchablePlatformSpecif
 const fontFamily = 'Raleway';
 
 export const colors = {
-  primary: '#279af1',
+  primary: '#03cea4',
   secondary: '#9f2042',
   success: '#03cea4',
   danger: '#fb4d3d',
