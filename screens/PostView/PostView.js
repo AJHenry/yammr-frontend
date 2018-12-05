@@ -100,6 +100,7 @@ class PostView extends React.Component {
       voteType,
     } = data;
 
+    const pT = new Date(postTime.split('.000+0000')[0]);
     return (
       <React.Fragment>
         <PostViewHeader goBack={this.goBack} menuHandler={this.menuHandler} />
@@ -120,7 +121,7 @@ class PostView extends React.Component {
                 score={score}
                 voteType={voteType}
               />
-              <Text>{getTimeAgo(postTime)}</Text>
+              <Text>{getTimeAgo(pT)}</Text>
             </View>
           </View>
           <View style={styles.belowContainer} />
