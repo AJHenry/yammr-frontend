@@ -36,7 +36,7 @@ export const style = {
     backgroundColor: colors.background,
   },
   commentHeader: {
-    marginLeft: 10,
+    paddingHorizontal: 10,
     fontSize: 12,
     color: colors.grey,
     backgroundColor: colors.white,
