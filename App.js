@@ -67,6 +67,7 @@ export default class App extends React.Component {
     await Font.loadAsync({
       OpenSans: require('./assets/fonts/OpenSans.ttf'),
       ProximaNova: require('./assets/fonts/ProximaNova.ttf'),
+      Raleway: require('./assets/fonts/Raleway.ttf'),
     });
     this.setState({ loading: false });
   }

@@ -14,68 +14,57 @@ import TouchablePlatformSpecific from '../index';
 export class Vote extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      score: this.props.score || 0,
-      voteType: this.props.voteType, // null = no vote, up = upvote, down = downvote
-    };
-
-    this.handleScore = this.handleScore.bind(this);
   }
 
   handleScore = type => {
-    let score = 0;
-    let voteType = null;
-    let { voteHandler, postId } = this.props;
+    let { voteHandler, postId, voteType, score } = this.props;
 
+    //console.log(`Vote score before: ${postId}, ${voteType}, ${score}`);
     switch (type) {
       case 'up':
         console.log('Upvote');
-        if (this.state.voteType === 'down') {
+        if (voteType === 'down') {
           voteType = 'up';
-          score = this.state.score + 2;
+          score = score + 2;
+          break;
         }
-        if (this.state.voteType === 'up') {
+
+        if (voteType === 'up') {
           voteType = null;
-          score = this.state.score - 1;
+          score = score - 1;
+          break;
         }
-        if (this.state.voteType == null) {
+        if (voteType == null) {
           voteType = 'up';
-          score = this.state.score + 1;
+          score = score + 1;
+          break;
         }
-
-        this.setState({
-          voteType: voteType,
-          score: score,
-        });
-
         break;
 
       case 'down':
         console.log('Downvote');
-        if (this.state.voteType === 'up') {
+        if (voteType === 'up') {
           voteType = 'down';
-          score = this.state.score - 2;
+          score = score - 2;
+          break;
         }
-        if (this.state.voteType === 'down') {
+        if (voteType === 'down') {
           voteType = null;
-          score = this.state.score + 1;
+          score = score + 1;
+          break;
         }
-        if (this.state.voteType == null) {
+        if (voteType == null) {
           voteType = 'down';
-          score = this.state.score - 1;
+          score = score - 1;
+          break;
         }
-
-        this.setState({
-          voteType: voteType,
-          score: score,
-        });
         break;
     }
 
+    //console.log(`Vote after: ${postId}, ${voteType}, ${score}`);
     // Callback to parent to handle the vote action
     if (voteHandler) {
-      voteHandler(postId, type);
+      voteHandler(postId, voteType, score);
     } else {
       console.log(
         `Warning: voteHandler called on Vote without being passed a voteHandler prop`
@@ -84,7 +73,7 @@ export class Vote extends React.Component {
   };
 
   render() {
-    const { voteType, score } = this.state;
+    const { voteType, score } = this.props;
     return (
       <View style={styles.container}>
         <Icon
@@ -96,7 +85,7 @@ export class Vote extends React.Component {
           name="ios-arrow-up"
           onPress={() => this.handleScore('up')}
         />
-        <Text style={style.scoreStyle}>{score}</Text>
+        <Text style={style.scoreStyle}>{score ? score : 0}</Text>
         <Icon
           component={TouchablePlatformSpecific}
           iconStyle={

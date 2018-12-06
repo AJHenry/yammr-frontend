@@ -47,6 +47,7 @@ class PostCreate extends React.Component {
       console.log('ACCESS_FINE_LOCATION permission denied');
     }
 
+    /*
     geolocation.getCurrentPosition(
       position => {
         console.log(position);
@@ -59,10 +60,11 @@ class PostCreate extends React.Component {
       error => this.setState({ error: error.message }),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
+    */
   }
 
   postHandler = async () => {
-    this.props.postStore.addPost(this.state.postconent);
+    this.props.postStore.addPost(this.state.postcontent);
   };
 
   render() {

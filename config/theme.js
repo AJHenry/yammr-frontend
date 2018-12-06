@@ -1,8 +1,11 @@
 import { Platform } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { TouchablePlatformSpecific } from '../components/TouchablePlatformSpecific/TouchablePlatformSpecific';
+
+const fontFamily = 'Raleway';
 
 export const colors = {
-  primary: '#279af1',
+  primary: '#03cea4',
   secondary: '#9f2042',
   success: '#03cea4',
   danger: '#fb4d3d',
@@ -16,6 +19,7 @@ export const colors = {
   white: '#fff',
   grey: '#A9A9A9',
   transparent: 'rgba(0,0,0,0)',
+  background: '#E0E0E0',
 };
 
 export const Avatar = {
@@ -27,6 +31,9 @@ export const Avatar = {
 export const Badge = {
   containerStyle: {
     margin: 5,
+  },
+  textStyle: {
+    fontFamily: fontFamily,
   },
 };
 
@@ -44,10 +51,18 @@ export const Button = {
   },
   titleStyle: {
     fontWeight: '100',
+    fontFamily: fontFamily,
   },
 };
 
-export const ButtonGroup = {};
+export const ButtonGroup = {
+  selectedTextStyle: {
+    fontFamily: fontFamily,
+  },
+  textStyle: {
+    fontFamily: fontFamily,
+  },
+};
 
 export const Card = {
   containerStyle: {
@@ -58,6 +73,11 @@ export const Card = {
   titleStyle: {
     fontWeight: '100',
   },
+  fontFamily: fontFamily,
+};
+
+export const CheckBox = {
+  fontFamily: fontFamily,
 };
 
 export const Header = {
@@ -67,26 +87,50 @@ export const Header = {
   },
 };
 
+export const Icon = {};
+
 export const Input = {
   errorStyle: {
     fontSize: 12,
     fontWeight: '100',
     color: colors.error,
+    fontFamily: fontFamily,
   },
   labelStyle: {
     fontSize: 12,
+    fontFamily: fontFamily,
   },
   containerStyle: {
     paddingTop: 5,
     paddingBottom: 5,
   },
+  inputStyle: {
+    fontFamily: fontFamily,
+  },
   inputContainerStyle: {},
+};
+
+export const ListItem = {
+  titleStyle: {
+    fontFamily: fontFamily,
+  },
+  subtitleStyle: {
+    fontFamily: fontFamily,
+  },
+  rightTitleStyle: {
+    fontFamily: fontFamily,
+  },
+  rightSubtitleStyle: {
+    fontFamily: fontFamily,
+  },
+  component: TouchablePlatformSpecific,
 };
 
 export const Text = {
   style: {
     fontWeight: '100',
   },
+  fontFamily: fontFamily,
 };
 
 export const theme = {
@@ -96,7 +140,10 @@ export const theme = {
   Button,
   ButtonGroup,
   Card,
+  CheckBox,
   Header,
   Input,
+  Icon,
+  ListItem,
   Text,
 };

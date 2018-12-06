@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Header, ButtonGroup } from 'react-native-elements';
+import { Icon, Header, ButtonGroup, Text } from 'react-native-elements';
 import { colors } from '../../../config/theme';
 import { style, styles } from './ExploreHeader.styles';
 
@@ -22,6 +22,7 @@ export class ExploreHeader extends React.Component {
     return (
       <Header
         containerStyle={style.containerStyle}
+        centerComponent={<Text style={style.titleStyle}>Explore</Text>}
         rightComponent={
           <Icon
             type="simple-line-icon"

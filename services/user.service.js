@@ -1,5 +1,12 @@
 import { AsyncStorage } from 'react-native';
-import { LOGIN, REGISTER, POST_ITEM } from '../constants/api.constants';
+import {
+  LOGIN,
+  REGISTER,
+  POST_ITEM,
+  GET_FEED,
+  DELETE_ACC,
+  GET_ME,
+} from '../constants/api.constants';
 import axios from 'axios';
 
 class UserService {
@@ -35,7 +42,7 @@ class UserService {
         },
         {
           headers: { 'Content-Type': 'application/json' },
-          validateStatus: status => status == 200,
+          validateStatus: status => status == 200 || status == 500,
         }
       );
     } catch (e) {
@@ -63,6 +70,85 @@ class UserService {
       response = { error: e };
     }
     return response;
+  };
+
+  getFeed = async start => {
+    const token = await AsyncStorage.getItem('userToken');
+    let response;
+    try {
+      response = await axios.get(GET_FEED, {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json',
+        },
+        param: {
+          start: start,
+        },
+        validateStatus: status => status == 200,
+      });
+    } catch (e) {
+      response = { error: e };
+    }
+    if (response.error) return response;
+    return response.data;
+  };
+
+  getFeedFresh = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    let response;
+    try {
+      response = await axios.get(GET_FEED, {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json',
+        },
+        validateStatus: status => status == 200,
+      });
+    } catch (e) {
+      response = { error: e };
+    }
+    if (response.error) return response;
+    return response.data;
+  };
+
+  getUserFeed = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    let response;
+    try {
+      response = await axios.get(GET_ME, {
+        headers: {
+          Authorization: token,
+          'Content-Type': 'application/json',
+        },
+        validateStatus: status => status == 200,
+      });
+    } catch (e) {
+      response = { error: e };
+    }
+    if (response.error) return response;
+    return response.data;
+  };
+
+  deleteAccount = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    let response;
+    try {
+      response = await axios.get(
+        DELETE_ACC,
+        {},
+        {
+          headers: {
+            Authorization: token,
+            'Content-Type': 'application/json',
+          },
+          validateStatus: status => status == 200,
+        }
+      );
+    } catch (e) {
+      response = { error: e };
+    }
+    if (response.error) return response;
+    return this.logout();
   };
 
   logout = async () => {

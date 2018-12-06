@@ -1,49 +1,18 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Text } from 'react-native';
 import { FeedHeader, FeedList, FeedItem } from '../../components';
+import { observer, inject } from 'mobx-react';
 
+@inject('postStore')
+@observer
 class Feed extends React.Component {
   constructor(props) {
     super(props);
 
-    const feedItems = [
-      {
-        text: 'Watermelon is a meat?',
-        score: 99,
-        postId: 'asdf1',
-        postTime: new Date(),
-        replyCount: 1,
-        postType: 'text',
-        voteType: 'down',
-      },
-      {
-        text: `Those who survived the San Francisco earthquake said, "Thank God, I'm still alive." But, of course, those who died, their lives will never be the same again.`,
-        score: 50,
-        postId: 'lkj4',
-        postTime: new Date(Date.now() - 24 * 60 * 60 * 1000),
-        voteType: 'down',
-      },
-      {
-        text: 'Negative Post',
-        score: -8,
-        postId: 'gfbfg8',
-        postTime: new Date(Date.now() - 546456),
-        replyCount: 2,
-      },
-      {
-        text: 'Overflow Post',
-        score: 0,
-        postId: 'weroiw9',
-        postTime: new Date(Date.now() - 346457457),
-      },
-    ];
+    const feedItems = null;
 
     this.state = {
-      text: 'Top Feed',
-      feedItems: feedItems,
-      isFetching: false,
-      isLoading: false,
-      showFooter: true,
+      selectedIndex: 0,
     };
   }
 
@@ -57,9 +26,10 @@ class Feed extends React.Component {
    * we can make it O(1) if we make the data an Object with postId as the key
    */
   getPostData = postId => {
+    const { postStore } = this.props;
     let selectedPost = null;
 
-    for (let post of this.state.feedItems) {
+    for (let post of postStore.getFeed) {
       if (post.postId === postId) {
         selectedPost = post;
         break;
@@ -70,11 +40,8 @@ class Feed extends React.Component {
   };
 
   onRefresh = () => {
-    this.setState({ isFetching: true }, () => {
-      setTimeout(() => {
-        this.setState({ isFetching: false });
-      }, 2000);
-    });
+    const { postStore } = this.props;
+    postStore.getRefreshPosts();
   };
 
   // Called when the compose button in the header is clicked
@@ -83,46 +50,50 @@ class Feed extends React.Component {
     this.props.navigation.push('PostCreate');
   };
 
+  // Called when component renders
+  componentDidMount = () => {
+    const { postStore } = this.props;
+    postStore.getPosts();
+  };
+
+  // Called when we want to grab more posts
+  getMorePosts = () => {
+    const { postStore } = this.props;
+    postStore.getMorePosts();
+  };
+
   // Called when a post is clicked on
   clickHandler = postId => {
     let postData = this.getPostData(postId);
 
     this.props.navigation.push('PostView', {
       postData: postData,
+      voteHandler: this.voteHandler,
     });
   };
 
+  componentWillUnmount = () => {
+    console.log('Component unmounted');
+  };
+
   // Called when a vote is cast on a post
-  voteHandler = (postId, voteType) => {
-    console.log(`VoteType: ${voteType} vote on postID: ${postId}`);
+  voteHandler = (postId, voteType, score) => {
+    const { postStore } = this.props;
+    console.log(
+      `VoteType: ${voteType} vote on postID: ${postId} with score: ${score}`
+    );
+    postStore.updatePostVote(postId, voteType, score);
   };
 
   feedHandler = index => {
+    const { postStore } = this.props;
     console.log('Feed Handler');
     console.log(`Index Selected : ${index}`);
-
-    switch (index) {
-      case 0:
-        this.setState({
-          text: 'New Feed',
-        });
-        break;
-      case 1:
-        this.setState({
-          text: 'Top Feed',
-        });
-        break;
-      case 2:
-        this.setState({
-          text: 'Hot Feed',
-        });
-        break;
-      default:
-        console.log('severe error');
-    }
+    postStore.setFeed(index);
   };
 
   render() {
+    const { postStore, navigation } = this.props;
     return (
       <React.Fragment>
         <FeedHeader
@@ -130,11 +101,13 @@ class Feed extends React.Component {
           feedHandler={this.feedHandler}
         />
         <FeedList
-          isLoading={this.state.isLoading}
-          showFooter={this.state.showFooter}
-          refreshing={this.state.isFetching}
+          onEndReachedThreshold={0.5}
+          onEndReached={this.getMorePosts}
+          isLoading={postStore.mFeedLoading}
+          showFooter={postStore.mFeedFooter}
+          refreshing={postStore.mFeedRefresh}
           onRefresh={this.onRefresh}
-          data={this.state.feedItems}
+          data={postStore.getFeed}
           clickHandler={this.clickHandler}
           voteHandler={this.voteHandler}
         />

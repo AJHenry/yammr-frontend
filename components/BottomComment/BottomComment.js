@@ -10,29 +10,14 @@ export class BottomComment extends React.Component {
     this.state = {
       comment: null,
     };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.commentHandler = this.commentHandler.bind(this);
-  }
-
-  handleInputChange(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    console.log(`${name}, ${value}`);
-
-    this.setState({
-      [name]: value,
-    });
   }
 
   /**
    * Used for handling comment button
    */
-  commentHandler() {
+  commentHandler = () => {
     console.log(`Comment Handler, comment data: ${this.state.comment}`);
-  }
+  };
 
   /**
    * Used for handling camera button
@@ -48,7 +33,7 @@ export class BottomComment extends React.Component {
           iconStyle={style.extraButton}
           type="simple-line-icon"
           name="camera"
-          onPress={() => this.cameraHandler()}
+          onPress={this.cameraHandler}
           component={TouchableHighlight}
         />
         <LargeInput
@@ -59,9 +44,9 @@ export class BottomComment extends React.Component {
         />
         <Icon
           iconStyle={style.commentButton}
-          type="simple-line-icon"
-          name="paper-plane"
-          onPress={() => this.commentHandler()}
+          type="font-awesome"
+          name="send-o"
+          onPress={this.commentHandler}
           component={TouchableHighlight}
         />
       </View>

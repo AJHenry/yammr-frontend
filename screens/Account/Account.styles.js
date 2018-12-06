@@ -2,24 +2,27 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../config/theme';
 
 export const style = {
-  labelStyle: {
+  mainContainer: {
     flex: 1,
+    backgroundColor: colors.white,
+  },
+  userContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  userNameStyle: {
+    color: colors.black,
+    fontSize: 20,
+  },
+  feedContainer: {
+    flex: 1,
+  },
+  changeNameButton: {
+    backgroundColor: colors.primary,
+    height: 25,
     alignItems: 'center',
   },
-  headerStyle: {
-    elevation: 0,
-    backgroundColor: colors.primary,
-  },
-  tabNavigatorStyle: {
-    backgroundColor: colors.light,
-    elevation: 0,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.muted,
-  },
-  indicatorStyle: {
-    backgroundColor: colors.transparent,
-  },
-  tabStyle: {},
 };
 
 export const styles = StyleSheet.create(style);

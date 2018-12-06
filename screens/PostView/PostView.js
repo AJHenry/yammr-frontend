@@ -17,33 +17,16 @@ import {
   Modal,
   TouchablePlatformSpecific,
 } from '../../components';
+import { inject, observer } from 'mobx-react';
+import PostStore from '../../mobx/postStore';
 
+@inject('postStore')
+@observer
 class PostView extends React.Component {
   constructor(props) {
     super(props);
 
-    const feedItems = [
-      {
-        text: 'Comment One',
-        score: 3,
-        postId: 'asdf1',
-        postTime: new Date(Date.now() - 24 * 60 * 60 * 4587),
-        user: 'HairyOrange67',
-        postType: 'comment',
-        voteType: 'down',
-      },
-      {
-        text: 'Comment Two',
-        score: 0,
-        postId: 'sdfef',
-        postTime: new Date(Date.now() - 24 * 60 * 60),
-        user: 'WireyTumbleWeed45',
-        postType: 'comment',
-      },
-    ];
-
     this.state = {
-      feedItems: feedItems,
       modalVisible: false,
     };
   }
@@ -56,42 +39,68 @@ class PostView extends React.Component {
     };
   };
 
-  /**
-   * Used for handling the back arrow on the header
-   */
+  componentDidMount = () => {
+    const { postStore, navigation } = this.props;
+    const postData = navigation.getParam('postData', {});
+    const { postId } = postData;
+    console.log(`Getting initial comments`);
+    postStore.setSelectedPost(postId);
+    postStore.getComments(postId);
+  };
+
+  componentWillUnmount = () => {
+    console.log(`Postview unmounted`);
+  };
+
+  // Used for handling the back arrow on the header
   goBack = () => {
     this.props.navigation.goBack();
   };
 
+  // Used for menu press
   menuHandler = () => {
     console.log(`Clicked menu handler`);
     this.toggleModal();
   };
 
+  // Toggles the menu
   toggleModal = () => {
     this.setState({ modalVisible: !this.state.modalVisible });
   };
 
+  // Used for issuing a service command for a vote on a comment
+  commentVoteHandler = (commentId, type, score) => {
+    const { postStore, navigation } = this.props;
+    const postData = navigation.getParam('postData', {});
+    const { postId } = postData;
+    console.log(
+      `Comment vote handler: ${type} on parentID:${postId} on commentID: ${commentId} with score" ${score}`
+    );
+    postStore.updateCommentScore(postId, commentId, type, score);
+  };
+
   render() {
-    const { navigation } = this.props;
+    const { navigation, postStore } = this.props;
     const { modalVisible } = this.state;
     const postData = navigation.getParam('postData', {});
+    const voteHandler = navigation.getParam('voteHandler', () => {});
+    const parentId = postData.postId;
+    const storeData = postStore.getPostById(parentId);
+
+    const data = storeData ? storeData : postData;
+
     const {
+      comments,
+      postId,
       text,
       score,
-      postId,
       postTime,
       replyCount,
       postType,
       voteType,
-    } = postData;
+    } = data;
 
-    voteHander = (postId, type) => {
-      console.log(
-        `Vote (type: ${type}) handler called on PostView with postId: ${postId}`
-      );
-    };
-
+    const pT = new Date(postTime.split('.000+0000')[0]);
     return (
       <React.Fragment>
         <PostViewHeader goBack={this.goBack} menuHandler={this.menuHandler} />
@@ -106,8 +115,13 @@ class PostView extends React.Component {
               <Text style={styles.contentStyle}>{text}</Text>
             </View>
             <View style={styles.sideContainer}>
-              <Vote score={score} voteType={voteType} />
-              <Text>{getTimeAgo(postTime)}</Text>
+              <Vote
+                postId={postId}
+                voteHandler={voteHandler}
+                score={score}
+                voteType={voteType}
+              />
+              <Text>{getTimeAgo(pT)}</Text>
             </View>
           </View>
           <View style={styles.belowContainer} />
@@ -115,7 +129,29 @@ class PostView extends React.Component {
             <Text style={styles.commentHeader}>COMMENTS</Text>
             <Divider />
             <View style={styles.commentFeed}>
-              <FeedList data={this.state.feedItems} />
+              {comments && comments.length > 0 ? (
+                <FeedList
+                  data={comments.slice()}
+                  voteHandler={this.commentVoteHandler}
+                  isLoading={comments ? false : true}
+                />
+              ) : (
+                <View
+                  style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 16,
+                    }}
+                  >
+                    No comments yet
+                  </Text>
+                </View>
+              )}
             </View>
 
             <BottomComment />
@@ -129,13 +165,13 @@ class PostView extends React.Component {
           <ListItem
             component={TouchablePlatformSpecific}
             title="Report"
-            leftIcon={<Icon name="flag" />}
+            leftIcon={<Icon type="font-awesome" name="flag" />}
           />
           <Divider />
           <ListItem
             component={TouchablePlatformSpecific}
             title="Delete Post"
-            leftIcon={<Icon name="flag" />}
+            leftIcon={<Icon type="font-awesome" name="close" />}
           />
         </Modal>
       </React.Fragment>

@@ -2,12 +2,11 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../config/theme';
 
 export const style = {
-  containerStyle: {
-    borderBottomWidth: 0,
+  mainContainer: {
+    backgroundColor: colors.backgroundColor,
   },
-  titleStyle: {
-    color: colors.white,
-    fontSize: 20,
+  listItemContainer: {
+    padding: 2,
   },
 };
 
